@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for GrafikaProjekt, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.8...4.0)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -16,7 +16,7 @@ project (
 )
 
 # Add source to this project's executable.
-add_executable (GrafikaProjekt "GrafikaProjekt.cpp" "GrafikaProjekt.h")
+add_executable (GrafikaProjekt "main.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
