@@ -1,0 +1,13 @@
+# ninja log v6
+12	242	7674867582696068	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj.ddi	7f18b974df3a0edb
+244	328	7674867585737203	CMakeFiles/GrafikaProjekt.dir/CXX.dd	927fc6f046201da5
+244	328	7674867585737203	C:/Users/jarom/source/repos/grafika-projekt/out/build/x64-debug/CMakeFiles/GrafikaProjekt.dir/CXXModules.json	927fc6f046201da5
+244	328	7674867585737203	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj.modmap	927fc6f046201da5
+330	1588	7674867585865603	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj	92712306fcf5c26a
+1589	2171	7674867598411454	GrafikaProjekt.exe	55a24a2da700f3e7
+13	257	7674871896449754	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj.ddi	7f18b974df3a0edb
+260	329	7674871898763963	CMakeFiles/GrafikaProjekt.dir/CXX.dd	927fc6f046201da5
+260	329	7674871898763963	C:/Users/jarom/source/repos/grafika-projekt/out/build/x64-debug/CMakeFiles/GrafikaProjekt.dir/CXXModules.json	927fc6f046201da5
+260	329	7674871898763963	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj.modmap	927fc6f046201da5
+331	1566	7674871899631225	CMakeFiles/GrafikaProjekt.dir/main.cpp.obj	92712306fcf5c26a
+1567	1901	7674871911987000	GrafikaProjekt.exe	55a24a2da700f3e7
