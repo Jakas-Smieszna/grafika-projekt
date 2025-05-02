@@ -13,7 +13,7 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	std::cout << filename << "\n";
+	std::cout << filename << " not found! \n";
 	//throw(errno);
 	return std::string{""};
 }

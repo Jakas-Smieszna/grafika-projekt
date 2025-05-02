@@ -16,6 +16,8 @@ find_package(OpenGL REQUIRED)
 message(STATUS "Found OpenGL in ${OPENGL_INCLUDE_DIR}")
 find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
+find_package(GLM REQUIRED)
+message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
 
 set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
 
@@ -24,6 +26,7 @@ set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
 include_directories(
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
+  ${GLM_INCLUDE_DIR}
 )
 
 # Enable Hot Reload for MSVC compilers if supported.
