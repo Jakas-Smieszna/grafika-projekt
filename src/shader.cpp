@@ -2,7 +2,8 @@
 
 std::string get_file_contents(const char* filename)
 {	
-	std::ifstream in(filename, std::ios::binary);
+	std::string fpath = std::string{SHADER_RELPATH} + std::string{filename};
+	std::ifstream in(fpath, std::ios::binary);
 	if (in)
 	{
 		std::string contents;
@@ -13,7 +14,6 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	std::cout << filename << " not found! \n";
 	//throw(errno);
 	return std::string{""};
 }

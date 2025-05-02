@@ -19,4 +19,13 @@ public:
 	void Activate();
 	void Delete();
 };
+
+#ifdef _WIN32
+#define SHADER_RELPATH "shaders\\"
+#elif __linux__
+#define SHADER_RELPATH "bin/shaders/"
+#else
+#define SHADER_RELPATH
+#endif
+
 #endif
