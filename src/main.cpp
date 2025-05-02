@@ -163,7 +163,7 @@ int main()
 	EBO1.Unbind();
 
 	std::string parentDir = "";
-	std::string texPath = "";
+	std::string texPath = "resources/";
 
 	std::cout << (parentDir + texPath + "metal.png").c_str() << std::endl;
 

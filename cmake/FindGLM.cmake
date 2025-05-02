@@ -23,6 +23,7 @@ if (WIN32)
 		GLM_INCLUDE_DIR
 		NAMES glm/glm.hpp
 		PATHS
+		${PROJECT_SOURCE_DIR}/include
 		$ENV{PROGRAMFILES}/include
 		${GLM_ROOT_DIR}/include
 		DOC "The directory where glm/glm.hpp resides")
