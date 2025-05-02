@@ -42,6 +42,8 @@ void main()
 	float specular = specAmount * specularLight;
 	float specular2 = specAmount2 * specularLight;
 
-   FragColor = vec4(0.15, 0.75, 0.43, 1.0)
-	//FragColor = mix(texture(texture1, texCoord), texture(texture2, texCoord), 0.55)  * (0.5f * lightColor * (diffuse + ambient + specular) + 0.5 * light2Color * (diffuse2 + ambient + specular2));
+	FragColor = mix(texture(texture1, texCoord), texture(texture2, texCoord), 0.55) * (0.5f * lightColor * (diffuse + ambient + specular) + 0.5 * light2Color * (diffuse2 + ambient + specular2));
+	//FragColor = texture(tex0, texCoord);
+	//* lightColor * (diffuse + ambient + specular);
+	//* (0.5f * lightColor * (diffuse + ambient + specular) + 0.5 * light2Color * (diffuse2 + ambient + specular2))
 }

@@ -10,7 +10,6 @@
 
 //Teksturowo:
 #include"Tekstury.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include"stb/stb_image.h"
 //
 #include"shader.h"
@@ -19,8 +18,9 @@
 #include"EBO.h"
 #include"Kamera.h"
 
+#define M_PI 3.141592653589793238462643383279502884197169399375105820
 
-//JG+ (zmodyfikowana kopia wlasnego projektu)
+
 //Teksturowo:
 // Wierzcholki2
 GLfloat vertices[] =
@@ -47,17 +47,18 @@ GLfloat vertices[] =
 	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
 	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
 
-	//D�
+	//Dół
    -0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
    -0.5f, -0.5f, -0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 5.0f,								0.0f, 1.0f, 0.0f,
 	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		5.0f, 5.0f,								0.0f, 1.0f, 0.0f,
 	0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		5.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-	//G�ra
+	//Góra
    -0.5f, 0.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
    -0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 1.0f,		0.0f, 3.0f,								0.0f, -1.0f, 0.0f,
 	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		3.0f, 3.0f,								0.0f, -1.0f, 0.0f,
 	0.5f, 0.5f,  0.5f,		0.0f, 1.0f, 1.0f,		3.0f, 0.0f,								0.0f, -1.0f, 0.0f
 };
+
 	 // Przyporzadkowanie wierzcholkow do trojkatow2
 GLuint indices[] =
 {
@@ -79,6 +80,8 @@ GLuint indices[] =
 	//Gora:
 	20, 21, 23,
 	21, 23, 22
+
+
 };
 
 //Swiatlo:
@@ -112,6 +115,8 @@ GLuint lightIndices[] =
 };
 
 
+
+
 int main()
 {
 	glfwInit();
@@ -136,8 +141,8 @@ int main()
 
 	glViewport(0, 0, 1000, 800);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 	Shader shaderProgram("default.vert", "default.frag");
@@ -164,8 +169,6 @@ int main()
 
 	std::string parentDir = "";
 	std::string texPath = "resources/";
-
-	std::cout << (parentDir + texPath + "metal.png").c_str() << std::endl;
 
 	Texture tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
@@ -229,7 +232,7 @@ int main()
 	light2EBO.Unbind();
 
 	glm::vec4 light2Color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-	glm::vec3 light2Pos = glm::vec3(0.0f, 0.0f, 1.1f);
+	glm::vec3 light2Pos = glm::vec3(0.0f, 0.0f, 1.2f);
 	glm::mat4 light2Model = glm::mat4(1.0f);
 	light2Model = glm::translate(light2Model, light2Pos);
 	glm::vec3 cube2Pos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -260,11 +263,11 @@ int main()
 		else lightColor = glm::vec4(0.f, 0.f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
 
 		light2Model = glm::translate(light2Model, -light2Pos);
-		light2Pos = glm::rotate(light2Pos, glm::radians(0.15f), glm::normalize(glm::vec3(0.0f, 0.f, 0.33f)));
+		light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
 		light2Model = glm::translate(light2Model, light2Pos);
 		cube2Model = glm::translate(cube2Model, cube2Pos);
 
-		glClearColor(0.f, 1.0f, 0.f, 1.0f);
+		glClearColor(0.f, 1.00f, 0.f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		camera.Inputs(window);
