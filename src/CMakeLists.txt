@@ -7,6 +7,9 @@ set(PROJ_FILES
     VAO.cpp
     VBO.cpp
     EBO.cpp
+    Kamera.cpp
+    Tekstury.cpp
+    stb.cpp
 # Biblioteki
     glad.c
 )
