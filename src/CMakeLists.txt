@@ -1,9 +1,5 @@
 
-# Pliki nagłówkowe.
-# Tu nie trzeba niczego edytować.
-file(GLOB HEADER_LIST CONFIGURE_DEPENDS 
-    "${GrafikaProjekt_SOURCE_DIR}/src/*.h"
-)
+
 set(PROJ_FILES
 # Pliki projektu
     main.cpp
@@ -15,22 +11,18 @@ set(PROJ_FILES
     glad.c
 )
 
-add_executable(GrafikaProjekt 
-    ${PROJ_FILES}
-    ${HEADER_LIST}
-)
+add_executable(GrafikaProjekt ${PROJ_FILES} )
 
 target_link_libraries(GrafikaProjekt PRIVATE
-	${OPENGL_LIBRARY}
-	${GLFW3_LIBRARY}
+	${OPENGL_LIBRARY} ${GLFW3_LIBRARY}
 )
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
-endif()
+set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
 
-source_group(
-    TREE "${PROJECT_SOURCE_DIR}/src"
-    PREFIX "Pliki Nagłówkowe"
-    FILES ${HEADER_LIST}
+if(UNIX)
+    set(RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+endif(UNIX)
+
+file(
+    COPY shaders DESTINATION "${RUNTIME_OUTPUT_DIRECTORY}"
 )

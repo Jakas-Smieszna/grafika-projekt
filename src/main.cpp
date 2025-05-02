@@ -46,10 +46,10 @@ int main()
 	glfwMakeContextCurrent(window);
 	gladLoadGL();
 	glViewport(0, 0, 800, 800);
-
-
-	Shader shaderProgram("default.vert", "default.frag");
-
+	std::cout << "SHADERS\n";
+	Shader shaderProgram(
+		"shaders/default.vert", "shaders/default.frag"
+	);
 
 	VAO VAO1;
 	VAO1.Bind();

@@ -1,11 +1,8 @@
 #include "shader.h"
 
-#define SHADER_SEARCH_DIR "src/"
-
 std::string get_file_contents(const char* filename)
 {	
-	std::string filepath = SHADER_SEARCH_DIR + std::string{filename};
-	std::ifstream in(filepath, std::ios::binary);
+	std::ifstream in(filename, std::ios::binary);
 	if (in)
 	{
 		std::string contents;
@@ -16,7 +13,9 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	throw(errno);
+	std::cout << filename << "\n";
+	//throw(errno);
+	return std::string{""};
 }
 
 Shader::Shader(const char* vertexFile, const char* fragmentFile)
