@@ -8,34 +8,34 @@ project (
   VERSION 1.0
   LANGUAGES CXX C
 )
-find_package(OpenGL REQUIRED)
 
-set(GLFW_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
-set(GLFW_LIBRARY "./lib/lib-vc2022/glfw3.lib" PATH)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+message(STATUS "Cmake module path is ${CMAKE_MODULE_PATH}.")
+find_package(OpenGL REQUIRED)
+message(STATUS "Found OpenGL in ${OPENGL_INCLUDE_DIR}")
+find_package(GLFW3 REQUIRED)
+message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
+
+#set(GLFW_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
+#set(GLFW_LIBRARY "./lib/lib-vc2022/glfw3.lib" PATH)
 
 set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
 #set(GLAD_LIBRARY "" CACHE FILEPATH "libglfw.a or glfw.lib" )
 
 set(SOURCE_FILES
   # Dodawajcie tu pliki źródłowe.
-  src/shader.h
-  src/VBO.h
-  src/VAO.h
-  src/EBO.h
   src/main.cpp
   src/shader.cpp
   src/VAO.cpp
   src/VBO.cpp
   src/EBO.cpp
   src/glad.c
-  SRC/
 )
-message(STATUS "GLFW incl path:")
-message(STATUS ${GLFW_INCLUDE_PATH})
+
 # Add source to this project's executable.
 
 include_directories(
-  GLFW_INCLUDE_PATH
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
 )
@@ -46,7 +46,7 @@ add_executable (GrafikaProjekt
 
 target_link_libraries(GrafikaProjekt
 	${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
-	${GLFW_LIBRARY}
+	${GLFW3_LIBRARY}
 )
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)

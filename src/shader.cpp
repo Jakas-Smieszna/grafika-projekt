@@ -1,8 +1,11 @@
-#include"shader.h"
+#include "shader.h"
+
+#define SHADER_SEARCH_DIR "src/"
 
 std::string get_file_contents(const char* filename)
-{
-	std::ifstream in(filename, std::ios::binary);
+{	
+	std::string filepath = SHADER_SEARCH_DIR + std::string{filename};
+	std::ifstream in(filepath, std::ios::binary);
 	if (in)
 	{
 		std::string contents;
