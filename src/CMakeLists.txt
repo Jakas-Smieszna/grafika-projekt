@@ -9,7 +9,6 @@ set(PROJ_FILES
     EBO.cpp
     Kamera.cpp
     Tekstury.cpp
-    stb.cpp
 # Biblioteki
     glad.c
 )
@@ -21,15 +20,9 @@ target_link_libraries(GrafikaProjekt PRIVATE
 )
 
 set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
-
 if(UNIX)
-    set(RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-
-file(
-    COPY "./shaders" DESTINATION "${RUNTIME_OUTPUT_DIRECTORY}"
-)
-message(STATUS "Shaders have been copied to ${RUNTIME_OUTPUT_DIRECTORY}")
-elseif(WIN32)
+    set(CMAKE_BINARY_DIR "${CMAKE_BINARY_DIR}/bin")
+    set_property(TARGET GrafikaProjekt PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+endif(UNIX)
 file(COPY "./shaders" DESTINATION "${CMAKE_BINARY_DIR}")
 message(STATUS "Shaders have been copied to ${CMAKE_BINARY_DIR}")
-endif(UNIX)

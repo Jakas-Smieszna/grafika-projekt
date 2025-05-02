@@ -10,7 +10,8 @@
 
 //Teksturowo:
 #include"Tekstury.h"
-#include<stb/stb_image.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include"stb/stb_image.h"
 //
 #include"shader.h"
 #include"VAO.h"
@@ -46,12 +47,12 @@ GLfloat vertices[] =
 	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
 	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
 
-	//Dó³
+	//Dï¿½
    -0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
    -0.5f, -0.5f, -0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 5.0f,								0.0f, 1.0f, 0.0f,
 	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		5.0f, 5.0f,								0.0f, 1.0f, 0.0f,
 	0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		5.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-	//Góra
+	//Gï¿½ra
    -0.5f, 0.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
    -0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 1.0f,		0.0f, 3.0f,								0.0f, -1.0f, 0.0f,
 	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		3.0f, 3.0f,								0.0f, -1.0f, 0.0f,
@@ -78,8 +79,6 @@ GLuint indices[] =
 	//Gora:
 	20, 21, 23,
 	21, 23, 22
-
-
 };
 
 //Swiatlo:
@@ -141,7 +140,7 @@ int main()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-	Shader shaderProgram("shaders/default.vert", "shaders/default.frag");
+	Shader shaderProgram("default.vert", "default.frag");
 
 
 	VAO VAO1;
@@ -166,6 +165,8 @@ int main()
 	std::string parentDir = "";
 	std::string texPath = "";
 
+	std::cout << (parentDir + texPath + "metal.png").c_str() << std::endl;
+
 	Texture tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -188,7 +189,7 @@ int main()
 
 
 	//swiatlo:
-	Shader lightShader("shaders/light.vert", "shaders/light.frag");
+	Shader lightShader("light.vert", "light.frag");
 	VAO lightVAO;
 	lightVAO.Bind();
 	VBO lightVBO(lightVertices, sizeof(lightVertices));
@@ -217,7 +218,7 @@ int main()
 
 
 	//swiatlo 2:
-	Shader lightShader2("shaders/light.vert", "shaders/light.frag");
+	Shader lightShader2("light.vert", "light.frag");
 	VAO light2VAO;
 	light2VAO.Bind();
 	VBO light2VBO(lightVertices, sizeof(lightVertices));

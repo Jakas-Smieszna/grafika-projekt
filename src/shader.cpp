@@ -14,6 +14,7 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
+	std::cout << fpath << " not found!\n";
 	//throw(errno);
 	return std::string{""};
 }
