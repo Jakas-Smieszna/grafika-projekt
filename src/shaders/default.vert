@@ -22,6 +22,7 @@ out vec3 crnt2Pos;
 uniform mat4 camMatrix;
 uniform mat4 model;
 uniform mat4 model2;
+uniform mat4 model3;
 
 // Controls the scale of the vertices
 uniform float scale;

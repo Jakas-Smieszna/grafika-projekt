@@ -19,6 +19,8 @@ uniform vec4 lightColor;
 uniform vec3 lightPos;
 uniform vec4 light2Color;
 uniform vec3 light2Pos;
+uniform vec4 pushColor;
+uniform vec3 pushPos;
 uniform vec3 camPos;
 
 
