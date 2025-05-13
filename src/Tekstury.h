@@ -3,6 +3,7 @@
 #include<glad/glad.h>
 #include<stb/stb_image.h>
 #include"shader.h"
+#include "helper/debugutils.h"
 class Texture
 {
 public:
@@ -19,4 +20,13 @@ public:
 	// Deletes a texture
 	void Delete();
 };
+
+#ifdef _WIN32
+#define TEXTURE_RELPATH "resources\\"
+#elif __linux__
+#define TEXTURE_RELPATH "bin/resources/"
+#else
+#define TEXTURE_RELPATH ""
+#endif
+
 #endif

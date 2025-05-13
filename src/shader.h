@@ -25,7 +25,7 @@ public:
 #elif __linux__
 #define SHADER_RELPATH "bin/shaders/"
 #else
-#define SHADER_RELPATH
+#define SHADER_RELPATH ""
 #endif
 
 #endif

@@ -20,6 +20,10 @@ target_link_libraries(GrafikaProjekt PRIVATE
 	${OPENGL_LIBRARY} ${GLFW3_LIBRARY}
 )
 
+target_compile_definitions(GrafikaProjekt PRIVATE
+    $<$<CONFIG:Debug>:DEBUG_BUILD>
+)
+
 set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
 if(UNIX)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/bin")

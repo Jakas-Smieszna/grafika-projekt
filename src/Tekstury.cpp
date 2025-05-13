@@ -2,13 +2,18 @@
 Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum
 	pixelType)
 {
-	//std::string fpath = std::string{"bin/"} + std::string{image};
 	type = texType;
 	int widthImg, heightImg, numColCh;
+
+	// Ścieżka do tekstury automatycznie w dobrym folderze.
+	std::string fpath = std::string{TEXTURE_RELPATH} + std::string{image}; 
+
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char* bytes = stbi_load(image, &widthImg, &heightImg, &numColCh, 0);
+	unsigned char* bytes = stbi_load(fpath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
-		std::cout << "Unable to load " << image << "!\n";
+		eprintf("Unable to load texture '%s'\n", fpath.c_str());
+	} else {
+		dprintf("Loaded texture '%s'\n", fpath.c_str());
 	}
 	glGenTextures(1, &ID);
 	glActiveTexture(slot);

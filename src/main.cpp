@@ -17,9 +17,9 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
-
+#ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-
+#endif
 
 //Teksturowo:
 // Wierzcholki2
@@ -163,28 +163,21 @@ int main()
 
 	/*VAO1.LinkVBO(VBO1, 0);*/
 
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
+	VAO1.Unbind(); VBO1.Unbind(); EBO1.Unbind();
 
-	std::string parentDir = "";
-	std::string texPath = "resources/";
-
-	Texture tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura1("metal.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-
-	Texture tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura2("Kotel1.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura2.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
 
 
 	tekstura1.texUnit(shaderProgram, "texture1", 0);
