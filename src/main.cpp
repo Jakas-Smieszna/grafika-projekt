@@ -774,21 +774,66 @@ GLfloat vertices[] =
 	1.0f, 2.90f, -15.7f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
 	1.0f, 2.70f, -15.9f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
 	 //Lewo
-	1.0f, 2.7f, -15.9f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
-	1.0f, 2.9f, -15.7f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	1.0f, 2.7f, -15.5f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	1.0f, 2.5f, -15.7f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	1.0f, 2.7f, -15.9f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	1.0f, 2.9f, -15.7f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
+	1.0f, 2.7f, -15.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
+	1.0f, 2.5f, -15.7f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
 	 //Dół
-	0.5f, 2.5f, -15.6f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, 2.5f, -15.8f,	0.0f, 0.0f, 1.0f,			0.0f, 5.0f,								0.0f, -1.0f, 0.0f,
-	1.0f, 2.7f, -15.9f,	1.0f, 0.0f, 0.0f,			5.0f, 5.0f,								0.0f, -1.0f, 0.0f,
-	1.0f, 2.5f, -15.7f,	0.0f, 0.0f, 1.0f,			5.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	0.5f, 2.5f, -15.6f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	0.5f, 2.5f, -15.8f,		0.0f, 0.0f, 1.0f,			0.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	1.0f, 2.7f, -15.9f,		1.0f, 0.0f, 0.0f,			5.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	1.0f, 2.5f, -15.7f,		0.0f, 0.0f, 1.0f,			5.0f, 0.0f,								0.0f, -1.0f, 0.0f,
 	//Góra
-	0.5f, 2.7f, -15.6f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, 2.7f, -15.8f,	0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	1.0f, 2.9f, -15.7f,	1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	1.0f, 2.7f, -15.5f,	0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	0.5f, 2.7f, -15.6f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	0.5f, 2.7f, -15.8f,		0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	1.0f, 2.9f, -15.7f,		1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	1.0f, 2.7f, -15.5f,		0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
 
+
+
+	//ODPYCHACZE BOCZNE
+			//LACZNIK LEWY:
+	//Front
+	-1.2f, -0.6f, -19.75f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-1.2f, -0.1f, -19.75f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-4.0f, -1.4f, -20.75f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-4.0f, -1.9f, -20.75f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	 //Tyl
+	-1.2f, -0.6f, -20.25f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.2f, -0.1f, -20.25f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-4.0f, -1.4f, -21.25f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-4.0f, -1.9f, -21.25f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	 //Dół
+	-1.2f, -0.6f, -20.25f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	-1.2f, -0.6f, -19.75f,	0.0f, 0.0f, 1.0f,			0.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	-4.0f, -1.9f, -20.75f,	1.0f, 0.0f, 0.0f,			5.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	-4.0f, -1.9f, -21.25f,	0.0f, 0.0f, 1.0f,			5.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	//Góra
+	-1.2f, -0.1f, -20.25f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	-1.2f, -0.1f, -19.75f,	0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	-4.0f, -1.4f, -20.75f,	1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	-4.0f, -1.4f, -21.25f,	0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,	
+		//LACZNIK PRAWY:
+	//Front
+	1.2f, -0.6f, -19.75f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	1.2f, -0.1f, -19.75f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	4.0f, -1.4f, -20.75f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	4.0f, -1.9f, -20.75f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	 //Tyl
+	1.2f, -0.6f, -20.25f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	1.2f, -0.1f, -20.25f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	4.0f, -1.4f, -21.25f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	4.0f, -1.9f, -21.25f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	 //Dół
+	1.2f, -0.6f, -20.25f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	1.2f, -0.6f, -19.75f,	0.0f, 0.0f, 1.0f,			0.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	4.0f, -1.9f, -20.75f,	1.0f, 0.0f, 0.0f,			5.0f, 5.0f,								0.0f, -1.0f, 0.0f,
+	4.0f, -1.9f, -21.25f,	0.0f, 0.0f, 1.0f,			5.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	//Góra
+	1.2f, -0.1f, -20.25f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	1.2f, -0.1f, -19.75f,	0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	4.0f, -1.4f, -20.75f,	1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
+	4.0f, -1.4f, -21.25f,	0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
 
 };
 
@@ -1249,6 +1294,35 @@ GLuint indices[] =
 	546, 547, 548,
 	546, 548, 549,
 
+
+	//ODPYCHANIE BOCZNE
+		//LACZNIK LEWY
+	//Front:
+	550, 551, 552,
+	550, 552, 553,
+	//Tyl:
+	554, 555, 556,
+	554, 556, 557,
+	//Dol:
+	558, 559, 560,
+	558, 560, 561,
+	//Gora:
+	562, 563, 564,
+	562, 564, 565,
+		//LACZNIK PRAWY
+	//Front:
+	566, 567, 568,
+	566, 568, 569,
+	//Tyl:
+	570, 571, 572,
+	570, 572, 573,
+	//Dol:
+	574, 575, 576,
+	574, 576, 577,
+	//Gora:
+	578, 579, 580,
+	578, 580, 581,
+
 };
 
 //Swiatlo:
@@ -1317,6 +1391,11 @@ GLuint pushIndices[66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2];
 GLfloat pushVertices_front[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
 GLfloat pushVertices_tyl[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
 
+//Kule:
+//
+GLfloat KulaVertices[2 * (66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3)];
+GLuint KulaIndices[2 * (66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2)];
+
 
 
 int main()
@@ -1351,6 +1430,7 @@ int main()
 	pushVertices[0] = 0.f;
 	pushVertices[1] = -0.35f;
 	pushVertices[2] = 0.f;
+
 	//int j = 0;
 	//glm::vec3 vec3pom = glm::vec3(0.0f, 0.0f, 1.0f);
 	/*for (int i = 3; i < 66 * 3; i = i + 3) {
@@ -1496,6 +1576,215 @@ int main()
 
 
 
+
+	//KULA
+
+	KulaVertices[0] = 0.f;
+	KulaVertices[1] = -0.6f;
+	KulaVertices[2] = 0.f;
+	int J = 130;
+	int X = 390;
+	int G = 579;
+	KulaVertices[X] = 0.f;
+	KulaVertices[X + 1] = 0.6f;
+	KulaVertices[X + 2] = 0.f;
+
+	vec3pom = glm::vec3(0.0f, 0.0f, 0.6f);
+	glm::vec3 vec3pom_kopia = vec3pom;
+	for (int i = 3; i < 66 * 3; i = i + 3) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 64.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		KulaVertices[i] = vec3pom.x;
+		KulaVertices[i + 1] = vec3pom.y;
+		KulaVertices[i + 2] = vec3pom.z;
+
+		KulaVertices[X + i] = vec3pom.x;
+		KulaVertices[X + i + 1] = -1.f * vec3pom.y;
+		KulaVertices[X + i + 2] = vec3pom.z;
+	}
+	vec3pom = glm::rotate(vec3pom_kopia, glm::radians(90.0f / 5.0f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+	vec3pom_kopia = vec3pom;
+	for (int i = 66 * 3; i < 66 * 3 + 33 * 3; i = i + 3) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 32.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		KulaVertices[i] = vec3pom.x;
+		KulaVertices[i + 1] = vec3pom.y;
+		KulaVertices[i + 2] = vec3pom.z;
+
+		KulaVertices[X + i] = vec3pom.x;
+		KulaVertices[X + i + 1] = -1.f * vec3pom.y;
+		KulaVertices[X + i + 2] = vec3pom.z;
+	}
+	vec3pom = glm::rotate(vec3pom_kopia, glm::radians(90.0f / 5.0f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+	vec3pom_kopia = vec3pom;
+	for (int i = 66 * 3 + 33 * 3; i < 66 * 3 + 33 * 3 + 17 * 3; i = i + 3) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 16.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		KulaVertices[i] = vec3pom.x;
+		KulaVertices[i + 1] = vec3pom.y;
+		KulaVertices[i + 2] = vec3pom.z;
+
+		KulaVertices[X + i] = vec3pom.x;
+		KulaVertices[X + i + 1] = -1.f * vec3pom.y;
+		KulaVertices[X + i + 2] = vec3pom.z;
+	}
+	vec3pom = glm::rotate(vec3pom_kopia, glm::radians(90.0f / 5.0f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+	vec3pom_kopia = vec3pom;
+	for (int i = 66 * 3 + 33 * 3 + 17 * 3; i < 66 * 3 + 33 * 3 + 17 * 3 + 9 * 3; i = i + 3) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 8.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		KulaVertices[i] = vec3pom.x;
+		KulaVertices[i + 1] = vec3pom.y;
+		KulaVertices[i + 2] = vec3pom.z;
+
+		KulaVertices[X + i] = vec3pom.x;
+		KulaVertices[X + i + 1] = -1.f * vec3pom.y;
+		KulaVertices[X + i + 2] = vec3pom.z;
+	}
+	vec3pom = glm::rotate(vec3pom_kopia, glm::radians(90.0f / 5.0f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+	vec3pom_kopia = vec3pom;
+	for (int i = 66 * 3 + 33 * 3 + 17 * 3 + 9 * 3; i < 66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3; i = i + 3) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 4.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		KulaVertices[i] = vec3pom.x;
+		KulaVertices[i + 1] = vec3pom.y;
+		KulaVertices[i + 2] = vec3pom.z;
+
+		KulaVertices[X + i] = vec3pom.x;
+		KulaVertices[X + i + 1] = -1.f * vec3pom.y;
+		KulaVertices[X + i + 2] = vec3pom.z;
+	}
+
+	inkr = 1;
+	inkr2 = 0;
+	for (int j = 0; j < (65 + 33) * 3; j = j + 9) {
+		KulaIndices[j] = inkr;
+		KulaIndices[j + 1] = inkr + 1;
+		KulaIndices[j + 2] = 65 + inkr2;
+		KulaIndices[j + 3] = 65 + inkr2;
+		KulaIndices[j + 4] = inkr + 1;
+		KulaIndices[j + 5] = 65 + inkr2 + 1;
+		KulaIndices[j + 6] = inkr + 1;
+		KulaIndices[j + 7] = 65 + inkr2 + 1;
+		KulaIndices[j + 8] = inkr + 2;
+
+		KulaIndices[G + j] = J + inkr;
+		KulaIndices[G + j + 1] = J + inkr + 1;
+		KulaIndices[G + j + 2] = J + 65 + inkr2;
+		KulaIndices[G + j + 3] = J + 65 + inkr2;
+		KulaIndices[G + j + 4] = J + inkr + 1;
+		KulaIndices[G + j + 5] = J + 65 + inkr2 + 1;
+		KulaIndices[G + j + 6] = J + inkr + 1;
+		KulaIndices[G + j + 7] = J + 65 + inkr2 + 1;
+		KulaIndices[G + j + 8] = J + inkr + 2;
+
+		inkr = inkr + 2;
+		inkr2 = inkr2 + 1;
+
+
+
+		/*std::cout << KulaIndices[G + j] << "\t" << KulaVertices[KulaIndices[G + j] * 3] << "\t" << KulaVertices[KulaIndices[G + j] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 1] << "\t" << KulaVertices[KulaIndices[G + j + 1] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 1] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 1] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 2] << "\t" << KulaVertices[KulaIndices[G + j + 2] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 2] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 2] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 3] << "\t" << KulaVertices[KulaIndices[G + j + 3] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 3] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 3] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 4] << "\t" << KulaVertices[KulaIndices[G + j + 4] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 4] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 4] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 5] << "\t" << KulaVertices[KulaIndices[G + j + 5] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 5] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 5] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 6] << "\t" << KulaVertices[KulaIndices[G + j + 6] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 6] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 6] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 7] << "\t" << KulaVertices[KulaIndices[G + j + 7] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 7] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 7] * 3 + 2] << "\n";
+		std::cout << KulaIndices[G + j + 8] << "\t" << KulaVertices[KulaIndices[G + j + 8] * 3] << "\t" << KulaVertices[KulaIndices[G + j + 8] * 3 + 1] << "\t" << KulaVertices[KulaIndices[G + j + 8] * 3 + 2] << "\n";
+		std::cout << "\n\n";*/
+
+	}
+
+
+	inkr = 0;
+	inkr2 = 0;
+	for (int j = (65 + 33) * 3; j < (65 + 2 * 33 + 17) * 3; j = j + 9) {
+		KulaIndices[j] = 65 + inkr;
+		KulaIndices[j + 1] = 65 + inkr + 1;
+		KulaIndices[j + 2] = 98 + inkr2;
+		KulaIndices[j + 3] = 98 + inkr2;
+		KulaIndices[j + 4] = 65 + inkr + 1;
+		KulaIndices[j + 5] = 98 + inkr2 + 1;
+		KulaIndices[j + 6] = 65 + inkr + 1;
+		KulaIndices[j + 7] = 98 + inkr2 + 1;
+		KulaIndices[j + 8] = 65 + inkr + 2;
+
+		KulaIndices[G + j] = J + 65 + inkr;
+		KulaIndices[G + j + 1] = J + 65 + inkr + 1;
+		KulaIndices[G + j + 2] = J + 98 + inkr2;
+		KulaIndices[G + j + 3] = J + 98 + inkr2;
+		KulaIndices[G + j + 4] = J + 65 + inkr + 1;
+		KulaIndices[G + j + 5] = J + 98 + inkr2 + 1;
+		KulaIndices[G + j + 6] = J + 65 + inkr + 1;
+		KulaIndices[G + j + 7] = J + 98 + inkr2 + 1;
+		KulaIndices[G + j + 8] = J + 65 + inkr + 2;
+		inkr = inkr + 2;
+		inkr2 = inkr2 + 1;
+	}
+	inkr = 0;
+	inkr2 = 0;
+	for (int j = (65 + 33 * 2 + 17) * 3; j < (65 + 2 * 33 + 2 * 17 + 9) * 3; j = j + 9) {
+		KulaIndices[j] = 98 + inkr;
+		KulaIndices[j + 1] = 98 + inkr + 1;
+		KulaIndices[j + 2] = 115 + inkr2;
+		KulaIndices[j + 3] = 115 + inkr2;
+		KulaIndices[j + 4] = 98 + inkr + 1;
+		KulaIndices[j + 5] = 115 + inkr2 + 1;
+		KulaIndices[j + 6] = 98 + inkr + 1;
+		KulaIndices[j + 7] = 115 + inkr2 + 1;
+		KulaIndices[j + 8] = 98 + inkr + 2;
+
+		KulaIndices[G + j] = J + 98 + inkr;
+		KulaIndices[G + j + 1] = J + 98 + inkr + 1;
+		KulaIndices[G + j + 2] = J + 115 + inkr2;
+		KulaIndices[G + j + 3] = J + 115 + inkr2;
+		KulaIndices[G + j + 4] = J + 98 + inkr + 1;
+		KulaIndices[G + j + 5] = J + 115 + inkr2 + 1;
+		KulaIndices[G + j + 6] = J + 98 + inkr + 1;
+		KulaIndices[G + j + 7] = J + 115 + inkr2 + 1;
+		KulaIndices[G + j + 8] = J + 98 + inkr + 2;
+		inkr = inkr + 2;
+		inkr2 = inkr2 + 1;
+	}
+	inkr = 0;
+	inkr2 = 0;
+	for (int j = (65 + 33 * 2 + 2 * 17 + 9) * 3; j < (65 + 2 * 33 + 2 * 17 + 2 * 9 + 5) * 3; j = j + 9) {
+		KulaIndices[j] = 115 + inkr;
+		KulaIndices[j + 1] = 115 + inkr + 1;
+		KulaIndices[j + 2] = 124 + inkr2;
+		KulaIndices[j + 3] = 124 + inkr2;
+		KulaIndices[j + 4] = 115 + inkr + 1;
+		KulaIndices[j + 5] = 124 + inkr2 + 1;
+		KulaIndices[j + 6] = 115 + inkr + 1;
+		KulaIndices[j + 7] = 124 + inkr2 + 1;
+		KulaIndices[j + 8] = 115 + inkr + 2;
+
+		KulaIndices[G + j] = J + 115 + inkr;
+		KulaIndices[G + j + 1] = J + 115 + inkr + 1;
+		KulaIndices[G + j + 2] = J + 124 + inkr2;
+		KulaIndices[G + j + 3] = J + 124 + inkr2;
+		KulaIndices[G + j + 4] = J + 115 + inkr + 1;
+		KulaIndices[G + j + 5] = J + 124 + inkr2 + 1;
+		KulaIndices[G + j + 6] = J + 115 + inkr + 1;
+		KulaIndices[G + j + 7] = J + 124 + inkr2 + 1;
+		KulaIndices[G + j + 8] = J + 115 + inkr + 2;
+		inkr = inkr + 2;
+		inkr2 = inkr2 + 1;
+	}
+	inkr = 0;
+	inkr2 = 0;
+	for (int j = (65 + 33 * 2 + 2 * 17 + 9 * 2 + 5) * 3; j < (65 + 2 * 33 + 2 * 17 + 2 * 9 + 2 * 5) * 3; j = j + 3) {
+		KulaIndices[j] = 124 + inkr;
+		KulaIndices[j + 1] = 124 + inkr + 1;
+		KulaIndices[j + 2] = 0;
+
+		KulaIndices[G + j] = J + 124 + inkr;
+		KulaIndices[G + j + 1] = J + 124 + inkr + 1;
+		KulaIndices[G + j + 2] = J + 0;
+		inkr = inkr + 1;
+	}
+
+	//KONIEC KULA
+
+
+	//KONIEC MODYFIKACJI TABLIC V/I
+
 	Shader shaderProgram("default.vert", "default.frag");
 
 
@@ -1628,6 +1917,39 @@ int main()
 
 
 
+	//odpychacze boczne:
+	Shader KulaShader("light.vert", "light.frag");
+	VAO KulaVAO;
+	KulaVAO.Bind();
+	VBO KulaVBO(KulaVertices, sizeof(KulaVertices));
+	EBO KulaEBO(KulaIndices, sizeof(KulaIndices));
+	KulaVAO.LinkAttrib(KulaVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+	KulaVAO.Unbind();
+	KulaVBO.Unbind();
+	KulaEBO.Unbind();
+
+	glm::vec4 KulaColor = glm::vec4(0.7f, 1.0f, 2.0f, 1.0f);
+	glm::vec3 KulaPos = glm::vec3(0.0f, -21.1f, -11.0);
+	glm::mat4 KulaModel = glm::mat4(1.0f);
+	KulaModel = glm::translate(KulaModel, KulaPos);
+	glm::vec3 cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::mat4 cubePBModel = glm::mat4(1.0f);
+	cubePBModel = glm::translate(cubePBModel, cubePBPos);
+
+	KulaShader.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
+	glUniform4f(glGetUniformLocation(KulaShader.ID, "lightColor"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	shaderProgram.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+
+	/*std::cout << "\n\nInd" << "\n";
+	for (int i = 0; i < sizeof(KulaIndices) / sizeof(int); i++) {
+		std::cout << i << "\t" << KulaIndices[i] << "\t" << KulaVertices[3 * KulaIndices[i]] << "\t" << KulaVertices[3 * KulaIndices[i] + 1] << "\t" << KulaVertices[3 * KulaIndices[i] + 2] << "\n";
+	}*/
+
+
 	glEnable(GL_DEPTH_TEST);
 
 	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
@@ -1635,17 +1957,20 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		//ZMIENNE ZMIAN KLATKOWYCH
 		if (i > 199.5) i = 0.0;
 		else i = i + 0.5;
 
 		if (i < 100.5) light2Color = glm::vec4(0.0f, 0.0f, i * 0.02f, 1.0f);
 		else light2Color = glm::vec4(0.0f, 0.0f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
 
+		//AKTUALIZACJA DANYCH
 		light2Model = glm::translate(light2Model, -light2Pos);
 		//light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
 		light2Model = glm::translate(light2Model, light2Pos);
 		cube2Model = glm::translate(cube2Model, cube2Pos);
 
+		//CZYSZCZENIE TLA
 		glClearColor(0.f, 1.00f, 0.f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -1654,6 +1979,8 @@ int main()
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
+
+		//POJAZD
 		shaderProgram.Activate();
 
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
@@ -1671,7 +1998,7 @@ int main()
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
-
+		//LAMPA
 		lightShader.Activate();
 
 		glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
@@ -1680,7 +2007,7 @@ int main()
 		lightVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
-
+		//OGIEN SILNIKA
 		lightShader2.Activate();
 
 		glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
@@ -1690,10 +2017,10 @@ int main()
 		light2VAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
-
+		//ODPYCHACZE CENTRALNE
 		pushShader.Activate();
 
-		//CENTRUM
+			//CENTRUM
 		pushVAO.Bind();
 		pushVBO = VBO(pushVertices, sizeof(pushVertices));
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
@@ -1711,7 +2038,7 @@ int main()
 		pushVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
-		//FRONT
+			//FRONT
 		pushVBO = VBO(pushVertices_front, sizeof(pushVertices_front));
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
@@ -1729,7 +2056,7 @@ int main()
 			pushVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		}
-		//TYL
+			//TYL
 		pushVBO = VBO(pushVertices_tyl, sizeof(pushVertices_tyl));
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
@@ -1745,7 +2072,41 @@ int main()
 		camera.Matrix(pushShader, "camMatrix");
 		pushVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		//KONIEC ODPYCHACZY CENTRALNYCH
 
+		//ODPYCHACZE BOCZNE
+		KulaShader.Activate();
+
+			//LEWA
+		KulaVAO.Bind();
+		KulaVBO = VBO(KulaVertices, sizeof(KulaVertices));
+		KulaVAO.LinkAttrib(KulaVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		KulaVAO.Unbind();
+		KulaVBO.Unbind();
+		KulaPos = glm::vec3(-4.0f, -1.65f, -21.0);
+		KulaModel = glm::mat4(1.0f);
+		KulaModel = glm::translate(KulaModel, KulaPos);
+		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
+		cubePBModel = glm::mat4(1.0f);
+		cubePBModel = glm::translate(cubePBModel, cubePBPos);
+		glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
+
+		camera.Matrix(KulaShader, "camMatrix");
+		KulaVAO.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			//PRAWA
+		KulaPos = glm::vec3(4.0f, -1.65f, -21.0);
+		KulaModel = glm::mat4(1.0f);
+		KulaModel = glm::translate(KulaModel, KulaPos);
+		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
+		cubePBModel = glm::mat4(1.0f);
+		cubePBModel = glm::translate(cubePBModel, cubePBPos);
+		glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
+		
+		camera.Matrix(KulaShader, "camMatrix");
+		KulaVAO.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		//KONIEC ODPYCHACZE BOCZNE
 
 
 		glfwSwapBuffers(window);
