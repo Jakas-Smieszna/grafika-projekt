@@ -10,6 +10,7 @@
 
 //Teksturowo:
 #include"Tekstury.h"
+#include "mesh.h"
 #include"stb/stb_image.h"
 //
 #include"shader.h"
@@ -17,11 +18,12 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
 #endif
 
-//Teksturowo:
+// Teksturowo:
 // Wierzcholki2
 GLfloat vertices[] =
 {
@@ -240,7 +242,7 @@ int main()
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 
-
+	Mesh testMesh = getTestMesh();
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -265,10 +267,8 @@ int main()
 
 		camera.Inputs(window);
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
-
-		camera.updateMatrix(45.0f, 0.1f, 100.0f);
-
 		shaderProgram.Activate();
+		testMesh.Draw(shaderProgram);
 
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));

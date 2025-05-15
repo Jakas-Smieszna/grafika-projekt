@@ -9,8 +9,9 @@ set(PROJ_FILES
     EBO.cpp
     Kamera.cpp
     Tekstury.cpp
-    stb.cpp
+    mesh.cpp
 # Biblioteki
+    stb.cpp
     glad.c
 )
 
@@ -24,7 +25,11 @@ target_compile_definitions(GrafikaProjekt PRIVATE
     $<$<CONFIG:Debug>:DEBUG_BUILD>
 )
 
-set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
+set_target_properties(GrafikaProjekt PROPERTIES
+    CXX_STANDARD 20
+)
+message("export compile cmd: $ENV{CMAKE_EXPORT_COMPILE_COMMANDS}")
+
 if(UNIX)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/bin")
     set_property(TARGET GrafikaProjekt PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")

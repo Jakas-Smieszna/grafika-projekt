@@ -1,9 +1,10 @@
 #include "shader.h"
+#include <fstream>
+#include <iostream>
 
 std::string get_file_contents(const char* filename)
 {	
-	std::string fpath = std::string{SHADER_RELPATH} + std::string{filename};
-	std::ifstream in(fpath, std::ios::binary);
+	std::ifstream in(filename, std::ios::binary);
 	if (in)
 	{
 		std::string contents;
@@ -14,15 +15,19 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	std::cout << fpath << " not found!\n";
+	eprintf("Failed to get contents of file '%s'", filename);
 	//throw(errno);
 	return std::string{""};
 }
 
+std::string getShaderPath(const char* shaderName) {
+	return std::string{SHADER_RELPATH} + std::string{shaderName};
+}
+
 Shader::Shader(const char* vertexFile, const char* fragmentFile)
 {
-	std::string vertexCode = get_file_contents(vertexFile);
-	std::string fragmentCode = get_file_contents(fragmentFile);
+	std::string vertexCode = get_file_contents(getShaderPath(vertexFile).c_str());
+	std::string fragmentCode = get_file_contents(getShaderPath(fragmentFile).c_str());
 
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();

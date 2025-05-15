@@ -1,8 +1,8 @@
 #ifndef TEXTURE_CLASS_H
 #define TEXTURE_CLASS_H
-#include<glad/glad.h>
-#include<stb/stb_image.h>
-#include"shader.h"
+#include <glad/glad.h>
+#include <stb/stb_image.h>
+#include "shader.h"
 #include "helper/debugutils.h"
 class Texture
 {
@@ -24,9 +24,15 @@ public:
 #ifdef _WIN32
 #define TEXTURE_RELPATH "resources\\"
 #elif __linux__
-#define TEXTURE_RELPATH "bin/resources/"
+
+#ifdef DEBUG_BUILD
+#define TEXTURE_RELPATH "out/build/linux-debug-x64/bin/resources/"
+#else
+#define TEXTURE_RELPATH "out/build/linux-release-x64/bin/resources/"
+#endif // DEBUG_BUILD
+
 #else
 #define TEXTURE_RELPATH ""
-#endif
+#endif // _WIN32
 
-#endif
+#endif // TEXTURE_CLASS_H

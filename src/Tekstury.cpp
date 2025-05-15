@@ -11,9 +11,9 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	stbi_set_flip_vertically_on_load(true);
 	unsigned char* bytes = stbi_load(fpath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
-		eprintf("Unable to load texture '%s'\n", fpath.c_str());
+		eprintf("Unable to load texture '%s'", fpath.c_str());
 	} else {
-		dprintf("Loaded texture '%s'\n", fpath.c_str());
+		dbgprintf("Loaded texture '%s'", fpath.c_str());
 	}
 	glGenTextures(1, &ID);
 	glActiveTexture(slot);

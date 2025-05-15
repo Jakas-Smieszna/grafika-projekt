@@ -1,12 +1,9 @@
 #ifndef SHADER_CLASS_H
 #define SHADER_CLASS_H
 
-#include<glad/glad.h>
-#include<string>
-#include<fstream>
-#include<sstream>
-#include<iostream>
-#include<cerrno>
+#include <glad/glad.h>
+#include <string>
+#include "helper/debugutils.h"
 
 std::string get_file_contents(const char* filename);
 
@@ -23,7 +20,11 @@ public:
 #ifdef _WIN32
 #define SHADER_RELPATH "shaders\\"
 #elif __linux__
-#define SHADER_RELPATH "bin/shaders/"
+#ifdef DEBUG_BUILD
+#define SHADER_RELPATH "out/build/linux-debug-x64/bin/shaders/"
+#else
+#define SHADER_RELPATH "out/build/linux-release-x64/bin/shaders/"
+#endif
 #else
 #define SHADER_RELPATH ""
 #endif

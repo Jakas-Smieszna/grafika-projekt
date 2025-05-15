@@ -22,7 +22,7 @@ message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
 set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
 
 # Add source to this project's executable.
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 include_directories(
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
