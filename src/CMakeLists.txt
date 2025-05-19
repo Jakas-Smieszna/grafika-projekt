@@ -10,6 +10,7 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     stb.cpp
+    Game.cpp
 # Biblioteki
     glad.c
 )
