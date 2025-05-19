@@ -18,7 +18,7 @@
 #include"EBO.h"
 #include"Kamera.h"
 //
-#include "Game.cpp"
+#include "Game.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
 
@@ -26,7 +26,6 @@ enum class AppState {
 	MAIN_MENU,
 	Game
 };
-
 
 
 int main() {
@@ -50,21 +49,18 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	// Inicjalizacja gry
-	GameElements game;
+	GameElements game = GameElements();
 	AppState currentState = AppState::Game;
-
+	std::cout << game.chuj << "\n";
 	// Główna pętla
 	while (!glfwWindowShouldClose(window)) {
-		// Obsługa wejścia
-		game.camera.Inputs(window);
-
 		if (currentState == AppState::Game) {
 			UpdateGameState(game, window);
 			RenderScene(game, window);
+			auto penis = glGetError();
+			if(penis != 0)std::cout << penis << '\n';
 		}
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
 	}
 
 	glfwDestroyWindow(window);

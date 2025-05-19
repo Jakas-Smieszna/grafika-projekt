@@ -17,9 +17,8 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+#include"Game.h"
 
-//Teksturowo:
-// Wierzcholki2
 GLfloat vertices[] =
 {
 	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D	Normalne wektory
@@ -56,7 +55,6 @@ GLfloat vertices[] =
 	0.5f, 0.5f,  0.5f,		0.0f, 1.0f, 1.0f,		3.0f, 0.0f,								0.0f, -1.0f, 0.0f
 };
 
-// Przyporzadkowanie wierzcholkow do trojkatow2
 GLuint indices[] =
 {
 	//Front:
@@ -77,11 +75,7 @@ GLuint indices[] =
 	//Gora:
 	20, 21, 23,
 	21, 23, 22
-
-
 };
-
-//Swiatlo:
 
 GLfloat lightVertices[] =
 { // COORDINATES //
@@ -111,49 +105,7 @@ GLuint lightIndices[] =
 	4, 6, 7
 };
 
-
-
-class GameElements {
-public:
-	Shader shaderProgram;
-	VAO VAO1;
-	VBO VBO1;
-	EBO EBO1;
-
-	std::string parentDir;
-	std::string texPath;
-
-	Texture tekstura1;
-	Texture tekstura2;
-
-
-	//swiatlo:
-	Shader lightShader;
-	VAO lightVAO;
-	VBO lightVBO;
-	EBO lightEBO;
-
-	glm::vec4 lightColor;
-	glm::vec3 lightPos;
-	glm::mat4 lightModel;
-	glm::vec3 cubePos;
-	glm::mat4 cubeModel;
-
-	//swiatlo 2:
-	Shader lightShader2;
-	VAO light2VAO;
-	VBO light2VBO;
-	EBO light2EBO;
-
-	glm::vec4 light2Color;
-	glm::vec3 light2Pos;
-	glm::mat4 light2Model;
-	glm::vec3 cube2Pos;
-	glm::mat4 cube2Model;
-
-	Camera camera;
-
-	GameElements() : shaderProgram("default.vert", "default.frag"), VBO1(vertices, sizeof(vertices)), EBO1(indices, sizeof(indices)),
+GameElements::GameElements() : shaderProgram("default.vert", "default.frag"), VBO1(vertices, sizeof(vertices)), EBO1(indices, sizeof(indices)),
 		parentDir(""), texPath("resources/"),
 		tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
 		tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE),
@@ -231,10 +183,12 @@ public:
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-	}
-};
 
-void UpdateGameState(GameElements& game, GLFWwindow* window) {
+		chuj = 5;
+	}
+
+void UpdateGameState(GameElements game, GLFWwindow* window) 
+{
 	static float i = 0.0f;
 
 	if (i > 192.0f) i = 0.0f;
@@ -252,14 +206,14 @@ void UpdateGameState(GameElements& game, GLFWwindow* window) {
 	game.light2Model = glm::translate(game.light2Model, game.light2Pos);
 	game.cube2Model = glm::translate(game.cube2Model, game.cube2Pos);
 
-	glClearColor(0.f, 1.00f, 0.f, 1.0f);
+	glClearColor(0.8f, 0.10f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	game.camera.Inputs(window);
 	game.camera.updateMatrix(45.0f, 0.1f, 100.0f);
 }
 
-void RenderScene(GameElements& game, GLFWwindow* window) {
+void RenderScene(GameElements game, GLFWwindow* window) {
 
 	// Renderowanie g³ównego obiektu
 	game.shaderProgram.Activate();
