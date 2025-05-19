@@ -19,7 +19,7 @@
 #include"Kamera.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-
+#define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352
 
 //Teksturowo:
 // POJAZD
@@ -835,6 +835,94 @@ GLfloat vertices[] =
 	4.0f, -1.4f, -20.75f,	1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
 	4.0f, -1.4f, -21.25f,	0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
 
+
+
+		//MONITOR
+			//RAMA GORNA
+	 //Front
+	-1.1f, 0.1f, 0.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, -0.1f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.1f, -0.1f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.1f, 0.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Gora
+	-1.1f, 0.0f, 0.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, 0.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.1f, 0.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.0f, 0.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Dol
+	-1.0f, 0.0f, -0.1f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, -0.1f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.1f, -0.1f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.0f, -0.1f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+			//RAMA DOLNA
+	 //Front
+	-1.0f, 0.1f, 0.1f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, 0.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.1f, 0.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.1f, 0.1f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Gora
+	-1.0f, 0.0f, 0.1f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, 0.1f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.1f, 0.1f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, 0.0f, 0.1f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Dol
+	-1.1f, 0.0f, 0.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, 0.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.1f, 0.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	 1.1f, 0.0f, 0.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+			//RAMA LEWA: Z w obliczeniach
+	 //Front
+	-1.1f, 0.1f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Lewo:
+	-1.1f, 0.0f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.1f, 0.0f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Prawo:
+	-1.0f, 0.0f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, 0.0f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+			//RAMA PRAWA: Z w obliczeniach
+	 //Front
+	1.0f, 0.1f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	1.1f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.1f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.0f, 0.1f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Lewo:
+	1.0f, 0.0f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	1.0f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.0f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.0f, 0.0f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//Prawo:
+	1.1f, 0.0f, 1.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	1.1f, 0.1f, 1.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.1f, 0.1f, -1.0f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	1.1f, 0.0f, -1.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	
+
+	//	//PANEL
+	// //Tyl
+	//-1.1f, 1.1f, -12.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	//-1.1f, 2.1f, -11.0f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	// 1.1f, 2.1f, -11.0f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	// 1.1f, 1.1f, -12.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	// //Lewo
+	//-1.1f, 1.1f, -9.5f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	//-1.1f, 2.1f, -11.0f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
+	//-1.1f, 1.1f, -12.5f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
+	////Prawo
+	// 1.1f, 1.1f, -9.5f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	// 1.1f, 2.1f, -11.0f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								1.0f, 0.0f, 0.0f,
+	// 1.1f, 1.1f, -12.5f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								1.0f, 0.0f, 0.0f,
+	////Front
+	//-1.1f, 1.1f, -9.5f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//-1.1f, 2.1f, -11.0f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	// 1.1f, 2.1f, -11.0f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	// 1.1f, 1.1f, -9.5f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 };
 
 	 // Przyporzadkowanie wierzcholkow do trojkatow2
@@ -1323,6 +1411,70 @@ GLuint indices[] =
 	578, 579, 580,
 	578, 580, 581,
 
+	//MONITO-WYSWIETLACZ-ELEMENTY_START:
+
+		//RAMA
+			//GORNA
+	//Front:
+	582, 583, 584,
+	582, 584, 585,
+	//Gora:
+	586, 587, 588,
+	586, 588, 589,
+	//Dol:
+	590, 591, 592,
+	590, 592, 593,
+			//DOL
+	//Front:
+	594, 595, 596,
+	594, 596, 597,
+	//Gora:
+	598, 599, 600,
+	598, 600, 601,
+	//Dol:
+	602, 603, 604,
+	602, 604, 605,
+			//LEWA
+	//Front:
+	606, 607, 608,
+	606, 608, 609,
+	//Gora:
+	610, 611, 612,
+	610, 612, 613,
+	//Dol:
+	614, 615, 616,
+	614, 616, 617,
+			//PRAWA
+	//Front:
+	618, 619, 620,
+	618, 620, 621,
+	//Gora:
+	622, 623, 624,
+	622, 624, 625,
+	//Dol:
+	626, 627, 628,
+	626, 628, 629,
+
+};
+
+//Na monitorze (odczyty):
+GLfloat Mon_Vertices[] =
+{
+	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D		Normalne wektory
+
+	//WSKAZNIK KIERUNKU: CENTRUM
+	-0.1f, 0.02f, 0.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.1f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.1f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.1f, 0.02f, 0.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+};
+
+GLuint Mon_Indices[] =
+{
+	//WSKAZNIK KIERUNKU: CENTRUM
+	0, 1, 2,
+	0, 2, 3,
+
 };
 
 //Swiatlo:
@@ -1427,6 +1579,60 @@ int main()
 
 
 	//Inicjacja
+
+			//MONITOR
+	//WYZNACZANIE POZYCJI GORNEJ RAMKI ZA POMOCA ROTACJI WEKTOROW
+	glm::vec3 vec3pom = glm::vec3(0.0f, 0.0f, 0.0f);
+	int start = 582;
+	for (int i = 0; i < 12; i++) {
+		vec3pom = glm::vec3(
+			vertices[(start + i) * 11],
+			vertices[(start + i) * 11 + 1],
+			vertices[(start + i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		vertices[(start + i) * 11 + 1] = vec3pom.y;
+		vertices[(start + i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, _JG_DL_RAM_MON_POJ_ / 2.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		vertices[(start + i) * 11 + 1] = vertices[(start + i) * 11 + 1] + vec3pom.y + 1.6f;
+		vertices[(start + i) * 11 + 2] = vertices[(start + i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+	//WYZNACZANIE POZYCJI DOLNEJ RAMKI ZA POMOCA ROTACJI WEKTOROW
+	start = 594;
+	for (int i = 0; i < 12; i++) {
+		vec3pom = glm::vec3(
+			vertices[(start + i) * 11],
+			vertices[(start + i) * 11 + 1],
+			vertices[(start + i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		vertices[(start + i) * 11 + 1] = vec3pom.y;
+		vertices[(start + i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, -_JG_DL_RAM_MON_POJ_ / 2.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		vertices[(start + i) * 11 + 1] = vertices[(start + i) * 11 + 1] + vec3pom.y + 1.6f;
+		vertices[(start + i) * 11 + 2] = vertices[(start + i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+	//WYZNACZANIE POZYCJI LEWEJ I PRAWEJ RAMKI ZA POMOCA ROTACJI WEKTOROW
+	start = 606;
+	for (int i = 0; i < 24; i++) {
+		if (abs(vertices[(start + i) * 11]) > 1.05f) {
+			vec3pom = glm::vec3(
+				vertices[(start + i) * 11],
+				vertices[(start + i) * 11 + 1],
+				vertices[(start + i) * 11 + 2] * _JG_DL_RAM_MON_POJ_ / 2.0f);
+		}
+		else {
+			vec3pom = glm::vec3(
+				vertices[(start + i) * 11],
+				vertices[(start + i) * 11 + 1],
+				vertices[(start + i) * 11 + 2] * (_JG_DL_RAM_MON_POJ_ - 0.1f) / 2.0f);
+		}
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		vertices[(start + i) * 11 + 1] = vec3pom.y + 1.6f;
+		vertices[(start + i) * 11 + 2] = vec3pom.z - 11.75f;
+	}
+
+			//POLKULE
 	pushVertices[0] = 0.f;
 	pushVertices[1] = -0.35f;
 	pushVertices[2] = 0.f;
@@ -1445,7 +1651,7 @@ int main()
 		j = j + 1;
 	}*/
 
-	glm::vec3 vec3pom = glm::vec3(0.0f, 0.0f, 1.0f);
+	vec3pom = glm::vec3(0.0f, 0.0f, 1.0f);
 	for (int i = 3; i < 66 * 3; i = i + 3) {
 		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 64.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
 		pushVertices[i] = vec3pom.x;
@@ -1829,6 +2035,24 @@ int main()
 
 	tekstura1.texUnit(shaderProgram, "texture1", 0);
 	tekstura2.texUnit(shaderProgram, "texture2", 1);
+
+	////DANE NA MONITORZE POJAZDU
+	//Shader Mon_Program("default.vert", "default.frag");
+	//
+	//VAO VAO_Mon;
+	//VAO_Mon.Bind();
+
+	//VBO VBO_Mon(Mon_Vertices, sizeof(Mon_Vertices));
+	//EBO EBO_Mon(Mon_Indices, sizeof(Mon_Indices));
+
+	//VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	//VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	//VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	//VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	//VAO_Mon.Unbind();
+	//VBO_Mon.Unbind();
+	//EBO_Mon.Unbind();
 
 
 	//swiatlo:
