@@ -111,7 +111,7 @@ GameElements::GameElements() : shaderProgram("default.vert", "default.frag"), VB
 		tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE),
 		lightShader("light.vert", "light.frag"), lightVBO(lightVertices, sizeof(lightVertices)), lightEBO(lightIndices, sizeof(lightIndices)),
 		lightShader2("light.vert", "light.frag"), light2VBO(lightVertices, sizeof(lightVertices)), light2EBO(lightIndices, sizeof(lightIndices)),
-		camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f))
+		camera(1000, 800, glm::vec3(1.0f, 0.0f, 0.0f))
 	{
 		VAO1.Bind();
 
@@ -187,7 +187,7 @@ GameElements::GameElements() : shaderProgram("default.vert", "default.frag"), VB
 		chuj = 5;
 	}
 
-void UpdateGameState(GameElements game, GLFWwindow* window) 
+void UpdateGameState(GameElements &game, GLFWwindow* window) 
 {
 	static float i = 0.0f;
 
@@ -213,7 +213,7 @@ void UpdateGameState(GameElements game, GLFWwindow* window)
 	game.camera.updateMatrix(45.0f, 0.1f, 100.0f);
 }
 
-void RenderScene(GameElements game, GLFWwindow* window) {
+void RenderScene(GameElements &game, GLFWwindow* window) {
 
 	// Renderowanie g³ównego obiektu
 	game.shaderProgram.Activate();
@@ -249,6 +249,8 @@ void RenderScene(GameElements game, GLFWwindow* window) {
 	game.camera.Matrix(game.lightShader2, "camMatrix");
 	game.light2VAO.Bind();
 	glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+	GLint modelLoc = glGetUniformLocation(game.shaderProgram.ID, "model");
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
