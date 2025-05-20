@@ -2,6 +2,7 @@
 #include "shader.h"
 #include "vertex.h"
 #include <vector>
+#include <iostream>
 
 _mesh::_mesh(
         std::vector<Vertex> vertices,
@@ -32,28 +33,37 @@ void _mesh::Draw(Shader &shader) {
     vao.Unbind();
 }
 
+// TODO: template?
+// template<typename VertType>
+std::vector<Vertex> vertexVectorFromVertexArray(GLfloat* vertexArray, size_t elems) {
+    std::vector<Vertex> vertexVect;
+    
+    for(int i = 0; i < elems; i+=11) {
+        vertexVect.push_back(Vertex{
+            glm::vec3{vertexArray[i], vertexArray[i+1], vertexArray[i+2]},
+            glm::vec3{vertexArray[i+3], vertexArray[i+4], vertexArray[i+5]},
+            glm::vec2{vertexArray[i+6], vertexArray[i+7]},
+            glm::vec3{vertexArray[i+8], vertexArray[i+9], vertexArray[i+10]}
+        });
+    }
+    return vertexVect;
+}
+
 Mesh getTestMesh() {
-    const GLfloat v[] = {
+    GLfloat v[] = {
    -0.5f, 1.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
    -0.5f, 1.5f, -0.5f,0.0f, 1.0f, 1.0f,0.0f, 3.0f,	0.0f,   -1.0f, 0.0f,
 	0.5f, 1.5f, -0.5f,1.0f, 1.0f, 0.0f,3.0f, 3.0f,	0.0f,   -1.0f, 0.0f,
 	0.5f, 1.5f,  0.5f,0.0f, 1.0f, 1.0f,3.0f, 0.0f,	0.0f,   -1.0f, 0.0f
     };
 
-    std::vector<Vertex> vertexVect;
-    
-    for(int i = 0; i < 43; i+=11) {
-        vertexVect.push_back(Vertex{
-            glm::vec3{v[i], v[i+1], v[i+2]},
-            glm::vec3{v[i+3], v[i+4], v[i+5]},
-            glm::vec2{v[i+6], v[i+7]},
-            glm::vec3{v[i+8], v[i+9], v[i+10]}
-        });
-    }
+    volatile size_t vsize = sizeof(v) / sizeof(v[0]); 
+    std::cout << vsize;
+
     std::vector<GLuint> indexVect = {
         0, 1, 3,
         1, 3, 2
     };
-    Mesh r = Mesh(vertexVect, indexVect);
+    Mesh r = Mesh(vertexVectorFromVertexArray(v, vsize), indexVect);
     return r;
 }

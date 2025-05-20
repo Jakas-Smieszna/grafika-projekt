@@ -18,6 +18,7 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+#include "vertex.h"
 
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
@@ -146,7 +147,6 @@ int main()
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
 	Shader shaderProgram("default.vert", "default.frag");
 
 
@@ -248,7 +248,7 @@ int main()
 
 	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
 	float i = 0.0;
-
+	
 	while (!glfwWindowShouldClose(window))
 	{
 		if (i > 192.0) i = 0.0;

@@ -10,6 +10,7 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     mesh.cpp
+    model.cpp
 # Biblioteki
     stb.cpp
     glad.c
