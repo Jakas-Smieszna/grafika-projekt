@@ -18,7 +18,7 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
-#include "vertex.h"
+#include "terrainGenerator.h"
 
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
@@ -248,6 +248,9 @@ int main()
 
 	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
 	float i = 0.0;
+
+	Shader terrainShader("terrain.vert", "terrain.frag");
+	TerrainGenerator generator;
 	
 	while (!glfwWindowShouldClose(window))
 	{
@@ -267,6 +270,10 @@ int main()
 
 		camera.Inputs(window);
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
+		terrainShader.Activate();
+		camera.Matrix(terrainShader, "camMatrix");
+		generator.Draw(terrainShader);
+
 		shaderProgram.Activate();
 		testMesh.Draw(shaderProgram);
 
@@ -302,6 +309,7 @@ int main()
 		camera.Matrix(lightShader2, "camMatrix");
 		light2VAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		light2VAO.Unbind();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

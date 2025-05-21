@@ -6,7 +6,7 @@
 #include <vector>
 
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
-#define TERRAINGENERATOR_CHUNK_SIZE 16
+#define TERRAINGENERATOR_CHUNK_SIZE 4
 #endif
 
 struct ivec2 {
@@ -16,11 +16,9 @@ struct ivec2 {
 
 class Chunk {
 public:
-    Mesh terrainMesh;
     ivec2 position;
-    Chunk(int cX, int cY, int LOD = 1) {
-        terrainMesh = generateChunkMesh(LOD, cX, cY);
-    }
+    Mesh terrainMesh;
+    Chunk(int cX, int cY, int LOD = 1) : terrainMesh(generateChunkMesh(LOD, cX, cY)) {};
 private:
     Mesh generateChunkMesh(int LOD, int chunkX, int chunkY);
 };

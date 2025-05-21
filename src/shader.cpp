@@ -1,6 +1,7 @@
 #include "shader.h"
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 std::string get_file_contents(const char* filename)
 {	
@@ -32,13 +33,43 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();
 
+	GLint status = 0;
+
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
+	if(status == GL_FALSE) {
+		GLint maxLength = 0;
+		glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+		// The maxLength includes the NULL character
+		std::vector<GLchar> errorLog(maxLength);
+		glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &errorLog[0]);
+
+		printf("%s: %s", vertexFile, &errorLog[0]);
+
+		// Exit with failure.
+		glDeleteShader(vertexShader); // Don't leak the shader.
+	}
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentShader);
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &status);
+	if(status == GL_FALSE) {
+		GLint maxLength = 0;
+		glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+		// The maxLength includes the NULL character
+		std::vector<GLchar> errorLog(maxLength);
+		glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &errorLog[0]);
+
+		printf("%s: %s", fragmentFile, &errorLog[0]);
+
+		// Exit with failure.
+		glDeleteShader(fragmentShader); // Don't leak the shader.
+	}
 
 	ID = glCreateProgram();
 	glAttachShader(ID, vertexShader);

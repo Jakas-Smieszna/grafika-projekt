@@ -10,7 +10,7 @@ class VBO
 {
 public:
 	GLuint ID;
-	VBO() {eprintf("VBO initialized with no arguments at line %u", __LINE__);}
+	VBO() {}
 	VBO(GLfloat* vertices, GLsizeiptr size);
 	VBO(std::vector<Vertex> &vertices, GLsizeiptr size);
 
