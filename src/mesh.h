@@ -21,6 +21,7 @@ class _mesh {
     _mesh(
         std::vector<Vertex> vertices,
         std::vector<GLuint> indices);
+    ~_mesh();
     void Draw(Shader &shader);
     private:
     VAO vao; 

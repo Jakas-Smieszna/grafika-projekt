@@ -47,7 +47,7 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &errorLog[0]);
 
-		printf("%s: %s", vertexFile, &errorLog[0]);
+		printf("%s: %s\n", vertexFile, &errorLog[0]);
 
 		// Exit with failure.
 		glDeleteShader(vertexShader); // Don't leak the shader.
@@ -65,7 +65,7 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &errorLog[0]);
 
-		printf("%s: %s", fragmentFile, &errorLog[0]);
+		printf("%s: %s\n", fragmentFile, &errorLog[0]);
 
 		// Exit with failure.
 		glDeleteShader(fragmentShader); // Don't leak the shader.

@@ -6,7 +6,7 @@
 #include <vector>
 
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
-#define TERRAINGENERATOR_CHUNK_SIZE 4
+#define TERRAINGENERATOR_CHUNK_SIZE 16
 #endif
 
 struct ivec2 {

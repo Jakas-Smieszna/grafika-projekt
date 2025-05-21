@@ -17,6 +17,12 @@ _mesh::_mesh(
         initMesh();
     }
 
+_mesh::~_mesh() {
+    vao.Delete();
+    vbo.Delete();
+    ebo.Delete();
+}
+
 void _mesh::initMesh() {
     vao = VAO();
     vao.Bind();
