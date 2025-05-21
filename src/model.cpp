@@ -1,4 +1,5 @@
 #include "model.h"
+#include "glm/fwd.hpp"
 #include "vertex.h"
 
 #include <assimp/Importer.hpp>
@@ -47,6 +48,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
         vector.y = mesh->mVertices[i].y;
         vector.z = mesh->mVertices[i].z;
         vertex.Position = vector;
+        vertex.Color = glm::vec3{0, 0, 0};
         // normals
         vector.x = mesh->mNormals[i].x;
         vector.y = mesh->mNormals[i].y;
@@ -59,7 +61,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
         } else {
-            vertex.TexCoords = glm::vec2{0.f, 0.f,};
+            vertex.TexCoords = glm::vec2{0.f, 0.f};
         }
         vertices.push_back(vertex);
     }
@@ -68,6 +70,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
         for(uint j = 0; j < face.mNumIndices; j++)
             indices.push_back(face.mIndices[j]);
     }
+    return Mesh(vertices, indices);
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName) {

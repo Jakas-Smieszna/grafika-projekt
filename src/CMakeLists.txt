@@ -11,6 +11,7 @@ set(PROJ_FILES
     Tekstury.cpp
     mesh.cpp
     model.cpp
+    terrainGenerator.cpp
 # Biblioteki
     stb.cpp
     glad.c

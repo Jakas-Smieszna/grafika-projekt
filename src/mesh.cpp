@@ -4,6 +4,10 @@
 #include <vector>
 #include <iostream>
 
+_mesh::_mesh() {
+    initMesh();
+}
+
 _mesh::_mesh(
         std::vector<Vertex> vertices,
         std::vector<GLuint> indices

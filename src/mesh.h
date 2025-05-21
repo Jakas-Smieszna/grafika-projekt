@@ -7,7 +7,6 @@
 #include "EBO.h"
 #include "VBO.h"
 #include "VAO.h"
-#include "glm/fwd.hpp"
 #include "shader.h"
 #include "vertex.h"
 
@@ -18,6 +17,7 @@ class _mesh {
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
 
+    _mesh();
     _mesh(
         std::vector<Vertex> vertices,
         std::vector<GLuint> indices);
