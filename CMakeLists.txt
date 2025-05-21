@@ -18,28 +18,17 @@ find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
 find_package(GLM REQUIRED)
 message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
+find_package(assimp REQUIRED)
+message(STATUS "Found assimp in ${assimp_INCLUDE_DIRS}")
 
 set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
-
-include(FetchContent)
-FetchContent_Declare(
-  assimp
-  GIT_REPOSITORY https://github.com/assimp/assimp.git
-  GIT_TAG c35200e38ea8f058812b83de2ef32c6093b0ece2 # wersja 5.4.3
-)
-# set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE BOOL "" FORCE)
-set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(assimp)
 
 # Add source to this project's executable.
 include_directories(
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
   ${GLM_INCLUDE_DIR}
-  _deps/assimp-src/include # asset import library
-  _deps/assimp-build/include # asset import library build stuff
+  ${assimp_INCLUDE_DIRS}
 )
 
 # Enable Hot Reload for MSVC compilers if supported.

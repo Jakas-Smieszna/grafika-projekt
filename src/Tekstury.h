@@ -3,12 +3,12 @@
 #include <glad/glad.h>
 #include <stb/stb_image.h>
 #include "shader.h"
-#include "helper/debugutils.h"
-class Texture
-{
+class Texture {
 public:
 	GLuint ID;
-	GLenum type;
+	GLenum GLTexType;
+	std::string type;
+
 	Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum
 		pixelType);
 	// Assigns a texture unit to a texture

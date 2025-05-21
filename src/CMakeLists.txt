@@ -19,7 +19,7 @@ set(PROJ_FILES
 add_executable(GrafikaProjekt ${PROJ_FILES} )
 
 target_link_libraries(GrafikaProjekt PRIVATE
-	${OPENGL_LIBRARY} ${GLFW3_LIBRARY}
+	${OPENGL_LIBRARY} ${GLFW3_LIBRARY} ${assimp_LIBRARIES}
 )
 
 target_compile_definitions(GrafikaProjekt PRIVATE
@@ -29,7 +29,6 @@ target_compile_definitions(GrafikaProjekt PRIVATE
 set_target_properties(GrafikaProjekt PROPERTIES
     CXX_STANDARD 20
 )
-message("export compile cmd: $ENV{CMAKE_EXPORT_COMPILE_COMMANDS}")
 
 if(UNIX)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/bin")
