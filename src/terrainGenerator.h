@@ -3,10 +3,14 @@
 
 #include "mesh.h"
 #include "shader.h"
+#include <memory>
 #include <vector>
 
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
 #define TERRAINGENERATOR_CHUNK_SIZE 16
+#endif
+#ifndef RENDER_DISTANCE
+#define RENDER_DISTANCE 32
 #endif
 
 struct ivec2 {
@@ -30,7 +34,7 @@ public:
     void Draw(Shader& shader);
     void updateTerrain();
 private:
-    std::vector<Chunk> TerrainChunks;
+    std::vector<std::unique_ptr<Chunk>> TerrainChunks;
     
 };
 

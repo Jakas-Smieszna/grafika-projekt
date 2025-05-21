@@ -1,12 +1,13 @@
 #include "terrainGenerator.h"
 #include "vertex.h"
+#include <memory>
 
 #define STB_PERLIN_IMPLEMENTATION
 #include <stb/stb_perlin.h>
 
 float perlinChunkHeight(float x, float y) {
     float h = 0;
-    h += stb_perlin_turbulence_noise3(x, y, 0.1f, 1.3f, 0.1f, 8);
+    h += stb_perlin_turbulence_noise3(x, y, 0.1f, 1.3f, 0.1f, 6);
     return h;
 }
 
@@ -77,18 +78,16 @@ TerrainGenerator::TerrainGenerator() {
     updateTerrain();
 }
 
-#define RENDER_DISTANCE 8
 void TerrainGenerator::updateTerrain() {
     for(int i = -RENDER_DISTANCE; i < RENDER_DISTANCE; i++) {
         for(int j = -RENDER_DISTANCE; j < RENDER_DISTANCE; j++) {
-            Chunk freshGen = Chunk(i,j, 1);
-            TerrainChunks.push_back(freshGen);
+            TerrainChunks.push_back(std::make_unique<Chunk>(i,j, 1));
         }
     }
 }
 
 void TerrainGenerator::Draw(Shader& shader) {
-    for(Chunk c : TerrainChunks) {
-        c.terrainMesh.Draw(shader);
+    for(const auto& c : TerrainChunks) {
+        c->terrainMesh.Draw(shader);
     }
 }
