@@ -1,4 +1,9 @@
+#include <filesystem>
+namespace fs = std::filesystem;
+
 #include"Tekstury.h"
+
+
 Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum
 	pixelType)
 {
@@ -6,7 +11,9 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	type = texType;
 	int widthImg, heightImg, numColCh;
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char* bytes = stbi_load(image, &widthImg, &heightImg, &numColCh, 0);
+	fs::path fpath = std::string{"bin/"} + std::string{image};
+	std::string imgFullPath = fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath;
+	unsigned char* bytes = stbi_load(imgFullPath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
 		std::cout << "Unable to load " << image << "!\n";
 	}
