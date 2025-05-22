@@ -1472,6 +1472,7 @@ GLfloat Mon_Vertices[] =
 	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
 	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+
 	//WSKAZNIK ENERGII: CENTRUM
 	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
@@ -1491,6 +1492,7 @@ GLfloat Mon_Vertices[] =
 	0.0f, 0.01f, 0.0f,		0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 	0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
 	-0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+
 	//WSKAZNIK KIERUNKU: ROZA
 		//DUZE STRZALKI
 	-0.03f, 0.005f, 0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
@@ -1511,10 +1513,55 @@ GLfloat Mon_Vertices[] =
 	0.0f, 0.0052f, -0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 	-0.15f, 0.0052f, -0.15f,0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 		//CENTRUM
-	-0.03f, 0.0052f, 0.0f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.0052f, 0.03f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.03f, 0.0052f, 0.0f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.00f, 0.0052f, -0.03f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.03f, 0.0052f, 0.0f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.0052f, 0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.0052f, 0.0f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.00f, 0.0052f, -0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+
+	//WSKAZNIK ODLEGLOSCI: CENTRUM
+	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ODLEGLOSCI: WSKAZOWKA
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ODLEGLOSCI: IKONA
+	0.0f, 0.005f, 0.0f,		0.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.2f, 0.005f, 0.1f,		0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.1f, 0.005f, 0.2f,		0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.1f, 0.005f, 0.2f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.2f, 0.005f, 0.1f,	0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.2f, 0.005f, -0.1f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.1f, 0.005f, -0.2f,	0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.1f, 0.005f, -0.2f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.2f, 0.005f, -0.1f,	0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ODLEGLOSCI: LINIA
+	0.0f, 0.01f, 0.0f,		0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+
+	//WSKAZNIK PREDKOSCI: CENTRUM
+	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK PREDKOSCI: WSKAZOWKA
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK PREDKOSCI: IKONA
+	0.2f, 0.005f, 0.0f,		1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, 0.2f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.2f, 0.005f, 0.0f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.2f, 0.005f, -0.2f,	1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, 0.0f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.2f, 0.005f, -0.2f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK PREDKOSCI: LINIA
+	0.0f, 0.01f, 0.0f,		0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
 
 };
 
@@ -1525,6 +1572,7 @@ GLuint Mon_Indices[] =
 	0, 2, 3,
 	//WSKAZNIK KIERUNKU: WSKAZOWKA
 	4, 5, 6,
+
 	//WSKAZNIK ENERGII: CENTRUM
 	7, 8, 9,
 	7, 9, 10,
@@ -1535,6 +1583,7 @@ GLuint Mon_Indices[] =
 	14, 17, 18,
 	//WSKAZNIK ENERGII: LINIA
 	19, 20, 21,
+
 	//WSKAZNIK KIERUNKU: ROZA DUZA
 	22, 23, 24,
 	24, 25, 26,
@@ -1548,6 +1597,30 @@ GLuint Mon_Indices[] =
 	//WSKAZNIK KIERUNKU: ROZA CENTRUM
 	38, 39, 40,
 	38, 40, 41,
+
+	//WSKAZNIK ODLEGLOSCI: CENTRUM
+	42, 43, 44,
+	42, 44, 45,
+	//WSKAZNIK ODLEGLOSCI: WSKAZOWKA
+	46, 47, 48,
+	//WSKAZNIK ODLEGLOSCI: IKONA
+	50, 49, 51,
+	52, 49, 53,
+	54, 49, 55,
+	56, 49, 57,
+	//WSKAZNIK ODLEGLOSCI: LINIA
+	58, 59, 60,
+
+	//WSKAZNIK PREDKOSC: CENTRUM
+	61, 62, 63,
+	61, 63, 64,
+	//WSKAZNIK PREDKOSC: WSKAZOWKA
+	65, 66, 67,
+	//WSKAZNIK PREDKOSC: IKONA
+	68, 69, 70,
+	71, 72, 73,
+	//WSKAZNIK PREDKOSC: LINIA
+	74, 75, 76,
 
 };
 
@@ -1625,8 +1698,15 @@ GLuint KulaIndices[2 * (66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2
 //Ramy wskazowek
 GLfloat Zeg1Vertices[130 * 11 + 65 * 11 + 130 * 11];
 GLuint Zeg1Indices[130 * 3 + 65 * 3 + 130 * 3];
+
 GLfloat Zeg2Vertices[130 * 11 + 65 * 11 + 130 * 11];
 GLuint Zeg2Indices[130 * 3 + 65 * 3 + 130 * 3];
+
+GLfloat Zeg3Vertices[130 * 11 + 65 * 11 + 130 * 11];
+GLuint Zeg3Indices[130 * 3 + 65 * 3 + 130 * 3];
+
+GLfloat Zeg4Vertices[130 * 11 + 65 * 11 + 130 * 11];
+GLuint Zeg4Indices[130 * 3 + 65 * 3 + 130 * 3];
 
 
 int main()
@@ -1761,6 +1841,37 @@ int main()
 		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
 		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
 	}
+	//WYZNACZANIE POZYCJI WSKAZOWKI ODLEGLOSCI
+	for (int i = 42; i < 61; i++) {
+		vec3pom = glm::vec3(
+			Mon_Vertices[(i) * 11],
+			Mon_Vertices[(i) * 11 + 1],
+			Mon_Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11] = vec3pom.x - 0.6f;
+		Mon_Vertices[(i) * 11 + 1] = vec3pom.y;
+		Mon_Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, (_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+	//WYZNACZANIE POZYCJI WSKAZOWKI PREDKOSCI
+	for (int i = 61; i < 77; i++) {
+		vec3pom = glm::vec3(
+			Mon_Vertices[(i) * 11],
+			Mon_Vertices[(i) * 11 + 1],
+			Mon_Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11] = vec3pom.x - 0.6f;
+		Mon_Vertices[(i) * 11 + 1] = vec3pom.y;
+		Mon_Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, -(_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+
 
 			//RAMY "ZEGAROW"
 
@@ -1823,6 +1934,7 @@ int main()
 		Zeg1Vertices[i + 10] = vec3A.z;
 	}
 	//TARCZA
+	float kat = 0.0f;
 	vec3pom = glm::vec3(0.0f, 0.003f, 0.395f);
 	for (int i = 130 * 11 + 66 * 11; i < 130 * 11 + 66 * 11 + 129 * 11; i = i + 11) {
 		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 128.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
@@ -1831,9 +1943,21 @@ int main()
 		Zeg1Vertices[i + 1] = vec3pom.y;
 		Zeg1Vertices[i + 2] = vec3pom.z;
 		//Kolor
-		Zeg1Vertices[i + 3] = 0.25f;
-		Zeg1Vertices[i + 4] = 0.25f;
-		Zeg1Vertices[i + 5] = 0.25f;
+			kat = kat + 360.0f / 128.0f;
+
+			//PRAWY - NIEBIESKI
+			if (kat < 180.0 - TOL) Zeg1Vertices[i + 5] = 0.75f * kat / 180.0f;
+			else Zeg1Vertices[i + 5] = 0.0f;
+
+			//SRODEK - ZIELEN
+			if (kat < 90.0 + TOL) Zeg1Vertices[i + 4] = 0.5f - 0.5f * (kat / 90.0f);
+			else if (kat > 270.0 - TOL) Zeg1Vertices[i + 4] = 0.5f * (kat - 270.0f) / 90.0f;
+			else Zeg1Vertices[i + 4] = 0.0f;
+
+			//LEWY - CZERWONY
+			if (kat > 180.0 + TOL) Zeg1Vertices[i + 3] = 0.25f - 0.25f * (kat - 180.0f) / 180.0f;
+			else Zeg1Vertices[i + 3] = 0.0f;
+
 		//Tekstura
 		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
 		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
@@ -1871,29 +1995,19 @@ int main()
 	//KLONOWANIE ZEGAROW
 	for (int i = 0; i < sizeof(Zeg1Vertices) / sizeof(float); i++) {
 		Zeg2Vertices[i] = Zeg1Vertices[i];
+		Zeg3Vertices[i] = Zeg1Vertices[i];
+		Zeg4Vertices[i] = Zeg1Vertices[i];
 	}
 	for (int i = 0; i < sizeof(Zeg1Indices) / sizeof(int); i++) {
 		Zeg2Indices[i] = Zeg1Indices[i];
+		Zeg3Indices[i] = Zeg1Indices[i];
+		Zeg4Indices[i] = Zeg1Indices[i];
 	}
-	//Gradient kolorow dla energii
-	vec3pom = glm::vec3(0.0f, 0.003f, 0.395f);
-	float kat = 0.0f;
+	//USUWANIE GRADIENTU Z TARCZY KIERUNKU
 	for (int i = 130 * 11 + 66 * 11; i < 130 * 11 + 66 * 11 + 129 * 11; i = i + 11) {
-		kat = kat + 360.0f / 128.0f;
-		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 128.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
-		
-		//PRAWY - NIEBIESKI
-		if (kat < 180.0 - TOL) Zeg2Vertices[i + 5] = 0.75f * kat / 180.0f;
-		else Zeg2Vertices[i + 5] = 0.0f;
-
-		//SRODEK - ZIELEN
-		if (kat < 90.0 + TOL) Zeg2Vertices[i + 4] = 0.5f - 0.5f * (kat / 90.0f);
-		else if (kat > 270.0 - TOL) Zeg2Vertices[i + 4] = 0.5f * (kat - 270.0f) / 90.0f;
-		else Zeg2Vertices[i + 4] = 0.0f;
-
-		//LEWY - CZERWONY
-		if (kat > 180.0 + TOL) Zeg2Vertices[i + 3] = 0.25f - 0.25f * (kat - 180.0f) / 180.0f;
-		else Zeg2Vertices[i + 3] = 0.0f;
+		Zeg1Vertices[i + 3] = 0.25f;
+		Zeg1Vertices[i + 4] = 0.25f;
+		Zeg1Vertices[i + 5] = 0.25f;
 	}
 
 
@@ -1930,6 +2044,41 @@ int main()
 		Zeg2Vertices[(i) * 11 + 2] = Zeg2Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
 
 	}
+
+	//WYZNACZANIE POZYCJI RAMY ZEGARA - ODLEGLOSC
+	for (int i = 0; i < sizeof(Zeg3Vertices) / sizeof(float) / 11; i++) {
+		vec3pom = glm::vec3(
+			Zeg3Vertices[(i) * 11],
+			Zeg3Vertices[(i) * 11 + 1],
+			Zeg3Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg3Vertices[(i) * 11] = vec3pom.x - 0.6f;
+		Zeg3Vertices[(i) * 11 + 1] = vec3pom.y;
+		Zeg3Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, (_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg3Vertices[(i) * 11 + 1] = Zeg3Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Zeg3Vertices[(i) * 11 + 2] = Zeg3Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+
+	}
+
+	//WYZNACZANIE POZYCJI RAMY ZEGARA - PREDKOSC
+	for (int i = 0; i < sizeof(Zeg4Vertices) / sizeof(float) / 11; i++) {
+		vec3pom = glm::vec3(
+			Zeg4Vertices[(i) * 11],
+			Zeg4Vertices[(i) * 11 + 1],
+			Zeg4Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg4Vertices[(i) * 11] = vec3pom.x - 0.6f;
+		Zeg4Vertices[(i) * 11 + 1] = vec3pom.y;
+		Zeg4Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, -(_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg4Vertices[(i) * 11 + 1] = Zeg4Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Zeg4Vertices[(i) * 11 + 2] = Zeg4Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+
+	}
+
 
 
 			//POLKULE
@@ -2390,6 +2539,43 @@ int main()
 	VBO_Zeg2.Unbind();
 	EBO_Zeg2.Unbind();
 
+	//DANE NA MONITORZE POJAZDU: TARCZA ODLEGLOSCI
+	Shader Zeg3_Program("default.vert", "default.frag");
+
+	VAO VAO_Zeg3;
+	VAO_Zeg3.Bind();
+
+	VBO VBO_Zeg3(Zeg3Vertices, sizeof(Zeg3Vertices));
+	EBO EBO_Zeg3(Zeg3Indices, sizeof(Zeg3Indices));
+
+	VAO_Zeg3.LinkAttrib(VBO_Zeg3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Zeg3.LinkAttrib(VBO_Zeg3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Zeg3.LinkAttrib(VBO_Zeg3, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Zeg3.LinkAttrib(VBO_Zeg3, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	VAO_Zeg3.Unbind();
+	VBO_Zeg3.Unbind();
+	EBO_Zeg3.Unbind();
+
+	//DANE NA MONITORZE POJAZDU: TARCZA PREDKOSCI
+	Shader Zeg4_Program("default.vert", "default.frag");
+
+	VAO VAO_Zeg4;
+	VAO_Zeg4.Bind();
+
+	VBO VBO_Zeg4(Zeg4Vertices, sizeof(Zeg4Vertices));
+	EBO EBO_Zeg4(Zeg4Indices, sizeof(Zeg4Indices));
+
+	VAO_Zeg4.LinkAttrib(VBO_Zeg4, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Zeg4.LinkAttrib(VBO_Zeg4, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Zeg4.LinkAttrib(VBO_Zeg4, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Zeg4.LinkAttrib(VBO_Zeg4, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	VAO_Zeg4.Unbind();
+	VBO_Zeg4.Unbind();
+	EBO_Zeg4.Unbind();
+
+
 
 	//swiatlo:
 	Shader lightShader("light.vert", "light.frag");
@@ -2429,7 +2615,14 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
-
+	Zeg3_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	Zeg4_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
 	//swiatlo 2:
@@ -2470,6 +2663,15 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Zeg3_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Zeg4_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
 
 
 	//Testowe sloneczko:
@@ -2510,7 +2712,14 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
 	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
 	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
-
+	Zeg3_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	Zeg4_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
 
 
 	//odpychacz centralny:
@@ -2551,6 +2760,14 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
 	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
 	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
+	Zeg3_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
+	Zeg4_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
 
 
 	//odpychacze boczne:
@@ -2591,6 +2808,14 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
 	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
 	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Zeg3_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Zeg4_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
 
 
 	/*std::cout << "\n\nInd" << "\n";
@@ -2697,6 +2922,40 @@ int main()
 
 		VAO_Zeg2.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(Zeg2Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//MONITOR DANE: WSKAZNIK ODLEGLOSCI
+		Zeg3_Program.Activate();
+
+		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Zeg3_Program, "camMatrix");
+
+		VAO_Zeg3.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(Zeg3Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//MONITOR DANE: WSKAZNIK PREDKOSCI
+		Zeg4_Program.Activate();
+
+		glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Zeg4_Program, "camMatrix");
+
+		VAO_Zeg4.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(Zeg4Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 		//LAMPA
 		lightShader.Activate();
