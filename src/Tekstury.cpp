@@ -11,7 +11,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	type = texType;
 	int widthImg, heightImg, numColCh;
 	stbi_set_flip_vertically_on_load(true);
-	fs::path fpath = std::string{"bin/"} + std::string{image};
+	fs::path fpath = std::string{TEXTURE_RELPATH} + std::string{image};
 	std::string imgFullPath = fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath;
 	unsigned char* bytes = stbi_load(imgFullPath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
