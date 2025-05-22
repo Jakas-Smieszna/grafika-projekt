@@ -10,7 +10,7 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     stb.cpp
-# Biblioteki
+# Biblioteki Kici kici kici kici kici kici kici kici kici kici
     glad.c
 )
 

@@ -20,6 +20,7 @@
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
 #define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352
+#define TOL 1e-12
 
 //Teksturowo:
 // POJAZD
@@ -1463,10 +1464,58 @@ GLfloat Mon_Vertices[] =
 	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D		Normalne wektory
 
 	//WSKAZNIK KIERUNKU: CENTRUM
-	-0.1f, 0.02f, 0.0f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, -0.1f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, 0.1f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.1f, 0.02f, 0.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK KIERUNKU: WSKAZOWKA
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ENERGII: CENTRUM
+	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ENERGII: WSKAZOWKA
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ENERGII: IKONA
+	0.0f, 0.005f, 0.0f,		1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.16f, 0.005f, -0.05f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, 0.35f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.16f, 0.005f, 0.05f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, -0.35f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK ENERGII: LINIA
+	0.0f, 0.01f, 0.0f,		0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.04f, 0.01f, -0.4f,	0.1f, 0.1f, 0.1f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	//WSKAZNIK KIERUNKU: ROZA
+		//DUZE STRZALKI
+	-0.03f, 0.005f, 0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, 0.3f,		0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.005f, 0.03f,	0.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.3f, 0.005f, 0.0f,		0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.005f, -0.03f,	0.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.005f, -0.3f,	0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.03f, 0.005f, -0.03f,	0.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.3f, 0.005f, 0.0f,	0.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+		//MALE STRZALKI
+	-0.03f, 0.0052f, 0.0f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.15f, 0.0052f, 0.15f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.0052f, 0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.15f, 0.0052f, 0.15f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.0052f, 0.0f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.15f, 0.0052f, -0.15f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.0052f, -0.03f,	0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.15f, 0.0052f, -0.15f,0.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+		//CENTRUM
+	-0.03f, 0.0052f, 0.0f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.0f, 0.0052f, 0.03f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.03f, 0.0052f, 0.0f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	0.00f, 0.0052f, -0.03f,	0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+
 };
 
 GLuint Mon_Indices[] =
@@ -1474,6 +1523,31 @@ GLuint Mon_Indices[] =
 	//WSKAZNIK KIERUNKU: CENTRUM
 	0, 1, 2,
 	0, 2, 3,
+	//WSKAZNIK KIERUNKU: WSKAZOWKA
+	4, 5, 6,
+	//WSKAZNIK ENERGII: CENTRUM
+	7, 8, 9,
+	7, 9, 10,
+	//WSKAZNIK ENERGII: WSKAZOWKA
+	11, 12, 13,
+	//WSKAZNIK ENERGII: IKONA
+	14, 15, 16,
+	14, 17, 18,
+	//WSKAZNIK ENERGII: LINIA
+	19, 20, 21,
+	//WSKAZNIK KIERUNKU: ROZA DUZA
+	22, 23, 24,
+	24, 25, 26,
+	26, 27, 28,
+	28, 29, 22,
+	//WSKAZNIK KIERUNKU: ROZA MALA
+	30, 31, 32,
+	32, 33, 34,
+	34, 35, 36,
+	36, 37, 30,
+	//WSKAZNIK KIERUNKU: ROZA CENTRUM
+	38, 39, 40,
+	38, 40, 41,
 
 };
 
@@ -1548,6 +1622,11 @@ GLfloat pushVertices_tyl[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
 GLfloat KulaVertices[2 * (66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3)];
 GLuint KulaIndices[2 * (66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2)];
 
+//Ramy wskazowek
+GLfloat Zeg1Vertices[130 * 11 + 65 * 11 + 130 * 11];
+GLuint Zeg1Indices[130 * 3 + 65 * 3 + 130 * 3];
+GLfloat Zeg2Vertices[130 * 11 + 65 * 11 + 130 * 11];
+GLuint Zeg2Indices[130 * 3 + 65 * 3 + 130 * 3];
 
 
 int main()
@@ -1579,6 +1658,12 @@ int main()
 
 
 	//Inicjacja
+			//KOLOR: KADLUB
+	for (int i = 3; i < sizeof(vertices) / sizeof(GLfloat); i = i + 11) {
+		vertices[i] = 0.67f;
+		vertices[i + 1] = 0.67f;
+		vertices[i + 2] = 0.67f;
+	}
 
 			//MONITOR
 	//WYZNACZANIE POZYCJI GORNEJ RAMKI ZA POMOCA ROTACJI WEKTOROW
@@ -1625,12 +1710,227 @@ int main()
 			vec3pom = glm::vec3(
 				vertices[(start + i) * 11],
 				vertices[(start + i) * 11 + 1],
-				vertices[(start + i) * 11 + 2] * (_JG_DL_RAM_MON_POJ_ - 0.1f) / 2.0f);
+				vertices[(start + i) * 11 + 2] * (_JG_DL_RAM_MON_POJ_ - 0.2f) / 2.0f);
 		}
 		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
 		vertices[(start + i) * 11 + 1] = vec3pom.y + 1.6f;
 		vertices[(start + i) * 11 + 2] = vec3pom.z - 11.75f;
 	}
+	//WYZNACZANIE POZYCJI WSKAZOWKI KIERUNKU
+	for (int i = 0; i < 7; i++) {
+		vec3pom = glm::vec3(
+			Mon_Vertices[(i) * 11],
+			Mon_Vertices[(i) * 11 + 1],
+			Mon_Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11] = vec3pom.x + 0.6f;
+		Mon_Vertices[(i) * 11 + 1] = vec3pom.y;
+		Mon_Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, (_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+	//WYZNACZANIE POZYCJI WSKAZOWKI ENERGII
+	for (int i = 7; i < 22; i++) {
+		vec3pom = glm::vec3(
+			Mon_Vertices[(i) * 11],
+			Mon_Vertices[(i) * 11 + 1],
+			Mon_Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11] = vec3pom.x + 0.6f;
+		Mon_Vertices[(i) * 11 + 1] = vec3pom.y;
+		Mon_Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, -(_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+	//WYZNACZANIE POZYCJI ROZY KIERUNKOW POD WSKAZNIK KIERUNKU
+	for (int i = 22; i < 42; i++) {
+		vec3pom = glm::vec3(
+			Mon_Vertices[(i) * 11],
+			Mon_Vertices[(i) * 11 + 1],
+			Mon_Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11] = vec3pom.x + 0.6f;
+		Mon_Vertices[(i) * 11 + 1] = vec3pom.y;
+		Mon_Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, (_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Mon_Vertices[(i) * 11 + 1] = Mon_Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Mon_Vertices[(i) * 11 + 2] = Mon_Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+	}
+
+			//RAMY "ZEGAROW"
+
+	glm::vec3 vec3A = glm::normalize(glm::vec3(0.0f, 1.5f, -1.0f));
+	//Pozycja
+	Zeg1Vertices[(130 + 65) * 11 + 0] = 0.0f;
+	Zeg1Vertices[(130 + 65) * 11 + 1] = 0.003f;
+	Zeg1Vertices[(130 + 65) * 11 + 2] = 0.0f;
+	//Kolor
+	Zeg1Vertices[(130 + 65) * 11 + 3] = 0.25f;
+	Zeg1Vertices[(130 + 65) * 11 + 4] = 0.25f;
+	Zeg1Vertices[(130 + 65) * 11 + 5] = 0.25f;
+	//Tekstury
+	Zeg1Vertices[(130 + 65) * 11 + 6] = 0.0f;
+	Zeg1Vertices[(130 + 65) * 11 + 7] = 0.0f;
+	//Wektor ormalny
+	Zeg1Vertices[(130 + 65) * 11 + 8] = vec3A.x;
+	Zeg1Vertices[(130 + 65) * 11 + 9] = vec3A.y;
+	Zeg1Vertices[(130 + 65) * 11 + 10] = vec3A.z;
+
+	float Przesuniecie_tekstura_zegar = 0.0f;
+
+	vec3pom = glm::vec3(0.0f, 0.02f, 0.4f);
+	for (int i = 0; i < 130 * 11; i = i + 11) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 128.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		//Pozycja
+		Zeg1Vertices[i] = vec3pom.x;
+		Zeg1Vertices[i + 1] = vec3pom.y;
+		Zeg1Vertices[i + 2] = vec3pom.z;
+		//Kolor
+		Zeg1Vertices[i + 3] = 0.5f;
+		Zeg1Vertices[i + 4] = 0.5f;
+		Zeg1Vertices[i + 5] = 0.5f;
+		//Tekstura
+		Zeg1Vertices[i + 6] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		//Wektor normalny
+		Zeg1Vertices[i + 8] = vec3A.x;
+		Zeg1Vertices[i + 9] = vec3A.y;
+		Zeg1Vertices[i + 10] = vec3A.z;
+
+	}
+	vec3pom = glm::vec3(0.0f, 0.02f, 0.35f);
+	for (int i = 130 * 11; i < 130 * 11 + 65 * 11; i = i + 11) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 64.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		//Pozycja
+		Zeg1Vertices[i] = vec3pom.x;
+		Zeg1Vertices[i + 1] = vec3pom.y;
+		Zeg1Vertices[i + 2] = vec3pom.z;
+		//Kolor
+		Zeg1Vertices[i + 3] = 0.5f;
+		Zeg1Vertices[i + 4] = 0.5f;
+		Zeg1Vertices[i + 5] = 0.5f;
+		//Tekstura
+		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		//Wektor normalny
+		Zeg1Vertices[i + 8] = vec3A.x;
+		Zeg1Vertices[i + 9] = vec3A.y;
+		Zeg1Vertices[i + 10] = vec3A.z;
+	}
+	//TARCZA
+	vec3pom = glm::vec3(0.0f, 0.003f, 0.395f);
+	for (int i = 130 * 11 + 66 * 11; i < 130 * 11 + 66 * 11 + 129 * 11; i = i + 11) {
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 128.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		//Pozycja
+		Zeg1Vertices[i] = vec3pom.x;
+		Zeg1Vertices[i + 1] = vec3pom.y;
+		Zeg1Vertices[i + 2] = vec3pom.z;
+		//Kolor
+		Zeg1Vertices[i + 3] = 0.25f;
+		Zeg1Vertices[i + 4] = 0.25f;
+		Zeg1Vertices[i + 5] = 0.25f;
+		//Tekstura
+		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		//Wektor normalny
+		Zeg1Vertices[i + 8] = vec3A.x;
+		Zeg1Vertices[i + 9] = vec3A.y;
+		Zeg1Vertices[i + 10] = vec3A.z;
+
+	}
+
+	int inkr = 0;
+	int inkr2 = 0;
+	for (int j = 0; j < (129 + 65) * 3; j = j + 9) {
+		Zeg1Indices[j] = inkr;
+		Zeg1Indices[j + 1] = inkr + 1;
+		Zeg1Indices[j + 2] = 129 + inkr2;
+		Zeg1Indices[j + 3] = 129 + inkr2;
+		Zeg1Indices[j + 4] = inkr + 1;
+		Zeg1Indices[j + 5] = 129 + inkr2 + 1;
+		Zeg1Indices[j + 6] = inkr + 1;
+		Zeg1Indices[j + 7] = 129 + inkr2 + 1;
+		Zeg1Indices[j + 8] = inkr + 2;
+		inkr = inkr + 2;
+		inkr2 = inkr2 + 1;
+	}
+	//TARCZA
+	inkr = 0;
+	for (int j = (130 + 66) * 3; j < (130 + 65 + 129) * 3; j = j + 3) {
+		Zeg1Indices[j] = 130 + 66 + inkr;
+		Zeg1Indices[j + 1] = 130 + 65;
+		Zeg1Indices[j + 2] = 130 + 66 + inkr + 1;
+		inkr = inkr + 1;
+	}
+
+	//KLONOWANIE ZEGAROW
+	for (int i = 0; i < sizeof(Zeg1Vertices) / sizeof(float); i++) {
+		Zeg2Vertices[i] = Zeg1Vertices[i];
+	}
+	for (int i = 0; i < sizeof(Zeg1Indices) / sizeof(int); i++) {
+		Zeg2Indices[i] = Zeg1Indices[i];
+	}
+	//Gradient kolorow dla energii
+	vec3pom = glm::vec3(0.0f, 0.003f, 0.395f);
+	float kat = 0.0f;
+	for (int i = 130 * 11 + 66 * 11; i < 130 * 11 + 66 * 11 + 129 * 11; i = i + 11) {
+		kat = kat + 360.0f / 128.0f;
+		vec3pom = glm::rotate(vec3pom, glm::radians(360.0f / 128.0f), glm::normalize(glm::vec3(0.0f, -1.0f, 0.0f)));
+		
+		//PRAWY - NIEBIESKI
+		if (kat < 180.0 - TOL) Zeg2Vertices[i + 5] = 0.75f * kat / 180.0f;
+		else Zeg2Vertices[i + 5] = 0.0f;
+
+		//SRODEK - ZIELEN
+		if (kat < 90.0 + TOL) Zeg2Vertices[i + 4] = 0.5f - 0.5f * (kat / 90.0f);
+		else if (kat > 270.0 - TOL) Zeg2Vertices[i + 4] = 0.5f * (kat - 270.0f) / 90.0f;
+		else Zeg2Vertices[i + 4] = 0.0f;
+
+		//LEWY - CZERWONY
+		if (kat > 180.0 + TOL) Zeg2Vertices[i + 3] = 0.25f - 0.25f * (kat - 180.0f) / 180.0f;
+		else Zeg2Vertices[i + 3] = 0.0f;
+	}
+
+
+	//WYZNACZANIE POZYCJI RAMY ZEGARA - KIERUNEK
+	for (int i = 0; i < sizeof(Zeg1Vertices)/sizeof(float)/11; i++) {
+		vec3pom = glm::vec3(
+			Zeg1Vertices[(i) * 11],
+			Zeg1Vertices[(i) * 11 + 1],
+			Zeg1Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg1Vertices[(i) * 11] = vec3pom.x + 0.6f;
+		Zeg1Vertices[(i) * 11 + 1] = vec3pom.y;
+		Zeg1Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, (_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg1Vertices[(i) * 11 + 1] = Zeg1Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Zeg1Vertices[(i) * 11 + 2] = Zeg1Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+
+	}
+
+	//WYZNACZANIE POZYCJI RAMY ZEGARA - ENERGIA
+	for (int i = 0; i < sizeof(Zeg2Vertices) / sizeof(float) / 11; i++) {
+		vec3pom = glm::vec3(
+			Zeg2Vertices[(i) * 11],
+			Zeg2Vertices[(i) * 11 + 1],
+			Zeg2Vertices[(i) * 11 + 2]);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg2Vertices[(i) * 11] = vec3pom.x + 0.6f;
+		Zeg2Vertices[(i) * 11 + 1] = vec3pom.y;
+		Zeg2Vertices[(i) * 11 + 2] = vec3pom.z;
+		vec3pom = glm::vec3(0.0f, 0.0f, -(_JG_DL_RAM_MON_POJ_ - 0.2f) / 4.0f);
+		vec3pom = glm::rotate(vec3pom, -0.5880026035475675512456110806250854276017072460559243537260472078359201315933085f, glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		Zeg2Vertices[(i) * 11 + 1] = Zeg2Vertices[(i) * 11 + 1] + vec3pom.y + 1.6f;
+		Zeg2Vertices[(i) * 11 + 2] = Zeg2Vertices[(i) * 11 + 2] + vec3pom.z - 11.75f;
+
+	}
+
 
 			//POLKULE
 	pushVertices[0] = 0.f;
@@ -1687,8 +1987,8 @@ int main()
 		pushVertices[i + 2] = vec3pom.z;
 	}
 
-	int inkr = 1;
-	int inkr2 = 0;
+	inkr = 1;
+	inkr2 = 0;
 	for (int j = 0; j < (65 + 33) * 3; j = j + 9) {
 		pushIndices[j] = inkr;
 		pushIndices[j + 1] = inkr + 1;
@@ -2036,23 +2336,59 @@ int main()
 	tekstura1.texUnit(shaderProgram, "texture1", 0);
 	tekstura2.texUnit(shaderProgram, "texture2", 1);
 
-	////DANE NA MONITORZE POJAZDU
-	//Shader Mon_Program("default.vert", "default.frag");
-	//
-	//VAO VAO_Mon;
-	//VAO_Mon.Bind();
+	//DANE NA MONITORZE POJAZDU
+	Shader Mon_Program("default.vert", "default.frag");
+	
+	VAO VAO_Mon;
+	VAO_Mon.Bind();
 
-	//VBO VBO_Mon(Mon_Vertices, sizeof(Mon_Vertices));
-	//EBO EBO_Mon(Mon_Indices, sizeof(Mon_Indices));
+	VBO VBO_Mon(Mon_Vertices, sizeof(Mon_Vertices));
+	EBO EBO_Mon(Mon_Indices, sizeof(Mon_Indices));
 
-	//VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	//VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-	//VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	//VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
-	//VAO_Mon.Unbind();
-	//VBO_Mon.Unbind();
-	//EBO_Mon.Unbind();
+	VAO_Mon.Unbind();
+	VBO_Mon.Unbind();
+	EBO_Mon.Unbind();
+
+	//DANE NA MONITORZE POJAZDU: TARCZA KIERUNKU
+	Shader Zeg1_Program("default.vert", "default.frag");
+
+	VAO VAO_Zeg1;
+	VAO_Zeg1.Bind();
+
+	VBO VBO_Zeg1(Zeg1Vertices, sizeof(Zeg1Vertices));
+	EBO EBO_Zeg1(Zeg1Indices, sizeof(Zeg1Indices));
+
+	VAO_Zeg1.LinkAttrib(VBO_Zeg1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Zeg1.LinkAttrib(VBO_Zeg1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Zeg1.LinkAttrib(VBO_Zeg1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Zeg1.LinkAttrib(VBO_Zeg1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	VAO_Zeg1.Unbind();
+	VBO_Zeg1.Unbind();
+	EBO_Zeg1.Unbind();
+
+	//DANE NA MONITORZE POJAZDU: TARCZA ENERGII
+	Shader Zeg2_Program("default.vert", "default.frag");
+
+	VAO VAO_Zeg2;
+	VAO_Zeg2.Bind();
+
+	VBO VBO_Zeg2(Zeg2Vertices, sizeof(Zeg2Vertices));
+	EBO EBO_Zeg2(Zeg2Indices, sizeof(Zeg2Indices));
+
+	VAO_Zeg2.LinkAttrib(VBO_Zeg2, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Zeg2.LinkAttrib(VBO_Zeg2, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Zeg2.LinkAttrib(VBO_Zeg2, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Zeg2.LinkAttrib(VBO_Zeg2, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	VAO_Zeg2.Unbind();
+	VBO_Zeg2.Unbind();
+	EBO_Zeg2.Unbind();
 
 
 	//swiatlo:
@@ -2081,6 +2417,18 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	Mon_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Mon_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	Zeg1_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	Zeg2_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
 
@@ -2110,6 +2458,59 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Mon_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Zeg1_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Zeg2_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+
+	//Testowe sloneczko:
+	Shader BIGlightShader("light.vert", "light.frag");
+	VAO BIGlightVAO;
+	BIGlightVAO.Bind();
+	VBO BIGlightVBO(lightVertices, sizeof(lightVertices));
+	EBO BIGlightEBO(lightIndices, sizeof(lightIndices));
+	BIGlightVAO.LinkAttrib(BIGlightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+	BIGlightVAO.Unbind();
+	BIGlightVBO.Unbind();
+	BIGlightEBO.Unbind();
+
+	glm::vec4 BIGlightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	glm::vec3 BIGlightPos = glm::vec3(0.0f, 1000000000.0f, -26.0f);
+	glm::mat4 BIGlightModel = glm::mat4(1.0f);
+	BIGlightModel = glm::translate(BIGlightModel, BIGlightPos);
+	glm::vec3 BIGcubePos = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::mat4 BIGcubeModel = glm::mat4(1.0f);
+	BIGcubeModel = glm::translate(BIGcubeModel, BIGcubePos);
+
+	BIGlightShader.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(BIGlightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(BIGlightModel));
+	glUniform4f(glGetUniformLocation(BIGlightShader.ID, "lightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	shaderProgram.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(shaderProgram.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(shaderProgram.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	Mon_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Mon_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Mon_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	Zeg1_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	Zeg2_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+
 
 
 	//odpychacz centralny:
@@ -2138,7 +2539,18 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
-
+	Mon_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
+	Zeg1_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
+	Zeg2_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
 
 
 	//odpychacze boczne:
@@ -2167,6 +2579,19 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Mon_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Zeg1_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Zeg2_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+
 
 	/*std::cout << "\n\nInd" << "\n";
 	for (int i = 0; i < sizeof(KulaIndices) / sizeof(int); i++) {
@@ -2221,6 +2646,57 @@ int main()
 
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//MONITOR-DANE
+		Mon_Program.Activate();
+
+		glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Mon_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Mon_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Mon_Program, "camMatrix");
+
+		VAO_Mon.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(Mon_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//MONITOR DANE: WSKAZNIK KIERUNKU
+		Zeg1_Program.Activate();
+
+		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Zeg1_Program, "camMatrix");
+
+		VAO_Zeg1.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(Zeg1Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//MONITOR DANE: WSKAZNIK ENERGII
+		Zeg2_Program.Activate();
+
+		glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Zeg2_Program, "camMatrix");
+
+		VAO_Zeg2.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(Zeg2Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 		//LAMPA
 		lightShader.Activate();
