@@ -1,3 +1,4 @@
+#include <iostream>
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -10,12 +11,11 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	GLTexType = texType;
 	int widthImg, heightImg, numColCh;
 
-	// Ścieżka do tekstury automatycznie w dobrym folderze.
-	std::string fpath = std::string{TEXTURE_RELPATH} + std::string{image}; 
-
 	stbi_set_flip_vertically_on_load(true);
+	// Ścieżka do tekstury automatycznie w dobrym folderze.
 	fs::path fpath = std::string{TEXTURE_RELPATH} + std::string{image};
 	std::string imgFullPath = fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath;
+	
 	unsigned char* bytes = stbi_load(imgFullPath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
 		std::cout << "Unable to load " << image << "!\n";

@@ -1,10 +1,11 @@
-#include "shader.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
-
 #include <filesystem>
 namespace fs = std::filesystem;
+
+#include "shader.h"
+#include "helper/debugutils.h"
 
 std::string get_file_contents(const char* filename)
 {	

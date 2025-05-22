@@ -1,6 +1,7 @@
 #include "model.h"
 #include "glm/fwd.hpp"
 #include "vertex.h"
+#include "helper/debugutils.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/material.h>
