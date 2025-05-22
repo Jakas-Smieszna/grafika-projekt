@@ -3,9 +3,15 @@
 #include <iostream>
 #include <vector>
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
 std::string get_file_contents(const char* filename)
 {	
-	std::ifstream in(filename, std::ios::binary);
+	fs::path fpath = std::string{SHADER_RELPATH} + std::string{filename};
+	std::ifstream in(
+		fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath,
+		std::ios::binary);
 	if (in)
 	{
 		std::string contents;

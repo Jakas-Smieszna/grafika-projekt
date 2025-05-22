@@ -3,7 +3,6 @@
 
 #include <glad/glad.h>
 #include <string>
-#include "helper/debugutils.h"
 
 std::string get_file_contents(const char* filename);
 
