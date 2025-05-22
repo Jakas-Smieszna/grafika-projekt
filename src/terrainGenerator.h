@@ -34,6 +34,9 @@ public:
     void Draw(Shader& shader);
     void updateTerrain();
 private:
+    // trochę takie długie, ale musimy uniknąć
+    // kopiowania mesh-y, bo inaczej wywołuje się
+    // ich dekonstruktor, który niszczy ebo, vbo, vao
     std::vector<std::unique_ptr<Chunk>> TerrainChunks;
     
 };

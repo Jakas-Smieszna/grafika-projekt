@@ -21,7 +21,6 @@ _mesh::~_mesh() {
     vao.Delete();
     vbo.Delete();
     ebo.Delete();
-    std::cout << "deleting mesh!\n";
 }
 
 void _mesh::initMesh() {

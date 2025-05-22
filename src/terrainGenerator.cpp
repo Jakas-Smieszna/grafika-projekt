@@ -7,7 +7,7 @@
 
 float perlinChunkHeight(float x, float y) {
     float h = 0;
-    h += stb_perlin_turbulence_noise3(x, y, 0.1f, 1.3f, 0.1f, 6);
+    h += stb_perlin_turbulence_noise3(x/10, y/10, 0.1f, 1.3f, 0.1f, 6);
     return h;
 }
 
