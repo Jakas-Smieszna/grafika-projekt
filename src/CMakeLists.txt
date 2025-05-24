@@ -15,7 +15,7 @@ set(PROJ_FILES
 # Biblioteki
     stb.cpp
     glad.c
-)
+ "helper/tsqueue.cpp")
 
 add_executable(GrafikaProjekt ${PROJ_FILES} )
 

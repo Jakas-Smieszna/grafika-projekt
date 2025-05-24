@@ -9,11 +9,9 @@ _mesh::_mesh() {
 }
 
 _mesh::_mesh(
-        std::vector<Vertex> vertices,
-        std::vector<GLuint> indices
-    ) {
-        this->vertices = vertices;
-        this->indices = indices;
+    std::vector<Vertex> vertices,
+    std::vector<GLuint> indices
+) : vertices(vertices), indices(indices) {
         initMesh();
     }
 
@@ -35,7 +33,6 @@ void _mesh::initMesh() {
     vao.LinkAttrib(vbo, 2, 2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
     vao.LinkAttrib(vbo, 3, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 }
-
 void _mesh::Draw(Shader &shader) {
     shader.Activate();
     vao.Bind();

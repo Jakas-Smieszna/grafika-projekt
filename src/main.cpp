@@ -19,6 +19,7 @@
 #include"EBO.h"
 #include"Kamera.h"
 #include "terrainGenerator.h"
+#include "helper/tsqueue.h"
 
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
@@ -254,6 +255,7 @@ int main()
 	
 	while (!glfwWindowShouldClose(window))
 	{
+		processTerrainQueue();
 		if (i > 192.0) i = 0.0;
 		else i = i + 5.0;
 
@@ -312,6 +314,7 @@ int main()
 		light2VAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		light2VAO.Unbind();
+
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

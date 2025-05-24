@@ -5,27 +5,33 @@
 #include "shader.h"
 #include <memory>
 #include <vector>
+#include <utility>
+#include <mutex>
 
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
-#define TERRAINGENERATOR_CHUNK_SIZE 16
+#define TERRAINGENERATOR_CHUNK_SIZE 32
 #endif
 #ifndef RENDER_DISTANCE
-#define RENDER_DISTANCE 32
+#define RENDER_DISTANCE 64
 #endif
 
-struct ivec2 {
+struct chData {
     int x;
     int y;
+    int LOD;
 };
 
 class Chunk {
 public:
-    ivec2 position;
+    chData data;
     Mesh terrainMesh;
-    Chunk(int cX, int cY, int LOD = 1) : terrainMesh(generateChunkMesh(LOD, cX, cY)) {};
+    // Chunk musi wygenerować własny mesh z verteksów i indeksów.
+    // Zapobiega to problemów z pamięcią itp.
+    Chunk(chData chnkData, std::vector<Vertex> V, std::vector<GLuint> I) : data(chnkData), terrainMesh(Mesh(V, I)) {};
 private:
-    Mesh generateChunkMesh(int LOD, int chunkX, int chunkY);
 };
+
+std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunkX, int chunkY, int LOD);
 
 class TerrainGenerator {
 public:
@@ -38,7 +44,13 @@ private:
     // kopiowania mesh-y, bo inaczej wywołuje się
     // ich dekonstruktor, który niszczy ebo, vbo, vao
     std::vector<std::unique_ptr<Chunk>> TerrainChunks;
+    // Mutex raczej nie powinien być potrzebny, bo
+    // wszystko (rysowanie + dodawanie do TerrainChunks)
+    // powinno wykonywać się na tym samym wątku.
+    std::mutex _mutex;
     
 };
+
+void processTerrainQueue();
 
 #endif // TERRAINGENERATOR_CLASS_H
