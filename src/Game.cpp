@@ -113,11 +113,15 @@ EBO1(indices, indices.size() * sizeof(indices[0])),
 parentDir(""), texPath("resources/"),
 tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
 tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE),
-lightShader("light.vert", "light.frag"), lightVBO(lightVertices, sizeof(lightVertices)), lightEBO(lightIndices, sizeof(lightIndices)),
-lightShader2("light.vert", "light.frag"), light2VBO(lightVertices, sizeof(lightVertices)), light2EBO(lightIndices, sizeof(lightIndices)),
-camera(1000, 800, glm::vec3(1.0f, 0.0f, 0.0f))
+lightShader("light.vert", "light.frag"),
+lightVBO(lightVertices, lightVertices.size() * sizeof(lightVertices[0])), lightEBO(lightIndices, lightIndices.size() * sizeof(lightIndices[0])),
+lightShader2("light.vert", "light.frag"),
+light2VBO(lightVertices, lightVertices.size() * sizeof(lightVertices[0])), light2EBO(lightIndices, lightIndices.size() * sizeof(lightIndices[0])),
+camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f))
 {
 	VAO1.Bind();
+	VBO1.Bind();
+	EBO1.Bind();
 	//Teksturowo:
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -140,10 +144,19 @@ camera(1000, 800, glm::vec3(1.0f, 0.0f, 0.0f))
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	tekstura1.texUnit(shaderProgram, "texture1", 0);
-	tekstura2.texUnit(shaderProgram, "texture2", 1);
+
+	tekstura1.Bind();
+	tekstura2.Bind();
+
+	tekstura1.texUnit(shaderProgram, "texture0", 0);
+	tekstura2.texUnit(shaderProgram, "texture1", 1);
+
+	tekstura1.Unbind();
+	tekstura2.Unbind();
 
 	lightVAO.Bind();
+	lightVBO.Bind();
+	lightEBO.Bind();
 	lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	lightVAO.Unbind();
 	lightVBO.Unbind();
@@ -165,7 +178,10 @@ camera(1000, 800, glm::vec3(1.0f, 0.0f, 0.0f))
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
+
 	light2VAO.Bind();
+	light2VBO.Bind();
+	light2EBO.Bind();
 	light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	light2VAO.Unbind();
 	light2VBO.Unbind();
@@ -186,5 +202,13 @@ camera(1000, 800, glm::vec3(1.0f, 0.0f, 0.0f))
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+
+
+
+	Texture tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
+
+	Texture tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
 }
 
