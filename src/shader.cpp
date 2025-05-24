@@ -9,9 +9,9 @@ namespace fs = std::filesystem;
 
 std::string get_file_contents(const char* filename)
 {	
-	fs::path fpath = std::string{SHADER_RELPATH} + std::string{filename};
+	fs::path fpath = std::string{filename};
 	std::ifstream in(
-		fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath,
+		(fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath).string(),
 		std::ios::binary);
 	if (in)
 	{
@@ -23,7 +23,7 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	eprintf("Failed to get contents of file '%s'", filename);
+	eprintf("Failed to get contents of file '%s'", fpath.string().c_str());
 	//throw(errno);
 	return std::string{""};
 }

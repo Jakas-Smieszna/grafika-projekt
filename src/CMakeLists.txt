@@ -10,7 +10,7 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     mesh.cpp
-    model.cpp
+    #model.cpp
     terrainGenerator.cpp
 # Biblioteki
     stb.cpp
@@ -20,7 +20,7 @@ set(PROJ_FILES
 add_executable(GrafikaProjekt ${PROJ_FILES} )
 
 target_link_libraries(GrafikaProjekt PRIVATE
-	${OPENGL_LIBRARY} ${GLFW3_LIBRARY} ${assimp_LIBRARIES}
+	${OPENGL_LIBRARY} ${GLFW3_LIBRARY} 
 )
 
 target_compile_definitions(GrafikaProjekt PRIVATE
@@ -39,9 +39,17 @@ elseif(WIN32)
 endif(UNIX)
 
 file(MAKE_DIRECTORY ${DIR_TO_COPY_RESOURCES})
-ADD_CUSTOM_TARGET(link_target ALL
-                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
-                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" )
+
+#ADD_CUSTOM_TARGET(link_target ALL
+#                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
+#                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" )
+
+ADD_CUSTOM_TARGET(copy_resource_files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" 
+)
+
+add_dependencies(GrafikaProjekt copy_resource_files)
 # file(COPY "./shaders" DESTINATION "${DIR_TO_COPY_RESOURCES}")
 # file(COPY "./resources" DESTINATION "${DIR_TO_COPY_RESOURCES}")
 # message(STATUS "Shaders and resources have been copied to ${DIR_TO_COPY_RESOURCES}")

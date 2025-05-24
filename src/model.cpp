@@ -28,20 +28,20 @@ void Model::loadModel(std::string path) {
 }
 
 void Model::processNode(aiNode *node, const aiScene *scene) {
-    for (uint i = 0; i < node->mNumMeshes; i++) {
+    for (GLuint i = 0; i < node->mNumMeshes; i++) {
         aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
         meshes.push_back(processMesh(mesh, scene));
     }
-    for(uint i = 0; i < node->mNumMeshes; i++) {
+    for(GLuint i = 0; i < node->mNumMeshes; i++) {
         processNode(node->mChildren[i], scene);
     }
 }
 
 Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
-    std::vector<uint> indices;
+    std::vector<GLuint> indices;
     std::vector<Texture> textures;
-    for(uint i = 0; i < mesh->mNumVertices; i++) {
+    for(GLuint i = 0; i < mesh->mNumVertices; i++) {
         Vertex vertex;
         glm::vec3 vector;
         // vertices
@@ -66,9 +66,9 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
         }
         vertices.push_back(vertex);
     }
-    for(uint i = 0; i < mesh->mNumFaces; i++) {
+    for(GLuint i = 0; i < mesh->mNumFaces; i++) {
         aiFace face = mesh->mFaces[i];
-        for(uint j = 0; j < face.mNumIndices; j++)
+        for(GLuint j = 0; j < face.mNumIndices; j++)
             indices.push_back(face.mIndices[j]);
     }
     return Mesh(vertices, indices);
@@ -76,7 +76,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName) {
     std::vector<Texture> textures;
-    for(uint i = 0; i < mat->GetTextureCount(type); i++) {
+    for(GLuint i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
         Texture texture(str.C_Str(), GL_TEXTURE_2D, i, GL_RGB, GL_RGB);

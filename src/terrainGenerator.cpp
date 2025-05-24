@@ -13,12 +13,12 @@ float perlinChunkHeight(float x, float y) {
 
 Mesh Chunk::generateChunkMesh(int LOD, int chunkX, int chunkY) {
     assert((TERRAINGENERATOR_CHUNK_SIZE % LOD) == 0);
-    uint vert_per_chunk = (TERRAINGENERATOR_CHUNK_SIZE / LOD) + 2;
-    uint vpc_half = vert_per_chunk/2;
+    GLuint vert_per_chunk = (TERRAINGENERATOR_CHUNK_SIZE / LOD) + 2;
+    GLuint vpc_half = vert_per_chunk/2;
     std::vector<Vertex> vertices;
-    for(uint i = 0; i < vert_per_chunk; i++) {
+    for(GLuint i = 0; i < vert_per_chunk; i++) {
         //const int cY = i * vert_per_chunk - vpc_half + TERRAINGENERATOR_CHUNK_SIZE*chunkX;
-        for(uint j = 0; j < vert_per_chunk; j++) {
+        for(GLuint j = 0; j < vert_per_chunk; j++) {
             Vertex v;
             //const int cX = j * vert_per_chunk - vpc_half + TERRAINGENERATOR_CHUNK_SIZE*chunkY;
             
@@ -41,7 +41,7 @@ Mesh Chunk::generateChunkMesh(int LOD, int chunkX, int chunkY) {
             vertices.push_back(v);
         }
     }
-    std::vector<uint> indices;
+    std::vector<GLuint> indices;
 
     for(int y = 0; y < vert_per_chunk-1; y++) {
         for(int x = 0; x < vert_per_chunk-1; x++) {
@@ -59,8 +59,8 @@ Mesh Chunk::generateChunkMesh(int LOD, int chunkX, int chunkY) {
     }
 
     /*
-    for(uint i = 0; i < vert_per_chunk; i++) {
-        for(uint j = 0; j < vert_per_chunk; j++) {
+    for(GLuint i = 0; i < vert_per_chunk; i++) {
+        for(GLuint j = 0; j < vert_per_chunk; j++) {
             indices.push_back(i*vert_per_chunk+j);
             indices.push_back(i*vert_per_chunk+j+1);
             indices.push_back((i+1)*vert_per_chunk+j);

@@ -14,7 +14,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	stbi_set_flip_vertically_on_load(true);
 	// Ścieżka do tekstury automatycznie w dobrym folderze.
 	fs::path fpath = std::string{TEXTURE_RELPATH} + std::string{image};
-	std::string imgFullPath = fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath;
+	std::string imgFullPath = (fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath).string();
 	
 	unsigned char* bytes = stbi_load(imgFullPath.c_str(), &widthImg, &heightImg, &numColCh, 0);
 	if(!bytes) {
