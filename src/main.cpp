@@ -17,104 +17,10 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+//
+#include"Game.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-
-
-//Teksturowo:
-// Wierzcholki2
-GLfloat vertices[] =
-{
-	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D	Normalne wektory
-	 //Front
-	-0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
-	-0.5f, 0.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
-	 0.5f, 0.5f,  0.5f,		0.0f, 1.0f, 1.0f,		1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
-	 0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
-	 //Tyl
-	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	-0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 1.0f,		1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	 0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	 //Lewo
-	-0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								1.0f, 0.0f, 0.0f,
-	-0.5f, 0.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								1.0f, 0.0f, 0.0f,
-	-0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 1.0f,		1.0f, 1.0f,								1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 0.0f,								1.0f, 0.0f, 0.0f,
-	//Prawo
-	0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
-	0.5f, 0.5f,  0.5f,		0.0f, 1.0f, 1.0f,		1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
-
-	//Dół
-   -0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-   -0.5f, -0.5f, -0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 5.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		5.0f, 5.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		5.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-	//Góra
-   -0.5f, 0.5f,  0.5f,		1.0f, 1.0f, 0.0f,		0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
-   -0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 1.0f,		0.0f, 3.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, 0.5f, -0.5f,		1.0f, 1.0f, 0.0f,		3.0f, 3.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, 0.5f,  0.5f,		0.0f, 1.0f, 1.0f,		3.0f, 0.0f,								0.0f, -1.0f, 0.0f
-};
-
-	 // Przyporzadkowanie wierzcholkow do trojkatow2
-GLuint indices[] =
-{
-	//Front:
-	0, 1, 2,
-	0, 2, 3,
-	//Tyl:
-	4, 5, 6,
-	4, 6, 7,
-	//Lewo:
-	8, 9, 10,
-	8, 10, 11,
-	//Prawo:
-	12, 13, 14,
-	12, 14, 15,
-	//Dol:
-	16, 17, 18,
-	19, 16, 18,
-	//Gora:
-	20, 21, 23,
-	21, 23, 22
-
-
-};
-
-//Swiatlo:
-
-GLfloat lightVertices[] =
-{ // COORDINATES //
-	-0.1f, -0.1f, 0.1f,
-	-0.1f, -0.1f, -0.1f,
-	0.1f, -0.1f, -0.1f,
-	0.1f, -0.1f, 0.1f,
-	-0.1f, 0.1f, 0.1f,
-	-0.1f, 0.1f, -0.1f,
-	0.1f, 0.1f, -0.1f,
-	0.1f, 0.1f, 0.1f
-};
-
-GLuint lightIndices[] =
-{
-	0, 1, 2,
-	0, 2, 3,
-	0, 4, 7,
-	0, 7, 3,
-	3, 7, 6,
-	3, 6, 2,
-	2, 6, 5,
-	2, 5, 1,
-	1, 5, 4,
-	1, 4, 0,
-	4, 5, 6,
-	4, 6, 7
-};
-
-
 
 
 int main()
@@ -144,15 +50,14 @@ int main()
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
 	Shader shaderProgram("default.vert", "default.frag");
 
 
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
+	VBO VBO1(vertices,vertices.size() * sizeof(vertices));
+	EBO EBO1(indices,indices.size() * sizeof(indices));
 
 	//Teksturowo:
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
@@ -195,8 +100,8 @@ int main()
 	Shader lightShader("light.vert", "light.frag");
 	VAO lightVAO;
 	lightVAO.Bind();
-	VBO lightVBO(lightVertices, sizeof(lightVertices));
-	EBO lightEBO(lightIndices, sizeof(lightIndices));
+	VBO lightVBO(lightVertices,lightVertices.size() * sizeof(lightVertices));
+	EBO lightEBO(lightIndices,lightIndices.size() * sizeof(lightIndices));
 	lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	lightVAO.Unbind();
 	lightVBO.Unbind();
@@ -224,8 +129,8 @@ int main()
 	Shader lightShader2("light.vert", "light.frag");
 	VAO light2VAO;
 	light2VAO.Bind();
-	VBO light2VBO(lightVertices, sizeof(lightVertices));
-	EBO light2EBO(lightIndices, sizeof(lightIndices));
+	VBO light2VBO(lightVertices,lightVertices.size() * sizeof(lightVertices));
+	EBO light2EBO(lightIndices,lightIndices.size() * sizeof(lightIndices));
 	light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	light2VAO.Unbind();
 	light2VBO.Unbind();
@@ -281,7 +186,6 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
 		//Teksturowo:
 		tekstura1.Bind();
 		tekstura2.Bind();
@@ -290,7 +194,7 @@ int main()
 		camera.Matrix(shaderProgram, "camMatrix");
 
 		VAO1.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,indices.size() * sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 
 		lightShader.Activate();
@@ -299,7 +203,7 @@ int main()
 
 		camera.Matrix(lightShader, "camMatrix");
 		lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 
 		lightShader2.Activate();
@@ -308,7 +212,7 @@ int main()
 
 		camera.Matrix(lightShader2, "camMatrix");
 		light2VAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
