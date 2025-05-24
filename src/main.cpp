@@ -17,10 +17,12 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+#include"Zegary.h"
+#include"StatusGry.h"
 
-#define M_PI 3.141592653589793238462643383279502884197169399375105820
-#define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352
-#define TOL 1e-12
+//#define M_PI 3.141592653589793238462643383279502884197169399375105820
+#define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352//Wyliczona recznie dlugosc przeciwprostokatnej trojkata monitora
+#define TOL 1e-12//Tolerancja
 
 //Teksturowo:
 // POJAZD
@@ -1733,6 +1735,8 @@ int main()
 
 	glViewport(0, 0, 1000, 800);
 
+	Pakiet_Zmiennych zmienne;//Cos mi extern nie dzialalo tutaj jak w poprzednim projekcie(JG)
+
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -1959,8 +1963,8 @@ int main()
 			else Zeg1Vertices[i + 3] = 0.0f;
 
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
-		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar + 0.395f;
+		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar + 0.395f;
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
 		Zeg1Vertices[i + 9] = vec3A.y;
@@ -2829,8 +2833,11 @@ int main()
 	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
 	float i = 0.0;
 
+	InicjujZmienne1(window, &zmienne, Mon_Vertices);
+
 	while (!glfwWindowShouldClose(window))
 	{
+		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
 		if (i > 199.5) i = 0.0;
 		else i = i + 0.5;
@@ -2857,6 +2864,17 @@ int main()
 		//POJAZD
 		shaderProgram.Activate();
 
+		VAO1.Bind();
+		VBO1 = VBO(vertices, sizeof(vertices));
+		EBO1 = EBO(indices, sizeof(indices));
+		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO1.Unbind();
+		VBO1.Unbind();
+		EBO1.Unbind();
+
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 		glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -2874,6 +2892,17 @@ int main()
 
 		//MONITOR-DANE
 		Mon_Program.Activate();
+
+		VAO_Mon.Bind();
+		VBO_Mon = VBO(Mon_Vertices, sizeof(Mon_Vertices));
+		EBO_Mon = EBO(Mon_Indices, sizeof(Mon_Indices));
+		VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Mon.Unbind();
+		VBO_Mon.Unbind();
+		EBO_Mon.Unbind();
 
 		glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));

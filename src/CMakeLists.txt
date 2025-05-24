@@ -10,6 +10,8 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     stb.cpp
+    Zegary.cpp
+    StatusGry.cpp
 # Biblioteki Kici kici kici kici kici kici kici kici kici kici
     glad.c
 )
