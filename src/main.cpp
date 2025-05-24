@@ -50,27 +50,23 @@ int main()
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	Shader shaderProgram("default.vert", "default.frag");
+	GameElements game;
 
+	game.VAO1.Bind();
 
-	VAO VAO1;
-	VAO1.Bind();
-
-	VBO VBO1(vertices,vertices.size() * sizeof(vertices));
-	EBO EBO1(indices,indices.size() * sizeof(indices));
 
 	//Teksturowo:
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	game.VAO1.LinkAttrib(game.VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	game.VAO1.LinkAttrib(game.VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	game.VAO1.LinkAttrib(game.VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	game.VAO1.LinkAttrib(game.VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 	//
 
-	/*VAO1.LinkVBO(VBO1, 0);*/
+	/*game.VAO1.LinkVBO(game.VBO1, 0);*/
 
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
+	game.VAO1.Unbind();
+	game.VBO1.Unbind();
+	game.EBO1.Unbind();
 
 	std::string parentDir = "";
 	std::string texPath = "resources/";
@@ -92,16 +88,16 @@ int main()
 
 
 
-	tekstura1.texUnit(shaderProgram, "texture1", 0);
-	tekstura2.texUnit(shaderProgram, "texture2", 1);
+	tekstura1.texUnit(game.shaderProgram, "texture1", 0);
+	tekstura2.texUnit(game.shaderProgram, "texture2", 1);
 
 
 	//swiatlo:
 	Shader lightShader("light.vert", "light.frag");
 	VAO lightVAO;
 	lightVAO.Bind();
-	VBO lightVBO(lightVertices,lightVertices.size() * sizeof(lightVertices));
-	EBO lightEBO(lightIndices,lightIndices.size() * sizeof(lightIndices));
+	VBO lightVBO(lightVertices,lightVertices.size() * sizeof(lightVertices[0]));
+	EBO lightEBO(lightIndices,lightIndices.size() * sizeof(lightIndices[0]));
 	lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	lightVAO.Unbind();
 	lightVBO.Unbind();
@@ -118,10 +114,10 @@ int main()
 	lightShader.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
 	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-	shaderProgram.Activate();
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
-	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	game.shaderProgram.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(game.shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
 
@@ -129,8 +125,8 @@ int main()
 	Shader lightShader2("light.vert", "light.frag");
 	VAO light2VAO;
 	light2VAO.Bind();
-	VBO light2VBO(lightVertices,lightVertices.size() * sizeof(lightVertices));
-	EBO light2EBO(lightIndices,lightIndices.size() * sizeof(lightIndices));
+	VBO light2VBO(lightVertices,lightVertices.size() * sizeof(lightVertices[0]));
+	EBO light2EBO(lightIndices,lightIndices.size() * sizeof(lightIndices[0]));
 	light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	light2VAO.Unbind();
 	light2VBO.Unbind();
@@ -147,10 +143,10 @@ int main()
 	lightShader2.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
 	glUniform4f(glGetUniformLocation(lightShader2.ID, "lightColor"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-	shaderProgram.Activate();
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	game.shaderProgram.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(game.shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 
 
 
@@ -180,21 +176,21 @@ int main()
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		shaderProgram.Activate();
+		game.shaderProgram.Activate();
 
-		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+		glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(game.shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 		//Teksturowo:
-		tekstura1.Bind();
-		tekstura2.Bind();
+		game.tekstura1.Bind();
+		game.tekstura2.Bind();
 
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(shaderProgram, "camMatrix");
+		glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(game.shaderProgram, "camMatrix");
 
-		VAO1.Bind();
-		glDrawElements(GL_TRIANGLES,indices.size() * sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		game.VAO1.Bind();
+		glDrawElements(GL_TRIANGLES,indices.size() * sizeof(indices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 
 		lightShader.Activate();
@@ -203,7 +199,7 @@ int main()
 
 		camera.Matrix(lightShader, "camMatrix");
 		lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 
 		lightShader2.Activate();
@@ -212,16 +208,16 @@ int main()
 
 		camera.Matrix(lightShader2, "camMatrix");
 		light2VAO.Bind();
-		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 
-	VAO1.Delete();
-	VBO1.Delete();
-	EBO1.Delete();
+	game.VAO1.Delete();
+	game.VBO1.Delete();
+	game.EBO1.Delete();
 	lightVAO.Delete();
 	lightVBO.Delete();
 	lightEBO.Delete();
@@ -229,10 +225,10 @@ int main()
 	light2VBO.Delete();
 	light2EBO.Delete();
 	//Teksturowo:
-	tekstura1.Delete();
-	tekstura2.Delete();
+	game.tekstura1.Delete();
+	game.tekstura2.Delete();
 	//
-	shaderProgram.Delete();
+	game.shaderProgram.Delete();
 	lightShader.Delete();
 	lightShader2.Delete();
 

@@ -107,9 +107,9 @@ std::vector<GLuint> lightIndices =
 	4, 6, 7
 };
 
-
 GameElements::GameElements() : shaderProgram("default.vert", "default.frag"),
-VBO1(vertices, vertices.size() * sizeof(vertices)), EBO1(indices, indices.size() * sizeof(indices)),
+VBO1(vertices, vertices.size() * sizeof(vertices[0])),
+EBO1(indices, indices.size() * sizeof(indices[0])),
 parentDir(""), texPath("resources/"),
 tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
 tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE),
