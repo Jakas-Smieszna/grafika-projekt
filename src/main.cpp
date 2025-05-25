@@ -2841,12 +2841,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		processTerrainQueue();
-		if (i > 192.0) i = 0.0;
-		else i = i + 5.0;
-	
 
-	while (!glfwWindowShouldClose(window))
-	{
 		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
 		if (i > 199.5) i = 0.0;
