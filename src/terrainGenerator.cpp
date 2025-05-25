@@ -1,8 +1,9 @@
 #include "terrainGenerator.h"
 #include "vertex.h"
+#include "Kamera.h"
+#include "helper/tsqueue.h"
 #include <memory>
 #include <thread>
-#include "helper/tsqueue.h"
 
 #define STB_PERLIN_IMPLEMENTATION
 #include <stb/stb_perlin.h>
@@ -14,15 +15,15 @@ float perlinChunkHeight(float x, float y) {
 }
 
 std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunkX, int chunkY, int LOD) {
-    assert((TERRAINGENERATOR_CHUNK_SIZE % LOD) == 0);
-    GLuint vert_per_chunk = (TERRAINGENERATOR_CHUNK_SIZE / LOD) + 2;
+    assert((TERRAINGENERATOR_CHUNK_DETAIL % LOD) == 0);
+    GLuint vert_per_chunk = (TERRAINGENERATOR_CHUNK_DETAIL / LOD);
     GLuint vpc_half = vert_per_chunk/2;
     std::vector<Vertex> vertices;
     for(GLuint i = 0; i < vert_per_chunk; i++) {
         for(GLuint j = 0; j < vert_per_chunk; j++) {
             Vertex v;
-            float cX = i/static_cast<float>(vert_per_chunk-1) + (chunkX);
-            float cY = j/static_cast<float>(vert_per_chunk-1) + (chunkY);
+            float cX = (i / static_cast<float>(vert_per_chunk - 1) + (chunkX)) * TERRAINGENERATOR_CHUNK_SIZE;
+            float cY = (j / static_cast<float>(vert_per_chunk - 1) + (chunkY)) * TERRAINGENERATOR_CHUNK_SIZE;
             
             glm::vec3 vector{
                 static_cast<float>(cX),
@@ -69,25 +70,60 @@ void processTerrainQueue()
 }
 
 
-TerrainGenerator::TerrainGenerator() {
-    std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
+TerrainGenerator::TerrainGenerator(Camera& cam) : associated_cam(cam) {
+    //std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
+    std::thread generatorThread([this] {
+        while (true) {
+            updateTerrain();
+        }
+        });
     generatorThread.detach();
 }
 
+
+
 void TerrainGenerator::updateTerrain() {
-    for(int i = -RENDER_DISTANCE; i < RENDER_DISTANCE; i++) {
-        for(int j = -RENDER_DISTANCE; j < RENDER_DISTANCE; j++) {
-            int LOD = std::pow(2, abs(i) % 3);
+    glm::vec3 P;
+    std::unique_lock<std::mutex> lock(associated_cam._mutex);
+    P = associated_cam.Position;
+    lock.unlock();
+    int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
+    int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
+
+    for(int i = x - RENDER_DISTANCE; i < x + RENDER_DISTANCE; i++) {
+        for(int j = y-RENDER_DISTANCE; j < y + RENDER_DISTANCE; j++) {
+            if (chunkExists({i,j,1})) {
+                continue;
+            }
+            printf("Generating chunk %i, %i at LOD %i\n", i, j, 1);
+            chData data{ i, j, 1 };
+            int LOD = std::pow(2, abs(i+j) % 3);
             auto VIPair = generateChunkMesh(i, j, 1);
             auto V = VIPair.first;
             auto I = VIPair.second;
-            chData data{ i, j, 1 };
             terrainGenQueue.push([this, data, V, I] {
                 std::unique_lock<std::mutex> lock(_mutex);
                 TerrainChunks.push_back(std::make_unique<Chunk>(data, V, I));
                 });
         }
     }
+}
+
+bool TerrainGenerator::chunkExists(chData who)
+{
+    std::unique_lock<std::mutex> lock(_mutex);
+    for (auto& pChunk : TerrainChunks) {
+        try {
+            auto& data = pChunk->data;
+            if (data.x == who.x && data.y == who.y && data.LOD == who.LOD)
+                return true;
+        }
+        catch (...) {
+            // something went wrong, pretend it exists just in case
+            return true;
+        }
+    }
+    return false;
 }
 
 void TerrainGenerator::Draw(Shader& shader) {

@@ -7,6 +7,7 @@
 #include<glm/gtc/type_ptr.hpp>
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
+#include <mutex>
 
 #include"shader.h"
 
@@ -30,5 +31,8 @@ public:
 	void updateMatrix(float FOVdeg, float nearPlane, float farPlane);
 	void Matrix(Shader& shader, const char* uniform);
 	void Inputs(GLFWwindow* window);
+private:
+	std::mutex _mutex;
+	friend class TerrainGenerator;
 };
 #endif

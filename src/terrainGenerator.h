@@ -3,16 +3,23 @@
 
 #include "mesh.h"
 #include "shader.h"
+#include "Kamera.h"
 #include <memory>
 #include <vector>
 #include <utility>
 #include <mutex>
 
+//Rozmiar chunk-u jeżeli chodzi o "unity" openGL
+// tutaj początek by był (0, 0) a koniec (32, 32)
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
-#define TERRAINGENERATOR_CHUNK_SIZE 32
+#define TERRAINGENERATOR_CHUNK_SIZE 0.5
 #endif
+
+// ilość vertexów w boku; fajnie jak jest potęgą dwójki
+#define TERRAINGENERATOR_CHUNK_DETAIL 16
+
 #ifndef RENDER_DISTANCE
-#define RENDER_DISTANCE 64
+#define RENDER_DISTANCE 4
 #endif
 
 struct chData {
@@ -35,11 +42,14 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
 
 class TerrainGenerator {
 public:
-    TerrainGenerator();
+    TerrainGenerator(Camera& cam);
 
     void Draw(Shader& shader);
     void updateTerrain();
 private:
+    bool chunkExists(chData who);
+    void dropChunk(chData who);
+
     // trochę takie długie, ale musimy uniknąć
     // kopiowania mesh-y, bo inaczej wywołuje się
     // ich dekonstruktor, który niszczy ebo, vbo, vao
@@ -48,6 +58,7 @@ private:
     // wszystko (rysowanie + dodawanie do TerrainChunks)
     // powinno wykonywać się na tym samym wątku.
     std::mutex _mutex;
+    Camera& associated_cam;
     
 };
 

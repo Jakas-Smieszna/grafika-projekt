@@ -251,7 +251,7 @@ int main()
 	float i = 0.0;
 
 	Shader terrainShader("terrain.vert", "terrain.frag");
-	TerrainGenerator generator;
+	TerrainGenerator generator(camera);
 	
 	while (!glfwWindowShouldClose(window))
 	{
@@ -274,9 +274,11 @@ int main()
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 		terrainShader.Activate();
 		camera.Matrix(terrainShader, "camMatrix");
-		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+			glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		}
 		generator.Draw(terrainShader);
-		//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 		shaderProgram.Activate();
 		testMesh.Draw(shaderProgram);
