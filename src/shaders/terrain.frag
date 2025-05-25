@@ -24,5 +24,5 @@ uniform vec3 camPos;
 void main()
 {
     //FragColor = color;
-    FragColor = vec4(0.2, 0.5 - worldPos.y/2, 0, 1);
+    FragColor = vec4(0.2, 0.5 - (worldPos.y + 5)/2, 0, 1);
 }

@@ -13,14 +13,14 @@
 //Rozmiar chunk-u jeżeli chodzi o "unity" openGL
 // tutaj początek by był (0, 0) a koniec (32, 32)
 #ifndef TERRAINGENERATOR_CHUNK_SIZE
-#define TERRAINGENERATOR_CHUNK_SIZE 1
+#define TERRAINGENERATOR_CHUNK_SIZE 16
 #endif
 
 // ilość vertexów w boku; fajnie jak jest potęgą dwójki
 #define TERRAINGENERATOR_CHUNK_DETAIL 8
 
 #ifndef RENDER_DISTANCE
-#define RENDER_DISTANCE 16
+#define RENDER_DISTANCE 8
 #endif
 
 struct chData {
