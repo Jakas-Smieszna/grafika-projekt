@@ -56,37 +56,46 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
     }
     return std::make_pair(vertices, indices);
 }
-
+#include <chrono>
 void processTerrainQueue()
 {
+    auto t_start = std::chrono::steady_clock::now();
     while (!terrainGenQueue.empty()) {
-        try {
-            auto task = terrainGenQueue.pop();
-            task();
-        } catch (...) {
-            printf("Error processing terrain generator queue!\n");
+        auto task = terrainGenQueue.pop();
+        task();
+        auto t_end = std::chrono::steady_clock::now();
+        double elapsed = std::chrono::duration<double, std::milli>(t_end - t_start).count();
+        if (elapsed > 1000) {
+            printf("stopped processing due to surpassed time limit!\n");
+            break;
         }
     }
 }
 
 
-TerrainGenerator::TerrainGenerator(Camera& cam) : associated_cam(cam) {
+TerrainGenerator::TerrainGenerator(Camera& cam) : associated_cam(cam), TerrainChunks(), lastCamChunk({21, 37, 0 }) {
     //std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
     std::thread generatorThread([this] {
         while (true) {
-            updateTerrain();
+            std::unique_lock<std::mutex> lock(associated_cam._mutex);
+            glm::vec3 P = associated_cam.Position;
+            lock.unlock();
+            auto currCamChunk = getChunkPosFromCamPos(P);
+            if (currCamChunk == lastCamChunk) continue;
+            lastCamChunk = currCamChunk;
+            updateTerrain(P);
         }
         });
     generatorThread.detach();
 }
 
+chData TerrainGenerator::getChunkPosFromCamPos(glm::vec3 P) {
+    int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
+    int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
+    return { x, y, 0 };
+}
 
-
-void TerrainGenerator::updateTerrain() {
-    glm::vec3 P;
-    std::unique_lock<std::mutex> lock(associated_cam._mutex);
-    P = associated_cam.Position;
-    lock.unlock();
+void TerrainGenerator::updateTerrain(glm::vec3 P) {
     int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
     int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
 
@@ -95,7 +104,6 @@ void TerrainGenerator::updateTerrain() {
             if (chunkExists({i,j,1})) {
                 continue;
             }
-            printf("Generating chunk %i, %i at LOD %i\n", i, j, 1);
             chData data{ i, j, 1 };
             int LOD = std::pow(2, abs(i+j) % 3);
             auto VIPair = generateChunkMesh(i, j, 1);
@@ -103,7 +111,8 @@ void TerrainGenerator::updateTerrain() {
             auto I = VIPair.second;
             terrainGenQueue.push([this, data, V, I] {
                 std::unique_lock<std::mutex> lock(_mutex);
-                TerrainChunks.push_back(std::make_unique<Chunk>(data, V, I));
+                //printf("adding chunk %i, %i\n", data.x, data.y);
+                TerrainChunks.emplace(data, std::make_unique<Chunk>(data, V, I) );
                 });
         }
     }
@@ -112,23 +121,25 @@ void TerrainGenerator::updateTerrain() {
 bool TerrainGenerator::chunkExists(chData who)
 {
     std::unique_lock<std::mutex> lock(_mutex);
-    for (auto& pChunk : TerrainChunks) {
-        try {
-            auto& data = pChunk->data;
-            if (data.x == who.x && data.y == who.y && data.LOD == who.LOD)
-                return true;
-        }
-        catch (...) {
-            // something went wrong, pretend it exists just in case
-            return true;
-        }
-    }
-    return false;
+    return TerrainChunks.contains(who);
 }
 
 void TerrainGenerator::Draw(Shader& shader) {
-    std::unique_lock<std::mutex> lock(_mutex);
-    for(const auto& c : TerrainChunks) {
-        c->terrainMesh.Draw(shader);
+    glm::vec3 P;
+    std::unique_lock<std::mutex> camLock(associated_cam._mutex);
+    P = associated_cam.Position;
+    camLock.unlock();
+    int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
+    int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
+    for (int i = x - RENDER_DISTANCE; i < x + RENDER_DISTANCE; i++) {
+        for (int j = y - RENDER_DISTANCE; j < y + RENDER_DISTANCE; j++) {
+            if (!chunkExists({ i,j,1 })) {
+                continue;
+            }
+            std::unique_lock<std::mutex> ourLock(_mutex);
+            TerrainChunks.at({ i, j, 1 })->terrainMesh.Draw(shader);
+            ourLock.unlock();
+        }
     }
+
 }
