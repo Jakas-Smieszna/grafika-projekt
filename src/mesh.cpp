@@ -19,6 +19,8 @@ _mesh::~_mesh() {
     vao.Delete();
     vbo.Delete();
     ebo.Delete();
+    vertices.clear();
+    indices.clear();
 }
 
 void _mesh::initMesh() {
