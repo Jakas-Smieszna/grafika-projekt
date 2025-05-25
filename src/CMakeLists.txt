@@ -29,6 +29,10 @@ if(UNIX)
 elseif(WIN32)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/src")
 endif(UNIX)
-file(COPY "./shaders" DESTINATION "${DIR_TO_COPY_RESOURCES}")
-file(COPY "./resources" DESTINATION "${DIR_TO_COPY_RESOURCES}")
-message(STATUS "Shaders and resources have been copied to ${DIR_TO_COPY_RESOURCES}")
+
+ADD_CUSTOM_TARGET(copy_resource_files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" 
+)
+
+add_dependencies(GrafikaProjekt copy_resource_files)
