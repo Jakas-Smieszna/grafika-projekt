@@ -11,6 +11,7 @@ set(PROJ_FILES
     Tekstury.cpp
     stb.cpp
     Game.cpp
+    Menu.cpp
 # Biblioteki
     glad.c
 )

@@ -55,8 +55,7 @@ public:
 
 };
 
-//void UpdateGameState(GameElements& game, GLFWwindow* window);
-
-//void RenderScene(GameElements& game, GLFWwindow* window);
+void UpdateGameState(GameElements& game, GLFWwindow* window);
+void RenderScene(GameElements& game, GLFWwindow* window);
 
 #endif // GAME_CLASS_H

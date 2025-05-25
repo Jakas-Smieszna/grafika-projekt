@@ -19,8 +19,14 @@
 #include"Kamera.h"
 //
 #include"Game.h"
+#include"Menu.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
+
+enum State {
+	PlayState,
+	MenuState
+};
 
 
 int main()
@@ -51,70 +57,26 @@ int main()
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	GameElements game;
+	MenuElements menu;
+
+	State state = State::MenuState;
 
 	glEnable(GL_DEPTH_TEST);
 
-	float i = 0.0;
-
+	 
 	while (!glfwWindowShouldClose(window))
 	{
-		if (i > 192.0) i = 0.0;
-		else i = i + 5.0;
-
-		if (i < 102.0) game.lightColor = glm::vec4(0.f, 0.f, i * 0.02f, 1.0f);
-		else game.lightColor = glm::vec4(0.f, 0.f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
-
-		game.light2Model = glm::translate(game.light2Model, -game.light2Pos);
-		game.light2Pos = glm::rotate(game.light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-		game.light2Model = glm::translate(game.light2Model, game.light2Pos);
-		game.cube2Model = glm::translate(game.cube2Model, game.cube2Pos);
-
-		glClearColor(0.f, 1.00f, 0.f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		game.camera.Inputs(window);
-		game.camera.updateMatrix(45.0f, 0.1f, 100.0f);
-
-		game.camera.updateMatrix(45.0f, 0.1f, 100.0f);
-
-		game.shaderProgram.Activate();
-
-		glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "lightColor"), game.lightColor.x, game.lightColor.y, game.lightColor.z, game.lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(game.shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(game.cube2Model));
-		glUniform4f(glGetUniformLocation(game.shaderProgram.ID, "light2Color"), game.light2Color.x, game.light2Color.y, game.light2Color.z, game.light2Color.w);
-		glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "light2Pos"), game.light2Pos.x, game.light2Pos.y, game.light2Pos.z);
-		//Teksturowo:
-		game.tekstura1.Bind();
-		game.tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(game.shaderProgram.ID, "camPos"), game.camera.Position.x, game.camera.Position.y, game.camera.Position.z);
-		game.camera.Matrix(game.shaderProgram, "camMatrix");
-
-		game.VAO1.Bind();
-		glDrawElements(GL_TRIANGLES,indices.size() * sizeof(indices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-
-		game.lightShader.Activate();
-
-		glUniform4f(glGetUniformLocation(game.lightShader.ID, "lightColor"), game.lightColor.x, game.lightColor.y, game.lightColor.z, game.lightColor.w);
-
-		game.camera.Matrix(game.lightShader, "camMatrix");
-		game.lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-
-		game.lightShader2.Activate();
-
-		glUniformMatrix4fv(glGetUniformLocation(game.lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(game.light2Model));
-
-		game.camera.Matrix(game.lightShader2, "camMatrix");
-		game.light2VAO.Bind();
-		glDrawElements(GL_TRIANGLES,lightIndices.size() * sizeof(lightIndices[0]) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		if (state == State::PlayState)
+		{
+		UpdateGameState(game, window);
+		RenderScene(game, window);
+		}
+		if (state == State::MenuState)
+		{
+			//UpdateMenuState(window);
+			RenderMenu(menu, window);
+		}
 	}
-
 
 	game.VAO1.Delete();
 	game.VBO1.Delete();
