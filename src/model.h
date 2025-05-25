@@ -4,12 +4,9 @@
 #include <string>
 
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+#include <tiny_obj_loader>
 
 #include "Tekstury.h"
-#include "assimp/material.h"
 #include "mesh.h"
 #include "shader.h"
 
