@@ -7,7 +7,6 @@ project (
   GrafikaProjekt
   VERSION 1.0
   LANGUAGES CXX C
-
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -19,9 +18,6 @@ find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
 find_package(GLM REQUIRED)
 message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
-set(ASSIMP_ROOT_DIR "C:/Program Files/Assimp" CACHE PATH "Assimp Root Directory" FORCE)
-find_package(assimp REQUIRED)
-message(STATUS "Found assimp in ${ASSIMP_INCLUDE_DIR}")
 
 set(GLAD_INCLUDE_PATH "./include" PATH "The directory that contains GL/glfw.h" )
 
@@ -30,7 +26,6 @@ include_directories(
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
   ${GLM_INCLUDE_DIR}
-  ${ASSIMP_INCLUDE_DIR}
 )
 
 # Enable Hot Reload for MSVC compilers if supported.
