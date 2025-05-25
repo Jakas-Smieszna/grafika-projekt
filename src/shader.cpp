@@ -1,3 +1,4 @@
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -13,6 +14,7 @@ std::string get_file_contents(const char* filename)
 	std::ifstream in(
 		(fs::is_symlink(fpath) ? fs::read_symlink(fpath) : fpath).string(),
 		std::ios::binary);
+  
 	if (in)
 	{
 		std::string contents;

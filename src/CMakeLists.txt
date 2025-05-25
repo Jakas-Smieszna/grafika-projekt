@@ -14,6 +14,9 @@ set(PROJ_FILES
     terrainGenerator.cpp
 # Biblioteki
     stb.cpp
+    Zegary.cpp
+    StatusGry.cpp
+# Biblioteki Kici kici kici kici kici kici kici kici kici kici
     glad.c
  "helper/tsqueue.cpp")
 
@@ -43,10 +46,9 @@ file(MAKE_DIRECTORY ${DIR_TO_COPY_RESOURCES})
 #ADD_CUSTOM_TARGET(link_target ALL
 #                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
 #                  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" )
-
-ADD_CUSTOM_TARGET(copy_resource_files ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
-    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" 
+#ADD_CUSTOM_TARGET(copy_resource_files ALL
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/shaders" "${DIR_TO_COPY_RESOURCES}/shaders" 
 )
 
 add_dependencies(GrafikaProjekt copy_resource_files)
