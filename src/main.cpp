@@ -10,6 +10,7 @@
 
 //Teksturowo:
 #include"Tekstury.h"
+#include "mesh.h"
 #include"stb/stb_image.h"
 //
 #include"shader.h"
@@ -17,6 +18,11 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+#include "terrainGenerator.h"
+#include "helper/tsqueue.h"
+
+// Teksturowo:
+// Wierzcholki2
 #include"Zegary.h"
 #include"StatusGry.h"
 
@@ -1740,7 +1746,6 @@ int main()
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
 	//Inicjacja
 			//KOLOR: KADLUB
 	for (int i = 3; i < sizeof(vertices) / sizeof(GLfloat); i = i + 11) {
@@ -2443,7 +2448,6 @@ int main()
 
 
 	//KONIEC MODYFIKACJI TABLIC V/I
-
 	Shader shaderProgram("default.vert", "default.frag");
 
 
@@ -2462,28 +2466,21 @@ int main()
 
 	/*VAO1.LinkVBO(VBO1, 0);*/
 
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
+	VAO1.Unbind(); VBO1.Unbind(); EBO1.Unbind();
 
-	std::string parentDir = "";
-	std::string texPath = "resources/";
-
-	Texture tekstura1((parentDir + texPath + "metal.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura1("metal.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-
-	Texture tekstura2((parentDir + texPath + "Kotel1.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura2("Kotel1.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura2.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
 
 
 	tekstura1.texUnit(shaderProgram, "texture1", 0);
@@ -2655,6 +2652,10 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+
+	Mesh testMesh = getTestMesh();
+  
 	Mon_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -2832,8 +2833,17 @@ int main()
 
 	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
 	float i = 0.0;
-
-	InicjujZmienne1(window, &zmienne, Mon_Vertices);
+	Shader terrainShader("terrain.vert", "terrain.frag");
+	TerrainGenerator generator;
+	
+  InicjujZmienne1(window, &zmienne, Mon_Vertices);
+  
+	while (!glfwWindowShouldClose(window))
+	{
+		processTerrainQueue();
+		if (i > 192.0) i = 0.0;
+		else i = i + 5.0;
+	
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -2857,12 +2867,16 @@ int main()
 
 		camera.Inputs(window);
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
-
-		camera.updateMatrix(45.0f, 0.1f, 100.0f);
+		terrainShader.Activate();
+		camera.Matrix(terrainShader, "camMatrix");
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		generator.Draw(terrainShader);
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 
 		//POJAZD
 		shaderProgram.Activate();
+		testMesh.Draw(shaderProgram);
 
 		VAO1.Bind();
 		VBO1 = VBO(vertices, sizeof(vertices));
@@ -3004,6 +3018,8 @@ int main()
 		camera.Matrix(lightShader2, "camMatrix");
 		light2VAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		light2VAO.Unbind();
+
 
 		//ODPYCHACZE CENTRALNE
 		pushShader.Activate();
