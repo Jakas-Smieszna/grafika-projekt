@@ -3,14 +3,49 @@
 
 #include<vector>
 
-
+//Teksturowo:
+// POJAZD
 extern std::vector<GLfloat> vertices;
-
 extern std::vector<GLuint> indices;
 
-extern std::vector<GLfloat> lightVertices;
+//Na monitorze (odczyty):
+extern std::vector<GLfloat> Mon_Vertices;
+extern std::vector<GLuint> Mon_Indices;
 
+//Swiatlo (lampa):
+extern std::vector<GLfloat> lightVertices;
 extern std::vector<GLuint> lightIndices;
+
+//Swiatlo2 (zaplon):
+extern std::vector<GLfloat> lightVertices2;
+extern std::vector<GLuint> lightIndices2;
+
+//Odpychanie centralne:
+//-11z
+extern std::vector<GLfloat> pushVertices;
+extern std::vector<GLuint> pushIndices;
+
+extern std::vector<GLfloat> pushVertices_front;
+extern std::vector<GLfloat> pushVertices_tyl;
+
+//Kule
+//
+extern std::vector<GLfloat> KulaVertices;
+extern std::vector<GLuint> KulaIndices;
+
+//Ramy wskazowek
+extern std::vector<GLfloat>  Zeg1Vertices;
+extern std::vector<GLuint> Zeg1Indices;
+
+extern std::vector<GLfloat>  Zeg2Vertices;
+extern std::vector<GLuint> Zeg2Indices;
+
+extern std::vector<GLfloat>  Zeg3Vertices;
+extern std::vector<GLuint> Zeg3Indices;
+
+extern std::vector<GLfloat>  Zeg4Vertices;
+extern std::vector<GLuint> Zeg4Indices;
+
 
 class GameElements {
 public:
@@ -19,8 +54,8 @@ public:
 	VBO VBO1;
 	EBO EBO1;
 
-	std::string parentDir;
-	std::string texPath;
+	//std::string parentDir;
+	//std::string texPath;
 
 	Texture tekstura1;
 	Texture tekstura2;

@@ -59,7 +59,7 @@ int main()
 	GameElements game;
 	MenuElements menu;
 
-	State state = State::MenuState;
+	State state = State::PlayState;
 
 	glEnable(GL_DEPTH_TEST);
 

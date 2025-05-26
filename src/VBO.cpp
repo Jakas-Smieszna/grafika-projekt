@@ -1,13 +1,15 @@
-#include"VBO.h"
-#include <iostream>
+#include <vector>
+#include "VBO.h"
+#include "vertex.h"
+
 VBO::VBO(GLfloat* vertices, GLsizeiptr size)
 {
 	glGenBuffers(1, &ID);
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 }
-
-VBO::VBO(std::vector <GLfloat> vertices, GLsizeiptr size)
+// VBO przez wektor.
+VBO::VBO(std::vector<Vertex>& vertices, GLsizeiptr size)
 {
 	glGenBuffers(1, &ID);
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
