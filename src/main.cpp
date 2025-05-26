@@ -28,6 +28,10 @@ enum State {
 	MenuState
 };
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
 
 int main()
 {
@@ -48,32 +52,39 @@ int main()
 	}
 
 	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	gladLoadGL();
 
 	glViewport(0, 0, 1000, 800);
+	
+	glClear(GL_COLOR_BUFFER_BIT);//xD
+	glfwSwapBuffers(window);//xD
 
-	//glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	GameElements game;
 	MenuElements menu;
+	//MenuElements menu;
 
-	State state = State::MenuState;
+	State state = State::PlayState;
 
 	glEnable(GL_DEPTH_TEST);
 
-	 
+
+	
+
+
 	while (!glfwWindowShouldClose(window))
 	{
 		if (state == State::PlayState)
 		{
-		UpdateGameState(game, window);
-		RenderScene(game, window);
+			UpdateGameState(game, window);
+			RenderScene(game, window);
 		}
 		if (state == State::MenuState)
 		{
-			//UpdateMenuState(window);
 			RenderMenu(menu, window);
 		}
 	}

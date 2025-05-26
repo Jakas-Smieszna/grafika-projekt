@@ -52,17 +52,22 @@ std::vector <GLuint> menu_indices = {
 
 MenuElements::MenuElements() 
 {
+
+
    vertexShader = glCreateShader(GL_VERTEX_SHADER);
    std::string vs_source = get_file_contents("menu_default.vert");
    const char* vertsh = vs_source.c_str();
 
    glShaderSource(vertexShader, 1, &vertsh, NULL);
    glCompileShader(vertexShader);
+   
+
    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
    std::string fs_source = get_file_contents("menu_default.frag");
    const char* fragsh = fs_source.c_str();
    glShaderSource(fragmentShader, 1, &fragsh, NULL);
    glCompileShader(fragmentShader);
+
 
    shaderProgram = glCreateProgram();
    glAttachShader(shaderProgram, vertexShader);
@@ -94,17 +99,18 @@ MenuElements::MenuElements()
 
 void RenderMenu(MenuElements &menu, GLFWwindow* window)
 {
-   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-   glClear(GL_COLOR_BUFFER_BIT);
 
-   glUseProgram(menu.shaderProgram);
+   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-   glUniform3f(glGetUniformLocation(menu.shaderProgram, "menuColor"), 1.0f, 0.0f, 0.0f);
+         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-   glBindVertexArray(menu.VAO);
-   glDrawElements(GL_TRIANGLES, menu_indices.size(), GL_UNSIGNED_INT, 0);
+         glUseProgram(menu.shaderProgram);
 
-   glfwSwapBuffers(window);
-   glfwPollEvents();
+         glBindVertexArray(menu.VAO);
+
+         glDrawElements(GL_TRIANGLES, menu_indices.size(), GL_UNSIGNED_INT, 0);
+
+         glfwSwapBuffers(window);
+         glfwPollEvents();
 
 }
