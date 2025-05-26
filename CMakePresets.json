@@ -56,6 +56,40 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
+        },
+        {
+            "name": "linux-base",
+            "hidden": true,
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}",
+            "environment": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "linux-debug-x64",
+            "description": "Build for debugging.",
+            "displayName": "x64 Debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "inherits": [
+                "linux-base"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "linux-build-debug-x64",
+            "description": "",
+            "displayName": "Build x64 Debug",
+            "configurePreset": "linux-debug-x64"
         }
     ]
 }

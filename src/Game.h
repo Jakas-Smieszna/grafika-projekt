@@ -22,33 +22,36 @@ extern std::vector<GLuint> lightIndices2;
 
 //Odpychanie centralne:
 //-11z
-extern std::vector<GLfloat> pushVertices;
-extern std::vector<GLuint> pushIndices;
+extern std::vector<GLfloat> pushVertices[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
+extern std::vector<GLuint> pushIndices[66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2];
 
-extern std::vector<GLfloat> pushVertices_front;
-extern std::vector<GLfloat> pushVertices_tyl;
+extern std::vector<GLfloat> pushVertices_front[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
+extern std::vector<GLfloat> pushVertices_tyl[66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3];
 
 //Kule
 //
-extern std::vector<GLfloat> KulaVertices;
-extern std::vector<GLuint> KulaIndices;
+extern std::vector<GLfloat> KulaVertices[2 * (66 * 3 + 33 * 3 + 17 * 3 + 9 * 3 + 5 * 3)];
+extern std::vector<GLuint> KulaIndices[2 * (66 * 3 + 33 * 3 * 2 + 17 * 3 * 2 + 9 * 3 * 2 + 5 * 3 * 2)];
 
 //Ramy wskazowek
-extern std::vector<GLfloat>  Zeg1Vertices;
-extern std::vector<GLuint> Zeg1Indices;
+extern std::vector<GLfloat>  Zeg1Vertices[130 * 11 + 65 * 11 + 130 * 11];
+extern std::vector<GLuint> Zeg1Indices[130 * 3 + 65 * 3 + 130 * 3];
 
-extern std::vector<GLfloat>  Zeg2Vertices;
-extern std::vector<GLuint> Zeg2Indices;
+extern std::vector<GLfloat>  Zeg2Vertices[130 * 11 + 65 * 11 + 130 * 11];
+extern std::vector<GLuint> Zeg2Indices[130 * 3 + 65 * 3 + 130 * 3];
 
-extern std::vector<GLfloat>  Zeg3Vertices;
-extern std::vector<GLuint> Zeg3Indices;
+extern std::vector<GLfloat>  Zeg3Vertices[130 * 11 + 65 * 11 + 130 * 11];
+extern std::vector<GLuint> Zeg3Indices[130 * 3 + 65 * 3 + 130 * 3];
 
-extern std::vector<GLfloat>  Zeg4Vertices;
-extern std::vector<GLuint> Zeg4Indices;
+extern std::vector<GLfloat>  Zeg4Vertices[130 * 11 + 65 * 11 + 130 * 11];
+extern std::vector<GLuint> Zeg4Indices[130 * 3 + 65 * 3 + 130 * 3];
 
 
 class GameElements {
 public:
+
+	Pakiet_Zmiennych zmienne;//Cos mi extern nie dzialalo tutaj jak w poprzednim projekcie(JG)
+
 	Shader shaderProgram;
 	VAO VAO1;
 	VBO VBO1;
@@ -86,7 +89,7 @@ public:
 	glm::mat4 cube2Model;
 
 	Camera camera;
-	GameElements();
+	GameElements(GLFWwindow* okno);
 
 };
 
