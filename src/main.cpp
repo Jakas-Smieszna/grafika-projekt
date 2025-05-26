@@ -50,23 +50,23 @@ GLfloat vertices[] =
 	 //Lewo
 	-0.5f, -0.5f,  7.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
 	-0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	-0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -7.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	-0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, -7.5f,	0.0f, 0.0f, 1.0f,			3.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
 	//Prawo
-	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								1.0f, 0.0f, 0.0f,
-	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			3.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								1.0f, 0.0f, 0.0f,
 	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								1.0f, 0.0f, 0.0f,
 	0.5f, -0.5f, -7.5f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								1.0f, 0.0f, 0.0f,
 	//Dół
-   -0.5f, -0.5f,  7.5f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
-   -0.5f, -0.5f, -7.5f,		0.0f, 0.0f, 1.0f,			0.0f, 5.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, -0.5f, -7.5f,		1.0f, 0.0f, 0.0f,			5.0f, 5.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			5.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+   -0.5f, -0.5f,  7.5f,		1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, -1.0f, 0.0f,
+   -0.5f, -0.5f, -7.5f,		0.0f, 0.0f, 1.0f,			3.0f, 1.0f,								0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f, -7.5f,		1.0f, 0.0f, 0.0f,			3.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
 	//Góra
-   -0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-   -0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+   -0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 1.0f, 0.0f,
+   -0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
 
 	//CZUB
 	//Gora
@@ -2468,14 +2468,14 @@ int main()
 
 	VAO1.Unbind(); VBO1.Unbind(); EBO1.Unbind();
 
-	Texture tekstura1("metal.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura1("Plyta.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	Texture tekstura2("Kotel1.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura2("Plyta.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura2.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -2836,13 +2836,27 @@ int main()
 	Shader terrainShader("terrain.vert", "terrain.frag");
 	TerrainGenerator generator(camera);
 	
-  InicjujZmienne1(window, &zmienne, Mon_Vertices);
+	//Liczenie rozmiaru tablic wierzcholkow
+	zmienne.Rozmiar_vertices[0] = sizeof(vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[1] = sizeof(Mon_Vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[2] = sizeof(lightVertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[3] = sizeof(lightVertices2) / sizeof(float);
+	zmienne.Rozmiar_vertices[4] = sizeof(pushVertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[5] = sizeof(KulaVertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[6] = sizeof(Zeg1Vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[7] = sizeof(Zeg2Vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[8] = sizeof(Zeg3Vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[9] = sizeof(Zeg4Vertices) / sizeof(float);
+	zmienne.Rozmiar_vertices[10] = sizeof(pushVertices_front) / sizeof(float);
+	zmienne.Rozmiar_vertices[11] = sizeof(pushVertices_tyl) / sizeof(float);
+
+	InicjujZmienne1(window, &zmienne, Mon_Vertices);
   
 	while (!glfwWindowShouldClose(window))
 	{
 		processTerrainQueue();
 
-		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices);
+		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
 		if (i > 199.5) i = 0.0;
 		else i = i + 0.5;
@@ -2932,6 +2946,17 @@ int main()
 		//MONITOR DANE: WSKAZNIK KIERUNKU
 		Zeg1_Program.Activate();
 
+		VAO_Zeg1.Bind();
+		VBO_Zeg1 = VBO(Zeg1Vertices, sizeof(Zeg1Vertices));
+		EBO_Zeg1 = EBO(Zeg1Indices, sizeof(Zeg1Indices));
+		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Zeg1.Unbind();
+		VBO_Zeg1.Unbind();
+		EBO_Zeg1.Unbind();
+
 		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -2948,6 +2973,17 @@ int main()
 
 		//MONITOR DANE: WSKAZNIK ENERGII
 		Zeg2_Program.Activate();
+
+		VAO_Zeg2.Bind();
+		VBO_Zeg2 = VBO(Zeg2Vertices, sizeof(Zeg2Vertices));
+		EBO_Zeg2 = EBO(Zeg2Indices, sizeof(Zeg2Indices));
+		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Zeg2.Unbind();
+		VBO_Zeg2.Unbind();
+		EBO_Zeg2.Unbind();
 
 		glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
@@ -2966,6 +3002,17 @@ int main()
 		//MONITOR DANE: WSKAZNIK ODLEGLOSCI
 		Zeg3_Program.Activate();
 
+		VAO_Zeg3.Bind();
+		VBO_Zeg3 = VBO(Zeg3Vertices, sizeof(Zeg3Vertices));
+		EBO_Zeg3 = EBO(Zeg3Indices, sizeof(Zeg3Indices));
+		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Zeg3.Unbind();
+		VBO_Zeg3.Unbind();
+		EBO_Zeg3.Unbind();
+
 		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -2982,6 +3029,17 @@ int main()
 
 		//MONITOR DANE: WSKAZNIK PREDKOSCI
 		Zeg4_Program.Activate();
+
+		VAO_Zeg4.Bind();
+		VBO_Zeg4 = VBO(Zeg4Vertices, sizeof(Zeg4Vertices));
+		EBO_Zeg4 = EBO(Zeg4Indices, sizeof(Zeg4Indices));
+		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Zeg4.Unbind();
+		VBO_Zeg4.Unbind();
+		EBO_Zeg4.Unbind();
 
 		glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
@@ -3000,6 +3058,14 @@ int main()
 		//LAMPA
 		lightShader.Activate();
 
+		lightVAO.Bind();
+		lightVBO = VBO(lightVertices, sizeof(lightVertices));
+		lightEBO = EBO(lightIndices, sizeof(lightIndices));
+		lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		lightVAO.Unbind();
+		lightVBO.Unbind();
+		lightEBO.Unbind();
+
 		glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 
 		camera.Matrix(lightShader, "camMatrix");
@@ -3008,6 +3074,14 @@ int main()
 
 		//OGIEN SILNIKA
 		lightShader2.Activate();
+
+		light2VAO.Bind();
+		light2VBO = VBO(lightVertices2, sizeof(lightVertices2));
+		light2EBO = EBO(lightIndices2, sizeof(lightIndices2));
+		light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		light2VAO.Unbind();
+		light2VBO.Unbind();
+		light2EBO.Unbind();
 
 		glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
 		glUniform4f(glGetUniformLocation(lightShader2.ID, "lightColor"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -3040,6 +3114,7 @@ int main()
 		glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 			//FRONT
+		pushVAO.Bind();
 		pushVBO = VBO(pushVertices_front, sizeof(pushVertices_front));
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
@@ -3058,6 +3133,7 @@ int main()
 			glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		}
 			//TYL
+		pushVAO.Bind();
 		pushVBO = VBO(pushVertices_tyl, sizeof(pushVertices_tyl));
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
@@ -3127,6 +3203,25 @@ int main()
 	pushVAO.Delete();
 	pushVBO.Delete();
 	pushEBO.Delete();
+	KulaVAO.Delete();
+	KulaVBO.Delete();
+	KulaEBO.Delete();
+	VAO_Mon.Delete();
+	VBO_Mon.Delete();
+	EBO_Mon.Delete();
+	VAO_Zeg1.Delete();
+	VBO_Zeg1.Delete();
+	EBO_Zeg1.Delete();
+	VAO_Zeg2.Delete();
+	VBO_Zeg2.Delete();
+	EBO_Zeg2.Delete();
+	VAO_Zeg3.Delete();
+	VBO_Zeg3.Delete();
+	EBO_Zeg3.Delete();
+	VAO_Zeg4.Delete();
+	VBO_Zeg4.Delete();
+	EBO_Zeg4.Delete();
+
 	//Teksturowo:
 	tekstura1.Delete();
 	tekstura2.Delete();
@@ -3135,6 +3230,12 @@ int main()
 	lightShader.Delete();
 	lightShader2.Delete();
 	pushShader.Delete();
+	KulaShader.Delete();
+	Mon_Program.Delete();
+	Zeg1_Program.Delete();
+	Zeg2_Program.Delete();
+	Zeg3_Program.Delete();
+	Zeg4_Program.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

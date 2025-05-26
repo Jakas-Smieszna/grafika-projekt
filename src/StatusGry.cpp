@@ -56,8 +56,17 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 	return 0;
 }
 
+
+
+
+
+
+
+
+
+
 //AKTUALIZUJ WSKAZOWKI I WSKAZYWANE PRZEZ NIE PARAMETRY
-int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki, GLfloat* korpus) {
+int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4) {
 
 	glm::vec3 vpom = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 vpom2 = glm::vec3(0.f, 0.f, 0.f);
@@ -141,7 +150,10 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 	//RUCH I ZMIANY ENERGII
 	w0 = 11;
+
+	Przestaw_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
 	zmienne->Biezaca_pozycja = zmienne->Biezaca_pozycja + float(zmienne->Predkosc) * zmienne->Kierunek;
+	Przestaw_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
 	double D_energia = zmienne->Predkosc / 60000.0f;
 	zmienne->Energia = zmienne->Energia - D_energia;
 	//Obrot - wskazanie energii:
@@ -169,11 +181,112 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 
 	//KIERUNEK I DYSTANS - aktualizacja:
-	zmienne->Kierunek = glm::normalize(zmienne->Punkt_docelowy - zmienne->Biezaca_pozycja);
+	zmienne->Kierunek_do_celu = glm::normalize(zmienne->Punkt_docelowy - zmienne->Biezaca_pozycja);
 	zmienne->Odleglosc = glm::length(zmienne->Punkt_docelowy - zmienne->Biezaca_pozycja);
 
 
 
 	return 1;//pomyslne ukonczenie
+
+}
+
+
+
+//Funkcja do przestawiania pojazdu do punktu poczatkowego i zerowej rotacji oraz do jego ponownego przesuwania na nowa pozycje i rotacje.
+//zmiana = -1: wroc do O(0,0,0)
+//zmiana = 1: wroc do Biezacej pozycji
+int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4) {
+
+	int DL1 = 11;
+	int DL2 = 3;
+
+
+	//POZYCJA
+	for (int i = 0; i < zmienne->Rozmiar_vertices[0]; i = i + DL1) {
+
+		korpus[i] = korpus[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		korpus[i + 1] = korpus[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		korpus[i + 2] = korpus[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[1]; i = i + DL1) {
+
+		monitor[i] = monitor[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		monitor[i + 1] = monitor[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		monitor[i + 2] = monitor[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[2]; i = i + DL2) {
+
+		lampa[i] = lampa[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		lampa[i + 1] = lampa[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		lampa[i + 2] = lampa[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL2) {
+
+		zaplon[i] = zaplon[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		zaplon[i + 1] = zaplon[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		zaplon[i + 2] = zaplon[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[4]; i = i + DL2) {
+
+		pusch[i] = pusch[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		pusch[i + 1] = pusch[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		pusch[i + 2] = pusch[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[5]; i = i + DL2) {
+
+		kule[i] = kule[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		kule[i + 1] = kule[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		kule[i + 2] = kule[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[6]; i = i + DL1) {
+
+		zeg1[i] = zeg1[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		zeg1[i + 1] = zeg1[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		zeg1[i + 2] = zeg1[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[7]; i = i + DL1) {
+
+		zeg2[i] = zeg2[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		zeg2[i + 1] = zeg2[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		zeg2[i + 2] = zeg2[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[8]; i = i + DL1) {
+
+		zeg3[i] = zeg3[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		zeg3[i + 1] = zeg3[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		zeg3[i + 2] = zeg3[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[9]; i = i + DL1) {
+
+		zeg4[i] = zeg4[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		zeg4[i + 1] = zeg4[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		zeg4[i + 2] = zeg4[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[10]; i = i + DL2) {
+
+		pusch_F[i] = pusch_F[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		pusch_F[i + 1] = pusch_F[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		pusch_F[i + 2] = pusch_F[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[11]; i = i + DL2) {
+
+		pusch_T[i] = pusch_T[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		pusch_T[i + 1] = pusch_T[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		pusch_T[i + 2] = pusch_T[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
+
+	return 1;
 
 }
