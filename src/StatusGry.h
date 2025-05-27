@@ -14,11 +14,11 @@
 #define _STATUS_GRY_DEFKI_1_
 #define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352//Wyliczona recznie dlugosc przeciwprostokatnej trojkata monitora
 #define TOL 1e-12//Tolerancja
-#define MAX_PREDKOSC 100.0
-#define MAX_ENERGIA 100000.0
-#define MAX_ODLEGLOSC 10000.0
+#define MAX_PREDKOSC 500.0
+#define MAX_ENERGIA 10000000.0
+#define MAX_ODLEGLOSC 1000000.0
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-#define MAX_PRZYSPIESZANIE 10
+#define MAX_PRZYSPIESZANIE 100
 #define LICZBA_VERTICES_TABLIC 12
 #endif // !_STATUS_GRY_DEFKI_1_
 
@@ -32,7 +32,7 @@ class Pakiet_Zmiennych {
 	double Energia;//Biezaca energia pojazdu.
 	double Odleglosc;//Odleglosc od celu //liczona z zawartych zmiennych - moze usune
 	unsigned int Czas_klatki;//Liczba klatek od sytartu rozgrywki.
-	double Skret_kat;//Obrot pojazdu w klatce
+	double Pojazd_kat;//Biezace zrotowanie pojazdu
 
 	int Czas_przyspieszanie;//Liczba klatek przyspieszania pojazdu.
 
@@ -63,7 +63,7 @@ class Pakiet_Zmiennych {
 		//CZAS W KLATKACH - zerowanie
 		Czas_klatki = 0;
 		//ZAKRECANIE - KAT
-		Skret_kat = 0.0;
+		Pojazd_kat = 0.0;
 
 		//CZAS PRZYSPIESZENIA W KLATKACH - zerowanie
 		Czas_przyspieszanie = 0;
@@ -80,5 +80,6 @@ class Pakiet_Zmiennych {
 int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki);
 int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4);
 int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4);
+int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4);
 
 #endif

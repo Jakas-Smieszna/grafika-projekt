@@ -29,11 +29,12 @@ void Camera::Matrix(Shader& shader, const char* uniform)
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 }
 
-void Camera::Inputs(GLFWwindow* window, float szybkosc, glm::vec3 kierunek)
+void Camera::Inputs(GLFWwindow* window, float rotacja)
 {
 
 	std::unique_lock<std::mutex> lock(_mutex);
-	//Position += szybkosc * kierunek;//KAMERA ZABLOKOWANA NA POJEZDZIE - RUCH POJAZDU WZGLEDEM OTOCZENIA - NISZCZY ROZDZIELCZOSC
+	Position = glm::rotate(Position, rotacja, glm::vec3(0.0f, 1.0f, 0.0f));
+	Orientation = glm::rotate(Orientation, rotacja, glm::vec3(0.0f, 1.0f, 0.0f));
 	// Obsluga klawiszy
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 	{

@@ -1744,10 +1744,10 @@ int main()
 
 	//Inicjacja
 			//KOLOR: KADLUB
-	for (int i = 3; i < sizeof(vertices) / sizeof(GLfloat); i = i + 11) {
-		vertices[i] = 0.67f;
-		vertices[i + 1] = 0.67f;
-		vertices[i + 2] = 0.67f;
+	for (int i = 0; i < sizeof(vertices) / sizeof(GLfloat); i = i + 11) {
+		vertices[i + 3] = 0.67f;
+		vertices[i + 4] = 0.67f;
+		vertices[i + 5] = 0.67f;
 	}
 
 			//MONITOR
@@ -2853,6 +2853,7 @@ int main()
 	{
 		processTerrainQueue();
 
+		float kat0 = zmienne.Pojazd_kat;
 		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
 		if (i > 199.5) i = 0.0;
@@ -2870,8 +2871,8 @@ int main()
 		//CZYSZCZENIE TLA
 		glClearColor(0.f, 1.00f, 0.f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		camera.Inputs(window, float(zmienne.Predkosc), zmienne.Kierunek);
+		
+		camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0),(2.0f * M_PI))));
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 		terrainShader.Activate();
 		camera.Matrix(terrainShader, "camMatrix");
@@ -3063,6 +3064,14 @@ int main()
 		lightVBO.Unbind();
 		lightEBO.Unbind();
 
+		lightPos = glm::rotate(glm::vec3(0.0f, 1.25f, -8.5f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+		lightModel = glm::mat4(1.0f);
+		lightModel = glm::translate(lightModel, lightPos);
+		cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
+		cubeModel = glm::mat4(1.0f);
+		cubeModel = glm::translate(cubeModel, cubePos);
+
+		glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
 		glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 
 		camera.Matrix(lightShader, "camMatrix");
@@ -3079,6 +3088,13 @@ int main()
 		light2VAO.Unbind();
 		light2VBO.Unbind();
 		light2EBO.Unbind();
+
+		light2Pos = glm::rotate(glm::vec3(0.0f, 0.0f, -23.8f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+		light2Model = glm::mat4(1.0f);
+		light2Model = glm::translate(light2Model, light2Pos);
+		cube2Pos = glm::vec3(0.0f, 0.0f, 0.0f);
+		cube2Model = glm::mat4(1.0f);
+		cube2Model = glm::translate(cube2Model, cube2Pos);
 
 		glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
 		glUniform4f(glGetUniformLocation(lightShader2.ID, "lightColor"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -3098,7 +3114,7 @@ int main()
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
 		pushVBO.Unbind();
-		pushPos = glm::vec3(0.0f, -1.1f, -11.0);
+		pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -11.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 		pushModel = glm::mat4(1.0f);
 		pushModel = glm::translate(pushModel, pushPos);
 		cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3117,7 +3133,7 @@ int main()
 		pushVAO.Unbind();
 		pushVBO.Unbind();
 		for (int i = 0; i < 6; i++) {
-			pushPos = glm::vec3(0.0f, -0.5f, 6.5f - 2.5f * float(i));
+			pushPos = glm::rotate(glm::vec3(0.0f, -0.5f, 6.5f - 2.5f * float(i)), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 			pushModel = glm::mat4(1.0f);
 			pushModel = glm::translate(pushModel, pushPos);
 			cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3135,7 +3151,7 @@ int main()
 		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		pushVAO.Unbind();
 		pushVBO.Unbind();
-		pushPos = glm::vec3(0.0f, -1.1f, -19.0);
+		pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -19.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 		pushModel = glm::mat4(1.0f);
 		pushModel = glm::translate(pushModel, pushPos);
 		cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3157,7 +3173,7 @@ int main()
 		KulaVAO.LinkAttrib(KulaVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 		KulaVAO.Unbind();
 		KulaVBO.Unbind();
-		KulaPos = glm::vec3(-4.0f, -1.65f, -21.0);
+		KulaPos = glm::rotate(glm::vec3(-4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 		KulaModel = glm::mat4(1.0f);
 		KulaModel = glm::translate(KulaModel, KulaPos);
 		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3169,7 +3185,7 @@ int main()
 		KulaVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			//PRAWA
-		KulaPos = glm::vec3(4.0f, -1.65f, -21.0);
+		KulaPos = glm::rotate(glm::vec3(4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 		KulaModel = glm::mat4(1.0f);
 		KulaModel = glm::translate(KulaModel, KulaPos);
 		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);

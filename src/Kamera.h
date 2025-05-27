@@ -30,7 +30,7 @@ public:
 		const char* uniform);*/
 	void updateMatrix(float FOVdeg, float nearPlane, float farPlane);
 	void Matrix(Shader& shader, const char* uniform);
-	void Inputs(GLFWwindow* window, float szybkosc, glm::vec3 kierunek);
+	void Inputs(GLFWwindow* window, float rotacja);
 private:
 	std::mutex _mutex;
 	friend class TerrainGenerator;
