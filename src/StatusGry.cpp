@@ -15,7 +15,7 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
 		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
 	}
-	//Obrot
+	//Obrot na min
 	for (int i = 0; i < 3; i++) {
 		vpom2 = glm::vec3(
 			wskazowki[(w0 + i) * 11],
@@ -39,7 +39,7 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
 		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
 	}
-	//Obrot
+	//Obrot na maks
 	for (int i = 0; i < 3; i++) {
 		vpom2 = glm::vec3(
 			wskazowki[(w0 + i) * 11],
@@ -52,6 +52,35 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
 
 	}
+
+
+	//ODLEGLOSC DO CELU
+	w0 = 46;
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot na maks
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, -0.975f * float(M_PI), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+	//KIERUNEK NA START 90, czyli na prost (domyslnie)
+
+
 
 	return 0;
 }
@@ -76,22 +105,23 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 
 		//ZMIANA PREDKOSCI
+	//[PRZYSPIESZANIE - W; ZWALNIANIE - S]
 	//PRZYSPIESZANIE
-	if ((glfwGetKey(okno, GLFW_KEY_Q) == GLFW_PRESS) && zmienne->Predkosc < MAX_PREDKOSC && zmienne->Czas_przyspieszanie < MAX_PRZYSPIESZANIE) {
+	if ((glfwGetKey(okno, GLFW_KEY_W) == GLFW_PRESS) && zmienne->Predkosc < MAX_PREDKOSC && zmienne->Czas_przyspieszanie < MAX_PRZYSPIESZANIE) {
 
 		zmienne->Czas_przyspieszanie = zmienne->Czas_przyspieszanie + 1;
 
 	}
 
 	//ZWALNIANIE
-	if ((glfwGetKey(okno, GLFW_KEY_E) == GLFW_PRESS) && zmienne->Predkosc > 0.0 && zmienne->Czas_przyspieszanie > -MAX_PRZYSPIESZANIE) {
+	if ((glfwGetKey(okno, GLFW_KEY_S) == GLFW_PRESS) && zmienne->Predkosc > 0.0 && zmienne->Czas_przyspieszanie > -MAX_PRZYSPIESZANIE) {
 
 		zmienne->Czas_przyspieszanie = zmienne->Czas_przyspieszanie - 1;
 		
 	}
 
 	//AUTOMATYCZNE WYRUWNYWANIE KIEROWNICY
-	if (!(((glfwGetKey(okno, GLFW_KEY_Q) == GLFW_PRESS) && zmienne->Predkosc < MAX_PREDKOSC) || ((glfwGetKey(okno, GLFW_KEY_E) == GLFW_PRESS) && zmienne->Predkosc > 0.0))) {
+	if (!(((glfwGetKey(okno, GLFW_KEY_W) == GLFW_PRESS) && zmienne->Predkosc < MAX_PREDKOSC) || ((glfwGetKey(okno, GLFW_KEY_S) == GLFW_PRESS) && zmienne->Predkosc > 0.0))) {
 		
 		if (zmienne->Czas_przyspieszanie > 0) zmienne->Czas_przyspieszanie = zmienne->Czas_przyspieszanie - 1;
 		else if (zmienne->Czas_przyspieszanie < 0) zmienne->Czas_przyspieszanie = zmienne->Czas_przyspieszanie + 1;
@@ -103,6 +133,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	zmienne->Predkosc = zmienne->Predkosc + double(zmienne->Czas_przyspieszanie) / 120.0;
 	if (zmienne->Predkosc > MAX_PREDKOSC) zmienne->Predkosc = MAX_PREDKOSC;
 	if (zmienne->Predkosc < 0.0) zmienne->Predkosc = 0.0;
+	if (zmienne->Energia < TOL)  zmienne->Predkosc = 0.0;
 
 	//ZEGAR
 	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
@@ -149,12 +180,36 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 
 	//RUCH I ZMIANY ENERGII
-	w0 = 11;
+	Przestaw_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);//COFNIECIE WSP POJAZDU DO O(0,0,0)
+	
 
-	Przestaw_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
+	//SKRECANIE [W LEWO - A; W PRAWO - D]
+	if ((glfwGetKey(okno, GLFW_KEY_A) == GLFW_PRESS)) {
+
+		zmienne->Skret_kat = 0.01f * M_PI / zmienne->Predkosc;
+
+	}
+	else if((glfwGetKey(okno, GLFW_KEY_D) == GLFW_PRESS)) {
+
+		zmienne->Skret_kat = -0.01f * M_PI / zmienne->Predkosc;
+
+	}
+	else {
+
+		zmienne->Skret_kat = 0.0f;
+
+	}
+	zmienne->Kierunek = glm::normalize(glm::vec3(korpus[24 * 11], korpus[24 * 11 + 1], korpus[24 * 11 + 2]));
+	//KONIEC SKRECANIA
+
+
+	
+	//PRZESUNIECIE 
 	zmienne->Biezaca_pozycja = zmienne->Biezaca_pozycja + float(zmienne->Predkosc) * zmienne->Kierunek;
-	Przestaw_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
-	double D_energia = zmienne->Predkosc / 60000.0f;
+	
+	//ZMIANY ENERGII
+	w0 = 11;
+	double D_energia = zmienne->Predkosc;
 	zmienne->Energia = zmienne->Energia - D_energia;
 	//Obrot - wskazanie energii:
 	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
@@ -171,7 +226,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 			wskazowki[(w0 + i) * 11 + 1],
 			wskazowki[(w0 + i) * 11 + 2]
 		);
-		vpom2 = glm::rotate(vpom2, 1.95f * float(M_PI * (D_energia) / MAX_PREDKOSC), glm::normalize(zmienne->Os_zegarow));
+		vpom2 = glm::rotate(vpom2, 1.95f * float(M_PI * (D_energia) / MAX_ENERGIA), glm::normalize(zmienne->Os_zegarow));
 		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
 		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
 		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
@@ -180,10 +235,72 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 
 
-	//KIERUNEK I DYSTANS - aktualizacja:
+	//KIERUNEK DO CELU I DYSTANS - aktualizacja:
+	double Odleglosc0 = zmienne->Odleglosc;
+	glm::vec3 Kierunek_do_celu0 = zmienne->Kierunek_do_celu;
 	zmienne->Kierunek_do_celu = glm::normalize(zmienne->Punkt_docelowy - zmienne->Biezaca_pozycja);
 	zmienne->Odleglosc = glm::length(zmienne->Punkt_docelowy - zmienne->Biezaca_pozycja);
+	if (zmienne->Odleglosc - MAX_ODLEGLOSC > -TOL) zmienne->Odleglosc = MAX_ODLEGLOSC;//Max na wskazniku
 
+	//AKTUALIZACJA WSKAZOWKI ODLEGLOSCI
+	w0 = 46; 
+	double D_DYSTANS = zmienne->Odleglosc - Odleglosc0;
+	//Obrot - wskazanie dystansu do celu:
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, -1.95f * float(M_PI * (D_DYSTANS) / MAX_ODLEGLOSC), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+	////AKTUALIZACJA WSKAZOWKI KIERUNKU
+	//w0 = 4;
+	////Liczenie zmiany kierunku do celu jako kata w radianach
+	//float KAT = 0.5f * M_PI;
+	//if (!(abs(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
+	//	KAT = acos(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
+	//	std::cout << KAT << "\n";
+	//}
+
+	////Obrot - wskazanie kierunku:
+	//vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	////Cofniecie do zera
+	//for (int i = 0; i < 3; i++) {
+	//	wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+	//	wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+	//	wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	//}
+	////Obrot
+	//for (int i = 0; i < 3; i++) {
+	//	vpom2 = glm::vec3(
+	//		wskazowki[(w0 + i) * 11],
+	//		wskazowki[(w0 + i) * 11 + 1],
+	//		wskazowki[(w0 + i) * 11 + 2]
+	//	);
+	//	vpom2 = glm::rotate(vpom2, KAT, glm::normalize(zmienne->Os_zegarow));
+	//	wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+	//	wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+	//	wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	//}
+
+	//POWROT DO POZYCJI NA MAPIE
+	Przestaw_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
 
 
 	return 1;//pomyslne ukonczenie
@@ -202,7 +319,7 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 
 
 	//POZYCJA
-	for (int i = 0; i < zmienne->Rozmiar_vertices[0]; i = i + DL1) {
+	/*for (int i = 0; i < zmienne->Rozmiar_vertices[0]; i = i + DL1) {
 
 		korpus[i] = korpus[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
 		korpus[i + 1] = korpus[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
@@ -285,7 +402,11 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 		pusch_T[i + 1] = pusch_T[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
 		pusch_T[i + 2] = pusch_T[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
 
-	}
+	}*/
+	//KONIEC POZYCJA
+
+	//KAT
+	
 
 	return 1;
 

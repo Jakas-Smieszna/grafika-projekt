@@ -26,10 +26,6 @@
 #include"Zegary.h"
 #include"StatusGry.h"
 
-//#define M_PI 3.141592653589793238462643383279502884197169399375105820
-#define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352//Wyliczona recznie dlugosc przeciwprostokatnej trojkata monitora
-#define TOL 1e-12//Tolerancja
-
 //Teksturowo:
 // POJAZD
 GLfloat vertices[] =
@@ -1915,8 +1911,9 @@ int main()
 		Zeg1Vertices[i + 4] = 0.5f;
 		Zeg1Vertices[i + 5] = 0.5f;
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.z + Przesuniecie_tekstura_zegar;
-		Zeg1Vertices[i + 7] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+			//std::cout << "x = " << Zeg1Vertices[i + 6] << "y = " << Zeg1Vertices[i + 7] << "\n";
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
 		Zeg1Vertices[i + 9] = vec3A.y;
@@ -1968,8 +1965,8 @@ int main()
 			else Zeg1Vertices[i + 3] = 0.0f;
 
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar + 0.395f;
-		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar + 0.395f;
+		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
 		Zeg1Vertices[i + 9] = vec3A.y;
@@ -2831,7 +2828,7 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f));
+	Camera camera(1000, 800, glm::vec3(0.0f, 4.5f, -17.0f));
 	float i = 0.0;
 	Shader terrainShader("terrain.vert", "terrain.frag");
 	TerrainGenerator generator(camera);
@@ -2874,7 +2871,7 @@ int main()
 		glClearColor(0.f, 1.00f, 0.f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		camera.Inputs(window);
+		camera.Inputs(window, float(zmienne.Predkosc), zmienne.Kierunek);
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 		terrainShader.Activate();
 		camera.Matrix(terrainShader, "camMatrix");

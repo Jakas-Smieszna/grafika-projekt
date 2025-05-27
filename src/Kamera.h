@@ -15,7 +15,7 @@ class Camera
 {
 public:
 	glm::vec3 Position;
-	glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, 1.0f);
 	glm::vec3 Up = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 cameraMatrix = glm::mat4(1.0f);
 	//glm::mat4 cameraMatrix = glm::mat4(1.0f);
@@ -30,7 +30,7 @@ public:
 		const char* uniform);*/
 	void updateMatrix(float FOVdeg, float nearPlane, float farPlane);
 	void Matrix(Shader& shader, const char* uniform);
-	void Inputs(GLFWwindow* window);
+	void Inputs(GLFWwindow* window, float szybkosc, glm::vec3 kierunek);
 private:
 	std::mutex _mutex;
 	friend class TerrainGenerator;

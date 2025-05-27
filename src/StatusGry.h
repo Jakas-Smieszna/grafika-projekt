@@ -12,11 +12,13 @@
 
 #ifndef _STATUS_GRY_DEFKI_1_
 #define _STATUS_GRY_DEFKI_1_
-#define MAX_PREDKOSC 500.0
-#define MAX_ENERGIA 1000000000.0
-#define MAX_ODLEGLOSC 1000000000.0
+#define _JG_DL_RAM_MON_POJ_ 1.8027756377319946465596106337352//Wyliczona recznie dlugosc przeciwprostokatnej trojkata monitora
+#define TOL 1e-12//Tolerancja
+#define MAX_PREDKOSC 100.0
+#define MAX_ENERGIA 100000.0
+#define MAX_ODLEGLOSC 10000.0
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-#define MAX_PRZYSPIESZANIE 100
+#define MAX_PRZYSPIESZANIE 10
 #define LICZBA_VERTICES_TABLIC 12
 #endif // !_STATUS_GRY_DEFKI_1_
 
@@ -30,6 +32,7 @@ class Pakiet_Zmiennych {
 	double Energia;//Biezaca energia pojazdu.
 	double Odleglosc;//Odleglosc od celu //liczona z zawartych zmiennych - moze usune
 	unsigned int Czas_klatki;//Liczba klatek od sytartu rozgrywki.
+	double Skret_kat;//Obrot pojazdu w klatce
 
 	int Czas_przyspieszanie;//Liczba klatek przyspieszania pojazdu.
 
@@ -42,13 +45,15 @@ class Pakiet_Zmiennych {
 
 		//LOSOWY KIERUNEK DO CELU
 		srand(time(NULL));
+		//Punkt_docelowy = glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC));
 		Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000)/36000.0f*2.0f*M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
 		//STARTOWA POZYCJA
 		Biezaca_pozycja = glm::vec3(0.f, 0.f, 0.f);
 		//KIEUNEK
 		Kierunek = glm::vec3(0.f, 0.f, 1.f);
-		//KIERUNEK DO CELU - pierwsze liczenie
-		Kierunek_do_celu = glm::normalize(Punkt_docelowy - Biezaca_pozycja);
+		//KIERUNEK DO CELU - pierwszy na wporst, by automatycznie liczyc przy pierwszej aktualizacji
+		Kierunek_do_celu = Kierunek;
+		//Kierunek_do_celu = glm::normalize(Punkt_docelowy - Biezaca_pozycja);
 		//STARTOWA PREDKOSC
 		Predkosc = 0.0;
 		//STARTOWA ENERGIA
@@ -57,6 +62,8 @@ class Pakiet_Zmiennych {
 		Odleglosc = glm::length(Punkt_docelowy - Biezaca_pozycja);
 		//CZAS W KLATKACH - zerowanie
 		Czas_klatki = 0;
+		//ZAKRECANIE - KAT
+		Skret_kat = 0.0;
 
 		//CZAS PRZYSPIESZENIA W KLATKACH - zerowanie
 		Czas_przyspieszanie = 0;

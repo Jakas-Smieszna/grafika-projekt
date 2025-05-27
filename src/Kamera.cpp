@@ -29,23 +29,25 @@ void Camera::Matrix(Shader& shader, const char* uniform)
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 }
 
-void Camera::Inputs(GLFWwindow* window)
+void Camera::Inputs(GLFWwindow* window, float szybkosc, glm::vec3 kierunek)
 {
+
 	std::unique_lock<std::mutex> lock(_mutex);
+	//Position += szybkosc * kierunek;//KAMERA ZABLOKOWANA NA POJEZDZIE - RUCH POJAZDU WZGLEDEM OTOCZENIA - NISZCZY ROZDZIELCZOSC
 	// Obsluga klawiszy
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 	{
 		Position += speed * Orientation;
 	}
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
 	{
 		Position += speed * -glm::normalize(glm::cross(Orientation, Up));
 	}
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 	{
 		Position += speed * -Orientation;
 	}
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
 	{
 		Position += speed * glm::normalize(glm::cross(Orientation, Up));
 	}
@@ -57,13 +59,13 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		Position += speed * -Up;
 	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
-		speed = 0.04f;
+		speed = 1.00f;
 	}
-	else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+	else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_RELEASE)
 	{
-		speed = 0.01f;
+		speed = 0.03f;
 	}
 	// Obsluga myszki
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
@@ -104,4 +106,5 @@ void Camera::Inputs(GLFWwindow* window)
 		// zabezpieczenie przed skokiem kamery
 		firstClick = true;
 	}
+
 }
