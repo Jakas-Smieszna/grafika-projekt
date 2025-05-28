@@ -32,7 +32,8 @@ class Pakiet_Zmiennych {
 	double Energia;//Biezaca energia pojazdu.
 	double Odleglosc;//Odleglosc od celu //liczona z zawartych zmiennych - moze usune
 	unsigned int Czas_klatki;//Liczba klatek od sytartu rozgrywki.
-	double Pojazd_kat;//Biezace zrotowanie pojazdu
+	double Pojazd_kat;//Biezace zrotowanie pojazdu wzgledem osi OY
+	double Przechylenie_kat;//Biezace zrotowanie pojazdu wzgledem osi OX oraz czas zakrecania w klatkach po puszczeniu przycisku.
 
 	int Czas_przyspieszanie;//Liczba klatek przyspieszania pojazdu.
 
@@ -64,6 +65,8 @@ class Pakiet_Zmiennych {
 		Czas_klatki = 0;
 		//ZAKRECANIE - KAT
 		Pojazd_kat = 0.0;
+		//PRZECHYLANIE - KAT
+		Przechylenie_kat = 0.0;
 
 		//CZAS PRZYSPIESZENIA W KLATKACH - zerowanie
 		Czas_przyspieszanie = 0;

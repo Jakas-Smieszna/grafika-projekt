@@ -34,58 +34,58 @@ GLfloat vertices[] =
 	
 	//PRZEDNI LACZNIK
 	//Front
-	-0.5f, -0.5f,  7.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f,  7.5f,	1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								0.0f, 0.0f, 1.0f,
 	-0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
 	 0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f,  7.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	 0.5f, -0.5f,  7.5f,	0.0f, 0.5f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, 1.0f,
 	 //Tyl
-	-0.5f, -0.5f, -7.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-0.5f, -0.5f, -7.5f,	0.0f, 0.5f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, -1.0f,
 	-0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
 	 0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
-	 0.5f, -0.5f, -7.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	 0.5f, -0.5f, -7.5f,	1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								0.0f, 0.0f, -1.0f,
 	 //Lewo
-	-0.5f, -0.5f,  7.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f,  7.5f,	1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								-1.0f, 0.0f, 0.0f,
 	-0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
 	-0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -7.5f,	0.0f, 0.0f, 1.0f,			3.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, -7.5f,	0.0f, 0.5f, 1.0f,			3.0f, 0.8f,								-1.0f, 0.0f, 0.0f,
 	//Prawo
-	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			3.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f,  7.5f,		0.0f, 0.5f, 1.0f,			3.0f, 0.8f,								1.0f, 0.0f, 0.0f,
 	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								1.0f, 0.0f, 0.0f,
 	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								1.0f, 0.0f, 0.0f,
-	0.5f, -0.5f, -7.5f,		1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f, -7.5f,		1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								1.0f, 0.0f, 0.0f,
 	//Dół
-   -0.5f, -0.5f,  7.5f,		1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, -1.0f, 0.0f,
-   -0.5f, -0.5f, -7.5f,		0.0f, 0.0f, 1.0f,			3.0f, 1.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, -0.5f, -7.5f,		1.0f, 0.0f, 0.0f,			3.0f, 0.0f,								0.0f, -1.0f, 0.0f,
-	0.5f, -0.5f,  7.5f,		0.0f, 0.0f, 1.0f,			0.0f, 0.0f,								0.0f, -1.0f, 0.0f,
+   -0.5f, -0.5f,  7.5f,		1.0f, 0.5f, 0.0f,			0.0f, 1.0f,								0.0f, -1.0f, 0.0f,
+   -0.5f, -0.5f, -7.5f,		0.0f, 0.5f, 1.0f,			3.0f, 1.0f,								0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f, -7.5f,		1.0f, 0.5f, 0.0f,			3.0f, 0.8f,								0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f,  7.5f,		0.0f, 0.5f, 1.0f,			0.0f, 0.8f,								0.0f, -1.0f, 0.0f,
 	//Góra
    -0.5f, 0.5f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 1.0f, 0.0f,
    -0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			3.0f, 1.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			3.0f, 0.8f,								0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f,  7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 0.8f,								0.0f, 1.0f, 0.0f,
 
 	//CZUB
 	//Gora
-	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.5f,								float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).z),
+	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.9f,								float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).z),
 	-1.0f, 1.0f,  7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).z),
 	 1.0f, 1.0f,  7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, 2.0f, 1.0f)).z),
 	 //Dol
-	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.5f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
-	-1.0f, -1.0f, 7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
-	 1.0f, -1.0f, 7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 0.0f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
+	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.9f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
+	-1.0f, -1.0f, 7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 0.8f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
+	 1.0f, -1.0f, 7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 0.8f,								float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).x), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).y), float(glm::normalize(glm::vec3(0.0f, -2.0f, 1.0f)).z),
 	 //Lewo
-	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.5f,								float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).z),
-	-1.0f, -1.0f,  7.5f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).z),
+	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.9f,								float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).z),
+	-1.0f, -1.0f,  7.5f,	1.0f, 1.0f, 0.0f,			0.0f, 0.8f,								float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).z),
 	-1.0f, 1.0f,  7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 1.0f,								float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(-2.0f, 0.0f, 1.0f)).z),
 	 //Prawo
-	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.5f,								float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).z),
+	 0.0f, 0.0f,  9.5f,		1.0f, 0.0f, 0.0f,			0.5f, 0.9f,								float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).z),
 	 1.0f, 1.0f,  7.5f,		1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).z),
-	 1.0f, -1.0f,  7.5f,	0.0f, 1.0f, 1.0f,			1.0f, 0.0f,								float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).z),
+	 1.0f, -1.0f,  7.5f,	0.0f, 1.0f, 1.0f,			1.0f, 0.8f,								float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).x), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).y), float(glm::normalize(glm::vec3(2.0f, 0.0f, 1.0f)).z),
 	 //Trzon
-	-1.0f, -1.0f,  7.5f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.0f, -1.0f,  7.5f,	1.0f, 1.0f, 0.0f,			0.0f, 0.8f,								0.0f, 0.0f, -1.0f,
 	-1.0f, 1.0f,  7.5f,		0.0f, 1.0f, 1.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
      1.0f, 1.0f,  7.5f,		1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
-	 1.0f, -1.0f,  7.5f,	0.0f, 1.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	 1.0f, -1.0f,  7.5f,	0.0f, 1.0f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, -1.0f,
 
 
 	 //KORPUS1
@@ -305,30 +305,30 @@ GLfloat vertices[] =
 
 	//OPARCIE
 	//Front
-	-1.5f, 1.1f, -18.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	-1.0f, 5.2f, -19.5f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	 1.0f, 5.2f, -19.5f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	 1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-1.5f, 1.1f, -18.5f,	0.0f, 0.0f, 1.0f,			1.0f, 0.6f,								0.0f, 0.0f, 1.0f,
+	-1.0f, 5.2f, -19.5f,	0.0f, 1.0f, 1.0f,			0.0f, 0.65f,							0.0f, 0.0f, 1.0f,
+	 1.0f, 5.2f, -19.5f,	1.0f, 1.0f, 0.0f,			0.0f, 0.75f,							0.0f, 0.0f, 1.0f,
+	 1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			1.0f, 0.8f,								0.0f, 0.0f, 1.0f,
 	 //Tyl
-	-1.4f, 1.2f, -20.0f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	-1.4f, 1.2f, -20.0f,	0.0f, 0.0f, 1.0f,			1.0f, 0.5f,								0.0f, 0.0f, -1.0f,
 	-1.0f, 5.2f, -20.0f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
 	 1.0f, 5.2f, -20.0f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
-	 1.4f, 1.2f, -20.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, -1.0f,
+	 1.4f, 1.2f, -20.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.5f,								0.0f, 0.0f, -1.0f,
 	 //Lewo
-	-1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	-1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.5f,								-1.0f, 0.0f, 0.0f,
 	-1.0f, 5.2f, -19.5f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
 	-1.0f, 5.2f, -20.0f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								-1.0f, 0.0f, 0.0f,
-	-1.4f, 1.2f, -20.0f,	0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								-1.0f, 0.0f, 0.0f,
+	-1.4f, 1.2f, -20.0f,	0.0f, 0.0f, 1.0f,			1.0f, 0.5f,								-1.0f, 0.0f, 0.0f,
 	//Prawo
-	 1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	 1.5f, 1.1f, -18.5f,	1.0f, 0.0f, 0.0f,			0.0f, 0.5f,								1.0f, 0.0f, 0.0f,
 	1.0f, 5.2f, -19.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								1.0f, 0.0f, 0.0f,
 	1.0f, 5.2f, -20.0f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								1.0f, 0.0f, 0.0f,
-	1.4f, 1.2f, -20.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.0f,								1.0f, 0.0f, 0.0f,
+	1.4f, 1.2f, -20.0f,		0.0f, 0.0f, 1.0f,			1.0f, 0.5f,								1.0f, 0.0f, 0.0f,
 	//Góra
-   -1.0f, 5.2f, -19.5f,		1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 1.0f, 0.0f,
-   -1.0f, 5.2f, -20.0f,		0.0f, 1.0f, 1.0f,			0.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	1.0f, 5.2f, -20.0f,		1.0f, 1.0f, 0.0f,			3.0f, 3.0f,								0.0f, 1.0f, 0.0f,
-	1.0f, 5.2f, -19.5f,		0.0f, 1.0f, 1.0f,			3.0f, 0.0f,								0.0f, 1.0f, 0.0f,
+   -1.0f, 5.2f, -19.5f,		1.0f, 1.0f, 0.0f,			0.0f, 0.5f,								0.0f, 1.0f, 0.0f,
+   -1.0f, 5.2f, -20.0f,		0.0f, 1.0f, 1.0f,			0.0f, 1.0f,								0.0f, 1.0f, 0.0f,
+	1.0f, 5.2f, -20.0f,		1.0f, 1.0f, 0.0f,			3.0f, 1.0f,								0.0f, 1.0f, 0.0f,
+	1.0f, 5.2f, -19.5f,		0.0f, 1.0f, 1.0f,			3.0f, 0.5f,								0.0f, 1.0f, 0.0f,
 
 	//SCIECIE GORNE
 	 //Tyl
@@ -1468,24 +1468,24 @@ GLfloat Mon_Vertices[] =
 	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D		Normalne wektory
 
 	//WSKAZNIK KIERUNKU: CENTRUM
-	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.07f, 0.02f, 0.0f,	0.6f, 0.5f, 0.0f,			0.45f, 0.25f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.6f, 0.5f, 0.0f,			0.45f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.6f, 0.5f, 0.0f,			0.55f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.6f, 0.5f, 0.0f,			0.55f, 0.25f,							0.0f, 0.0f, 1.0f,
 	//WSKAZNIK KIERUNKU: WSKAZOWKA
-	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.45f, 0.25f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.50f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.55f, 0.25f,							0.0f, 0.0f, 1.0f,
 
 	//WSKAZNIK ENERGII: CENTRUM
-	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			1.0f, 0.0f,								0.0f, 0.0f, 1.0f,
+	-0.07f, 0.02f, 0.0f,	0.5f, 0.5f, 0.5f,			0.45f, 0.25f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, -0.07f,	0.5f, 0.5f, 0.5f,			0.45f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.07f, 0.02f, 0.0f,		0.5f, 0.5f, 0.5f,			0.55f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.02f, 0.07f,		0.5f, 0.5f, 0.5f,			0.55f, 0.25f,							0.0f, 0.0f, 1.0f,
 	//WSKAZNIK ENERGII: WSKAZOWKA
-	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
-	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
-	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.45f, 0.25f,							0.0f, 0.0f, 1.0f,
+	0.0f, 0.015f, 0.35f,	1.0f, 0.0f, 0.0f,			0.50f, 0.35f,							0.0f, 0.0f, 1.0f,
+	0.03f, 0.015f, 0.0f,	1.0f, 0.0f, 0.0f,			0.55f, 0.25f,							0.0f, 0.0f, 1.0f,
 	//WSKAZNIK ENERGII: IKONA
 	0.0f, 0.005f, 0.0f,		1.0f, 1.0f, 0.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
 	0.16f, 0.005f, -0.05f,	1.0f, 1.0f, 0.0f,			0.0f, 0.0f,								0.0f, 0.0f, 1.0f,
@@ -1664,14 +1664,14 @@ GLuint lightIndices[] =
 GLfloat lightVertices2[] =
 { // COORDINATES //
 	0.0f, 0.9f, -5.0f,
-	-0.3f, 0.5f, 4.5f,
-	-0.65f, 0.9f, 4.5f,
-	0.65f, 0.9f, 4.5f,
-	0.3f, 0.5f, 4.5f,
-	-0.65f, 0.9f, 4.5f,
-	-0.3f, 1.3f, 4.5f,
-	 0.3f, 1.3f, 4.5f,
-	 0.65f, 0.9f, 4.5f
+	-0.6f, 0.2f, 4.5f,
+	-0.95f, 0.9f, 4.5f,
+	0.95f, 0.9f, 4.5f,
+	0.6f, 0.2f, 4.5f,
+	-0.95f, 0.9f, 4.5f,
+	-0.6f, 1.6f, 4.5f,
+	 0.6f, 1.6f, 4.5f,
+	 0.95f, 0.9f, 4.5f
 };
 
 GLuint lightIndices2[] =
@@ -1890,8 +1890,8 @@ int main()
 	Zeg1Vertices[(130 + 65) * 11 + 4] = 0.25f;
 	Zeg1Vertices[(130 + 65) * 11 + 5] = 0.25f;
 	//Tekstury
-	Zeg1Vertices[(130 + 65) * 11 + 6] = 0.0f;
-	Zeg1Vertices[(130 + 65) * 11 + 7] = 0.0f;
+	Zeg1Vertices[(130 + 65) * 11 + 6] = 0.5f;
+	Zeg1Vertices[(130 + 65) * 11 + 7] = 0.3f;
 	//Wektor ormalny
 	Zeg1Vertices[(130 + 65) * 11 + 8] = vec3A.x;
 	Zeg1Vertices[(130 + 65) * 11 + 9] = vec3A.y;
@@ -1911,8 +1911,8 @@ int main()
 		Zeg1Vertices[i + 4] = 0.5f;
 		Zeg1Vertices[i + 5] = 0.5f;
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
-		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 6] = 0.5f + vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = 0.1f + 0.2f * vec3pom.z + Przesuniecie_tekstura_zegar;
 			//std::cout << "x = " << Zeg1Vertices[i + 6] << "y = " << Zeg1Vertices[i + 7] << "\n";
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
@@ -1928,12 +1928,12 @@ int main()
 		Zeg1Vertices[i + 1] = vec3pom.y;
 		Zeg1Vertices[i + 2] = vec3pom.z;
 		//Kolor
-		Zeg1Vertices[i + 3] = 0.5f;
-		Zeg1Vertices[i + 4] = 0.5f;
-		Zeg1Vertices[i + 5] = 0.5f;
+		Zeg1Vertices[i + 3] = 0.20f;
+		Zeg1Vertices[i + 4] = 0.0f;
+		Zeg1Vertices[i + 5] = 0.20f;
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
-		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 6] = 0.5f + vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = 0.1f + 0.2f * vec3pom.z + Przesuniecie_tekstura_zegar;
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
 		Zeg1Vertices[i + 9] = vec3A.y;
@@ -1957,7 +1957,7 @@ int main()
 
 			//SRODEK - ZIELEN
 			if (kat < 90.0 + TOL) Zeg1Vertices[i + 4] = 0.5f - 0.5f * (kat / 90.0f);
-			else if (kat > 270.0 - TOL) Zeg1Vertices[i + 4] = 0.5f * (kat - 270.0f) / 90.0f;
+			else if (kat > 270.0 - TOL) Zeg1Vertices[i + 4] = 0.5f * (kat - 270.0f) / 96.0f;
 			else Zeg1Vertices[i + 4] = 0.0f;
 
 			//LEWY - CZERWONY
@@ -1965,8 +1965,8 @@ int main()
 			else Zeg1Vertices[i + 3] = 0.0f;
 
 		//Tekstura
-		Zeg1Vertices[i + 6] = vec3pom.x + Przesuniecie_tekstura_zegar;
-		Zeg1Vertices[i + 7] = vec3pom.z + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 6] = 0.5f + 1.3f * vec3pom.x + Przesuniecie_tekstura_zegar;
+		Zeg1Vertices[i + 7] = 0.3f + 0.26f * vec3pom.z + Przesuniecie_tekstura_zegar;
 		//Wektor normalny
 		Zeg1Vertices[i + 8] = vec3A.x;
 		Zeg1Vertices[i + 9] = vec3A.y;
@@ -2011,9 +2011,9 @@ int main()
 	}
 	//USUWANIE GRADIENTU Z TARCZY KIERUNKU
 	for (int i = 130 * 11 + 66 * 11; i < 130 * 11 + 66 * 11 + 129 * 11; i = i + 11) {
-		Zeg1Vertices[i + 3] = 0.25f;
-		Zeg1Vertices[i + 4] = 0.25f;
-		Zeg1Vertices[i + 5] = 0.25f;
+		Zeg1Vertices[i + 3] = 0.44f;
+		Zeg1Vertices[i + 4] = 0.33f;
+		Zeg1Vertices[i + 5] = 0.0f;
 	}
 
 
@@ -2465,14 +2465,14 @@ int main()
 
 	VAO1.Unbind(); VBO1.Unbind(); EBO1.Unbind();
 
-	Texture tekstura1("Plyta.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura1("Skladanka.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura1.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	Texture tekstura2("Plyta.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture tekstura2("Skladanka.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
 	glBindTexture(GL_TEXTURE_2D, tekstura2.ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -2828,7 +2828,7 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(1000, 800, glm::vec3(0.0f, 4.5f, -17.0f));
+	Camera camera(1000, 800, glm::vec3(0.0f, 4.5f, -6.0f));
 	float i = 0.0;
 	Shader terrainShader("terrain.vert", "terrain.frag");
 	TerrainGenerator generator(camera);
@@ -2848,6 +2848,11 @@ int main()
 	zmienne.Rozmiar_vertices[11] = sizeof(pushVertices_tyl) / sizeof(float);
 
 	InicjujZmienne1(window, &zmienne, Mon_Vertices);
+
+	//przesuniecie srodka ciezkosci
+	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, -11.0f);
+	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
+	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
 	while (!glfwWindowShouldClose(window))
 	{
@@ -2856,17 +2861,17 @@ int main()
 		float kat0 = zmienne.Pojazd_kat;
 		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
-		if (i > 199.5) i = 0.0;
-		else i = i + 0.5;
+		//if (i > 199.5) i = 0.0;
+		//else i = i + 0.5;
 
-		if (i < 100.5) light2Color = glm::vec4(0.0f, 0.0f, i * 0.02f, 1.0f);
-		else light2Color = glm::vec4(0.0f, 0.0f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
+		//if (i < 100.5) light2Color = glm::vec4(0.0f, 0.0f, i * 0.02f, 1.0f);
+		//else light2Color = glm::vec4(0.0f, 0.0f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
 
-		//AKTUALIZACJA DANYCH
-		light2Model = glm::translate(light2Model, -light2Pos);
-		//light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-		light2Model = glm::translate(light2Model, light2Pos);
-		cube2Model = glm::translate(cube2Model, cube2Pos);
+		////AKTUALIZACJA DANYCH
+		//light2Model = glm::translate(light2Model, -light2Pos);
+		////light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+		//light2Model = glm::translate(light2Model, light2Pos);
+		//cube2Model = glm::translate(cube2Model, cube2Pos);
 
 		//CZYSZCZENIE TLA
 		glClearColor(0.f, 1.00f, 0.f, 1.0f);
@@ -3089,6 +3094,7 @@ int main()
 		light2VBO.Unbind();
 		light2EBO.Unbind();
 
+		light2Color = glm::vec4(0.0f, 0.33f, 0.33f + zmienne.Predkosc / MAX_PREDKOSC * (1.0f), 1.0f);
 		light2Pos = glm::rotate(glm::vec3(0.0f, 0.0f, -23.8f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 		light2Model = glm::mat4(1.0f);
 		light2Model = glm::translate(light2Model, light2Pos);

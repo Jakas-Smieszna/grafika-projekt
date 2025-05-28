@@ -2,7 +2,7 @@
 
 //USTAW WSKAZOWKI NA POZYCJACH POCZATKOWYCH
 int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki) {
-	
+
 	glm::vec3 vpom = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 vpom2 = glm::vec3(0.f, 0.f, 0.f);
 	int w0 = 65;//pierwszy wierzcholek wskazowki
@@ -159,6 +159,9 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 	}
 
+	//ZAPLON
+	zaplon[2] = 2.0f +  zmienne->Predkosc / MAX_PREDKOSC * (-20.0f);
+
 	//KIEROWNICA
 	//Wsyuwanie/wysuwanie:
 	w0 = 438;
@@ -182,20 +185,21 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 
 	//RUCH I ZMIANY ENERGII
+	float Delta_kat = 0.0f;
 
 	//SKRECANIE [W LEWO - A; W PRAWO - D]
 	if ((glfwGetKey(okno, GLFW_KEY_A) == GLFW_PRESS)) {
 
-		zmienne->Pojazd_kat = fmod(zmienne->Pojazd_kat + 0.01f * M_PI, 2.0f * M_PI);
-		zmienne->Kierunek = glm::rotate(zmienne->Kierunek, 0.01f * float(M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+		Delta_kat = 0.01f * M_PI;
 
 	}
 	else if((glfwGetKey(okno, GLFW_KEY_D) == GLFW_PRESS)) {
 
-		zmienne->Pojazd_kat = fmod(zmienne->Pojazd_kat - 0.01f * M_PI, 2.0f * M_PI);
-		zmienne->Kierunek = glm::rotate(zmienne->Kierunek, -0.01f * float(M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+		Delta_kat = -0.01f * M_PI;
 
 	}
+	zmienne->Pojazd_kat = fmod(zmienne->Pojazd_kat + Delta_kat, 2.0f * M_PI);
+	zmienne->Kierunek = glm::rotate(zmienne->Kierunek, Delta_kat, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
 	//KONIEC SKRECANIA
 
 
@@ -264,36 +268,36 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	}
 
 
-	////AKTUALIZACJA WSKAZOWKI KIERUNKU
-	//w0 = 4;
-	////Liczenie zmiany kierunku do celu jako kata w radianach
-	//float KAT = 0.5f * M_PI;
-	//if (!(abs(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
-	//	KAT = acos(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
-	//	std::cout << KAT << "\n";
-	//}
+	//AKTUALIZACJA WSKAZOWKI KIERUNKU
+	w0 = 4;
+	//Liczenie zmiany kierunku do celu jako kata w radianach
+	float KAT = 0.5f * M_PI;
+	if (!(abs(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
+		KAT = acos(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
+		std::cout << zmienne->Kierunek.x << "\n";
+	}
 
-	////Obrot - wskazanie kierunku:
-	//vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
-	////Cofniecie do zera
-	//for (int i = 0; i < 3; i++) {
-	//	wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
-	//	wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
-	//	wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
-	//}
-	////Obrot
-	//for (int i = 0; i < 3; i++) {
-	//	vpom2 = glm::vec3(
-	//		wskazowki[(w0 + i) * 11],
-	//		wskazowki[(w0 + i) * 11 + 1],
-	//		wskazowki[(w0 + i) * 11 + 2]
-	//	);
-	//	vpom2 = glm::rotate(vpom2, KAT, glm::normalize(zmienne->Os_zegarow));
-	//	wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
-	//	wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
-	//	wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+	//Obrot - wskazanie kierunku:
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, -Delta_kat, glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
 
-	//}
+	}
 
 	//POWROT DO POZYCJI NA MAPIE
 	Zrotuj_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
