@@ -160,7 +160,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	}
 
 	//ZAPLON
-	zaplon[2] = 2.0f +  zmienne->Predkosc / MAX_PREDKOSC * (-20.0f);
+	zaplon[2] = 12.0f +  zmienne->Predkosc / MAX_PREDKOSC * (-20.0f);
 
 	//KIEROWNICA
 	//Wsyuwanie/wysuwanie:
@@ -274,7 +274,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	float KAT = 0.5f * M_PI;
 	if (!(abs(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
 		KAT = acos(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
-		std::cout << zmienne->Kierunek.x << "\n";
+		//std::cout << zmienne->Kierunek.x << "\n";
 	}
 
 	//Obrot - wskazanie kierunku:
