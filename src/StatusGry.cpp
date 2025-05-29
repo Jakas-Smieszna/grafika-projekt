@@ -317,6 +317,7 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 
 	int DL1 = 11;
 	int DL2 = 3;
+	int DL3 = 7;
 
 
 	//POZYCJA
@@ -341,7 +342,7 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 		lampa[i + 2] = lampa[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
 
 	}
-	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL2) {
+	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL3) {
 
 		zaplon[i] = zaplon[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
 		zaplon[i + 1] = zaplon[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
@@ -416,6 +417,8 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	int DL1 = 11;
 	int DL2 = 3;
+	int DL3 = 7;
+
 	glm::vec3 vpom(0.f, 0.f, 0.f);
 
 	//KAT
@@ -455,7 +458,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		lampa[i + 2] = vpom.z;
 
 	}
-	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL2) {
+	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL3) {
 		vpom = glm::vec3(
 			zaplon[i],
 			zaplon[i + 1],
