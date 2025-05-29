@@ -20,14 +20,10 @@ out vec3 worldPos;
 // Imports the camera matrix from the main function
 uniform mat4 camMatrix;
 uniform mat4 model;
-uniform mat4 model2;
-
-// Controls the scale of the vertices
-uniform float scale;
 
 void main()
 {
-    gl_Position = camMatrix * vec4(aPos.x + aPos.x * scale, aPos.y + aPos.y * scale, aPos.z + aPos.z * scale, 1.0);
+    gl_Position = camMatrix * model * vec4(aPos, 1.0);
     worldPos = aPos;
     color = aColor;
     texCoord = aTex;

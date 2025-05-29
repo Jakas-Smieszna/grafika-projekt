@@ -4,6 +4,7 @@
 #include "mesh.h"
 #include "shader.h"
 #include "Kamera.h"
+#include "StatusGry.h"
 #include <memory>
 #include <vector>
 #include <utility>
@@ -17,10 +18,10 @@
 #endif
 
 // ilość vertexów w boku; fajnie jak jest potęgą dwójki
-#define TERRAINGENERATOR_CHUNK_DETAIL 8
+#define TERRAINGENERATOR_CHUNK_DETAIL 16
 
 #ifndef RENDER_DISTANCE
-#define RENDER_DISTANCE 8
+#define RENDER_DISTANCE 7
 #endif
 
 struct chData {
@@ -54,9 +55,9 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
 
 class TerrainGenerator {
 public:
-    TerrainGenerator(Camera& cam);
+    TerrainGenerator(Pakiet_Zmiennych& vars);
     ~TerrainGenerator() {
-        std::unique_lock<std::mutex> lock(associated_cam._mutex);
+        //std::unique_lock<std::mutex> lock(assoc_vars._mutex);
         TerrainChunks.clear();
     }
 
@@ -81,7 +82,7 @@ private:
     // wszystko (rysowanie + dodawanie do TerrainChunks)
     // powinno wykonywać się na tym samym wątku.
     std::mutex _mutex;
-    Camera& associated_cam;
+    Pakiet_Zmiennych& assoc_vars;
     
 };
 
