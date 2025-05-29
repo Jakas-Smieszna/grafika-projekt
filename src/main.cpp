@@ -2649,9 +2649,6 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-
-	Mesh testMesh = getTestMesh();
   
 	Mon_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
@@ -2673,8 +2670,6 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-
 
 	//Testowe sloneczko:
 	Shader BIGlightShader("light.vert", "light.frag");
@@ -2831,7 +2826,7 @@ int main()
 	Camera camera(1000, 800, glm::vec3(0.0f, 4.5f, -6.0f));
 	float i = 0.0;
 	Shader terrainShader("terrain.vert", "terrain.frag");
-	TerrainGenerator generator(camera);
+	TerrainGenerator generator(zmienne);
 	
 	//Liczenie rozmiaru tablic wierzcholkow
 	zmienne.Rozmiar_vertices[0] = sizeof(vertices) / sizeof(float);
@@ -2890,7 +2885,6 @@ int main()
 
 		//POJAZD
 		shaderProgram.Activate();
-		testMesh.Draw(shaderProgram);
 
 		VAO1.Bind();
 		VBO1 = VBO(vertices, sizeof(vertices));

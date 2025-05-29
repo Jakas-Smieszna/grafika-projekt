@@ -1,6 +1,7 @@
 #ifndef STATUSGRY_H
 #define STATUSGRY_H
 #include<iostream>
+#include <mutex>
 #include<cstdlib>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>

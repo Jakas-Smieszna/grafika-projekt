@@ -32,13 +32,13 @@ uniform float scale;
 
 void main()
 {
-crntPos = vec3(model * vec4(aPos, 1.0f));
-crnt2Pos = vec3(model2 * vec4(aPos, 1.0f));
-crnt3Pos = vec3(model3 * vec4(aPos, 1.0f));
-crntBIGPos = vec3(modelBIG * vec4(aPos, 1.0f));
-gl_Position = camMatrix * vec4(aPos.x + aPos.x * scale, aPos.y + aPos.y * scale, aPos.z + aPos.z * scale, 1.0);
-//gl_Position = camMatrix * vec4(aPos, 1.0);
-color = aColor;
-texCoord = aTex;
-Normal = aNormal;
+    crntPos = vec3(model * vec4(aPos, 1.0f));
+    crnt2Pos = vec3(model2 * vec4(aPos, 1.0f));
+    crnt3Pos = vec3(model3 * vec4(aPos, 1.0f));
+    crntBIGPos = vec3(modelBIG * vec4(aPos, 1.0f));
+    gl_Position = camMatrix * vec4(aPos.x + aPos.x * scale, aPos.y + aPos.y * scale, aPos.z + aPos.z * scale, 1.0);
+    //gl_Position = camMatrix * vec4(aPos, 1.0);
+    color = aColor;
+    texCoord = aTex;
+    Normal = aNormal;
 }
