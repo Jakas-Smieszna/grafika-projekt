@@ -132,7 +132,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 	//ZMIANA PREDKOSCI
 	double predkosc0 = zmienne->Predkosc;
-	zmienne->Predkosc = zmienne->Predkosc + double(zmienne->Czas_przyspieszanie) / 120.0;
+	zmienne->Predkosc = zmienne->Predkosc + double(zmienne->Czas_przyspieszanie) / 1800.0;
 	if (zmienne->Predkosc > MAX_PREDKOSC) zmienne->Predkosc = MAX_PREDKOSC;
 	if (zmienne->Predkosc < 0.0) zmienne->Predkosc = 0.0;
 	if (zmienne->Energia < TOL)  zmienne->Predkosc = 0.0;
