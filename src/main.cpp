@@ -1628,6 +1628,39 @@ GLuint Mon_Indices[] =
 
 };
 
+
+//KIEROWCA!!!
+GLfloat Ty_Vertices[] =
+{
+	//Pozycja XYZ			Kolory						Wspolrzedne tekstury ze zrodla 2D	Normalne wektory
+
+	//LEWY BUT
+	//Dol
+	-2.75f, -1.6f, -11.5f,	1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								0.0f, 0.0f, 1.0f,
+	-2.0f, -1.35f, -14.5f,	1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-3.5f, -1.45f, -14.5f,	0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, 1.0f,
+	-3.0f, -1.28f, -15.5f,	0.0f, 0.5f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, 1.0f,
+	-2.5f, -1.3f, -15.5f,	0.0f, 0.5f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, 1.0f,
+	
+	////Tyl
+	//-0.5f, -0.5f, -7.5f,	0.0f, 0.5f, 1.0f,			1.0f, 0.8f,								0.0f, 0.0f, -1.0f,
+	//-0.5f, 0.5f, -7.5f,		0.0f, 1.0f, 1.0f,			1.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	// 0.5f, 0.5f, -7.5f,		1.0f, 1.0f, 0.0f,			0.0f, 1.0f,								0.0f, 0.0f, -1.0f,
+	// 0.5f, -0.5f, -7.5f,	1.0f, 0.5f, 0.0f,			0.0f, 0.8f,								0.0f, 0.0f, -1.0f
+
+};
+
+GLuint Ty_Indices[] =
+{
+	//WSKAZNIK KIERUNKU: CENTRUM
+	0, 1, 2,
+	2, 3, 1,
+	1, 4, 3
+	
+
+};
+
+
 //Swiatlo:
 
 GLfloat lightVertices[] =
@@ -2510,6 +2543,24 @@ int main()
 	VBO_Mon.Unbind();
 	EBO_Mon.Unbind();
 
+	//KIEROWCA
+	Shader Man_Program("default.vert", "default.frag");
+
+	VAO VAO_Man;
+	VAO_Man.Bind();
+
+	VBO VBO_Man(Ty_Vertices, sizeof(Ty_Vertices));
+	EBO EBO_Man(Ty_Indices, sizeof(Ty_Indices));
+
+	VAO_Man.LinkAttrib(VBO_Man, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO_Man.LinkAttrib(VBO_Man, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO_Man.LinkAttrib(VBO_Man, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO_Man.LinkAttrib(VBO_Man, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	VAO_Man.Unbind();
+	VBO_Man.Unbind();
+	EBO_Man.Unbind();
+
 	//DANE NA MONITORZE POJAZDU: TARCZA KIERUNKU
 	Shader Zeg1_Program("default.vert", "default.frag");
 
@@ -2610,10 +2661,15 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	
 	Mon_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(Mon_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	Man_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+	glUniform4f(glGetUniformLocation(Man_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(Man_Program.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 	Zeg1_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
@@ -2664,6 +2720,10 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
 	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+	Man_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+	glUniform4f(glGetUniformLocation(Man_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+	glUniform3f(glGetUniformLocation(Man_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 	Zeg1_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
 	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
@@ -2707,10 +2767,15 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	
 	Mon_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
 	glUniform3f(glGetUniformLocation(Mon_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+	Man_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+	glUniform4f(glGetUniformLocation(Man_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+	glUniform3f(glGetUniformLocation(Man_Program.ID, "BIGlightPos"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
 	Zeg1_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "modelBIG"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
 	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "BIGlightColor"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
@@ -2759,6 +2824,10 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
 	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
+	Man_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+	glUniform4f(glGetUniformLocation(Man_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+	glUniform3f(glGetUniformLocation(Man_Program.ID, "light3Pos"), pushPos.x, pushPos.y, pushPos.z);
 	Zeg1_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
 	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light3Color"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
@@ -2803,10 +2872,15 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	
 	Mon_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
 	glUniform4f(glGetUniformLocation(Mon_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
 	glUniform3f(glGetUniformLocation(Mon_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
+	Man_Program.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
+	glUniform4f(glGetUniformLocation(Man_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
+	glUniform3f(glGetUniformLocation(Man_Program.ID, "light3Pos"), KulaPos.x, KulaPos.y, KulaPos.z);
 	Zeg1_Program.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model3"), 1, GL_FALSE, glm::value_ptr(cubePBModel));
 	glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light3Color"), KulaColor.x, KulaColor.y, KulaColor.z, KulaColor.w);
@@ -2851,13 +2925,14 @@ int main()
 	zmienne.Rozmiar_vertices[9] = sizeof(Zeg4Vertices) / sizeof(float);
 	zmienne.Rozmiar_vertices[10] = sizeof(pushVertices_front) / sizeof(float);
 	zmienne.Rozmiar_vertices[11] = sizeof(pushVertices_tyl) / sizeof(float);
+	zmienne.Rozmiar_vertices[12] = sizeof(Ty_Vertices) / sizeof(float);
 
 	InicjujZmienne1(window, &zmienne, Mon_Vertices);
 
 
 	//przesuniecie srodka ciezkosci
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, -11.0f);
-	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
+	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
 	while (!glfwWindowShouldClose(window))
@@ -2865,7 +2940,7 @@ int main()
 		processTerrainQueue();
 
 		float kat0 = zmienne.Pojazd_kat;
-		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
+		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 		//ZMIENNE ZMIAN KLATKOWYCH
 		//if (i > 199.5) i = 0.0;
 		//else i = i + 0.5;
@@ -2922,6 +2997,35 @@ int main()
 
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//KIEROWCA
+		Mon_Program.Activate();
+
+		VAO_Man.Bind();
+		VBO_Man = VBO(Ty_Vertices, sizeof(Ty_Vertices));
+		EBO_Man = EBO(Ty_Indices, sizeof(Ty_Indices));
+		VAO_Man.LinkAttrib(VBO_Man, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+		VAO_Man.LinkAttrib(VBO_Man, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO_Man.LinkAttrib(VBO_Man, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO_Man.LinkAttrib(VBO_Man, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		VAO_Man.Unbind();
+		VBO_Man.Unbind();
+		EBO_Man.Unbind();
+
+		glUniform4f(glGetUniformLocation(Man_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		glUniform4f(glGetUniformLocation(Man_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		glUniform3f(glGetUniformLocation(Man_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+		tekstura1.Bind();
+		tekstura2.Bind();
+
+		glUniform3f(glGetUniformLocation(Man_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(Man_Program, "camMatrix");
+
+		VAO_Man.Bind();
+		//glDrawElements(GL_TRIANGLES, sizeof(Ty_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
 
 		//MONITOR-DANE
 		Mon_Program.Activate();
@@ -3234,6 +3338,9 @@ int main()
 	VAO_Mon.Delete();
 	VBO_Mon.Delete();
 	EBO_Mon.Delete();
+	VAO_Man.Delete();
+	VBO_Man.Delete();
+	EBO_Man.Delete();
 	VAO_Zeg1.Delete();
 	VBO_Zeg1.Delete();
 	EBO_Zeg1.Delete();
@@ -3257,6 +3364,7 @@ int main()
 	pushShader.Delete();
 	KulaShader.Delete();
 	Mon_Program.Delete();
+	Man_Program.Delete();
 	Zeg1_Program.Delete();
 	Zeg2_Program.Delete();
 	Zeg3_Program.Delete();

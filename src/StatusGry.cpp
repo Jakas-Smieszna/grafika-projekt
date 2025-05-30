@@ -95,7 +95,7 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 
 
 //AKTUALIZUJ WSKAZOWKI I WSKAZYWANE PRZEZ NIE PARAMETRY
-int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4) {
+int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4, GLfloat* man) {
 
 	glm::vec3 vpom = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 vpom2 = glm::vec3(0.f, 0.f, 0.f);
@@ -103,7 +103,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 	//Zerowanie pozycji oraz kata
 	//Przestaw_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);//COFNIECIE WSP POJAZDU DO O(0,0,0)
-	Zrotuj_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);//COFNIECIE WSP POJAZDU DO O(0,0,0)
+	Zrotuj_0_1_pojazd(zmienne, -1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4, man);//COFNIECIE WSP POJAZDU DO O(0,0,0)
 
 
 		//ZMIANA PREDKOSCI
@@ -198,6 +198,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 		Delta_kat = -0.01f * M_PI;
 
 	}
+	glm::vec3 Kierunek0 = zmienne->Kierunek;
 	zmienne->Pojazd_kat = fmod(zmienne->Pojazd_kat + Delta_kat, 2.0f * M_PI);
 	zmienne->Kierunek = glm::rotate(zmienne->Kierunek, Delta_kat, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
 	//KONIEC SKRECANIA
@@ -271,11 +272,57 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	//AKTUALIZACJA WSKAZOWKI KIERUNKU
 	w0 = 4;
 	//Liczenie zmiany kierunku do celu jako kata w radianach
-	float KAT = 0.5f * M_PI;
-	if (!(abs(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
-		KAT = acos(glm::dot(Kierunek_do_celu0, zmienne->Kierunek_do_celu) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
-		//std::cout << zmienne->Kierunek.x << "\n";
+	float KAT = 0.0f * M_PI;
+
+	/*glm::vec2 KDC0(Kierunek_do_celu0.z, Kierunek_do_celu0.x);
+	glm::vec2 KDC1(zmienne->Kierunek_do_celu.z, zmienne->Kierunek_do_celu.x);
+
+	if (abs(KDC0.y) < TOL) {
+		if (KDC0.x > -TOL) KAT = KAT - M_PI * 0.5;
+		else KAT = KAT - M_PI * 1.5;
 	}
+	else {
+		if (KDC0.y > -TOL) KAT = KAT - acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y)));
+		else KAT = KAT + acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y))) - 2.0 * M_PI;
+	}
+
+	if (abs(KDC1.y) < TOL) {
+		if (KDC1.x > -TOL) KAT = KAT + M_PI * 0.5;
+		else KAT = KAT + M_PI * 1.5;
+	}
+	else {
+		if (KDC1.y > -TOL) KAT = KAT + acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y)));
+		else KAT = KAT - acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y))) + 2.0 * M_PI;
+	}*/
+
+	glm::vec2 K0(Kierunek0.z, Kierunek0.x);
+	glm::vec2 K1(zmienne->Kierunek.z, zmienne->Kierunek.x);
+
+	if (abs(K0.y) < TOL) {
+		if (K0.x > -TOL) KAT = KAT - M_PI * 0.5;
+		else KAT = KAT - M_PI * 1.5;
+	}
+	else {
+		if (K0.y > -TOL) KAT = KAT - acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y)));
+		else KAT = KAT + acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y))) - 2.0 * M_PI;
+	}
+
+	if (abs(K1.y) < TOL) {
+		if (K1.x > -TOL) KAT = KAT + M_PI * 0.5;
+		else KAT = KAT + M_PI * 1.5;
+	}
+	else {
+		if (K1.y > -TOL) KAT = KAT + acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y)));
+		else KAT = KAT - acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y))) + 2.0 * M_PI;
+	}
+
+	std::cout << "KAT = " << KAT << "\t Kierunek do celu [" << zmienne->Kierunek_do_celu.x << ", " << zmienne->Kierunek_do_celu.y << ", " << zmienne->Kierunek_do_celu.z <<"]\t" << "Kierunek [" << zmienne->Kierunek.x << ", " << zmienne->Kierunek.y << ", " << zmienne->Kierunek.z << "]\n";
+
+
+	//if (!(abs(glm::dot(glm::normalize(Kierunek_do_celu0), glm::normalize(zmienne->Kierunek_do_celu)) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
+	//	KAT = acos(glm::dot(glm::normalize(Kierunek_do_celu0), glm::normalize(zmienne->Kierunek_do_celu)) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
+	//	//std::cout << KAT << "\n";
+	//}
 
 	//Obrot - wskazanie kierunku:
 	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
@@ -292,7 +339,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 			wskazowki[(w0 + i) * 11 + 1],
 			wskazowki[(w0 + i) * 11 + 2]
 		);
-		vpom2 = glm::rotate(vpom2, -Delta_kat, glm::normalize(zmienne->Os_zegarow));
+		vpom2 = glm::rotate(vpom2, KAT, glm::normalize(zmienne->Os_zegarow));
 		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
 		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
 		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
@@ -300,7 +347,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	}
 
 	//POWROT DO POZYCJI NA MAPIE
-	Zrotuj_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
+	Zrotuj_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4, man);
 	//Przestaw_0_1_pojazd(zmienne, 1, wskazowki, korpus, lampa, zaplon, pusch, pusch_F, pusch_T, kule, zeg1, zeg2, zeg3, zeg4);
 
 
@@ -313,7 +360,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 //Funkcja do przestawiania pojazdu do punktu poczatkowego i zerowej rotacji oraz do jego ponownego przesuwania na nowa pozycje i rotacje.
 //zmiana = -1: wroc do O(0,0,0)
 //zmiana = 1: wroc do Biezacej pozycji
-int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4) {
+int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4, GLfloat* man) {
 
 	int DL1 = 11;
 	int DL2 = 3;
@@ -405,6 +452,13 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 		pusch_T[i + 2] = pusch_T[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
 
 	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[12]; i = i + DL1) {
+
+		man[i] = man[i] + float(zmiana) * zmienne->Biezaca_pozycja.x;
+		man[i + 1] = man[i + 1] + float(zmiana) * zmienne->Biezaca_pozycja.y;
+		man[i + 2] = man[i + 2] + float(zmiana) * zmienne->Biezaca_pozycja.z;
+
+	}
 	//KONIEC POZYCJA
 
 	return 1;
@@ -413,7 +467,7 @@ int Przestaw_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor,
 
 
 
-int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4) {
+int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, GLfloat* korpus, GLfloat* lampa, GLfloat* zaplon, GLfloat* pusch, GLfloat* pusch_F, GLfloat* pusch_T, GLfloat* kule, GLfloat* zeg1, GLfloat* zeg2, GLfloat* zeg3, GLfloat* zeg4, GLfloat * man) {
 
 	int DL1 = 11;
 	int DL2 = 3;
@@ -564,6 +618,18 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		pusch_T[i] = vpom.x;
 		pusch_T[i + 1] = vpom.y;
 		pusch_T[i + 2] = vpom.z;
+
+	}
+	for (int i = 0; i < zmienne->Rozmiar_vertices[12]; i = i + DL1) {
+		vpom = glm::vec3(
+			man[i],
+			man[i + 1],
+			man[i + 2]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		man[i] = vpom.x;
+		man[i + 1] = vpom.y;
+		man[i + 2] = vpom.z;
 
 	}
 	//KONIEC KAT
