@@ -42,7 +42,7 @@ int main()
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(1000, 800, "Okno", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1200, 800, "Okno", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -56,7 +56,7 @@ int main()
 
 	gladLoadGL();
 
-	glViewport(0, 0, 1000, 800);
+	glViewport(0, 0, 1200, 800);
 	
 	glClear(GL_COLOR_BUFFER_BIT);//xD
 	glfwSwapBuffers(window);//xD

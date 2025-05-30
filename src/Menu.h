@@ -7,17 +7,17 @@ extern std::vector<GLuint> menu_indices;
 
 class MenuElements {
 public:
-   GLuint vertexShader;
-   GLuint fragmentShader;
-
-   GLuint shaderProgram;
+   Shader shaderProgram;
 
    GLuint VAO, VBO, EBO;
 
-   //Texture tekstura1;
-   //Texture tekstura2;
-   //Texture tekstura3;
-   //Texture tekstura4;
+   std::string parentDir;
+   std::string texPath;
+
+   Texture tekstura1;
+   Texture tekstura2;
+   Texture tekstura3;
+   Texture tekstura4;
 
    MenuElements();
 };

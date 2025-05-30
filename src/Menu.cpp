@@ -21,22 +21,22 @@
 #include"Menu.h"
 
 std::vector<GLfloat> menu_vertices = {
-   -0.4f, 0.95f, 0.0f, 0.0f, 1.0f,
-   0.4f, 0.95f, 0.0f, 1.0f, 1.0f,
-   -0.4f, 0.55f, 0.0f, 0.0f, 0.0f,
-   0.4f, 0.55f, 0.0f, 1.0f, 0.0f,
-   -0.4f, 0.45f, 0.0f,0.0f, 1.0f,
-   0.4f, 0.45f, 0.0f, 1.0f, 1.0f,
-   -0.4f, 0.05f, 0.0f, 0.0f, 0.0f,
-   0.4f, 0.05f, 0.0f, 1.0f, 0.0f,
-   -0.4f, -0.05f, 0.0f,0.0f, 1.0f,
-   0.4f, -0.05f, 0.0f, 1.0f, 1.0f,
-   -0.4f, -0.45f, 0.0f, 0.0f, 0.0f,
-   0.4f, -0.45f, 0.0f, 1.0f, 0.0f,
-   -0.4f, -0.55f, 0.0f,0.0f, 1.0f,
-   0.4f, -0.55f, 0.0f, 1.0f, 1.0f,
-   -0.4f, -0.95f, 0.0f, 0.0f, 0.0f,
-   0.4f, -0.95f, 0.0f, 1.0f, 0.0f
+   0.5f, 0.95f, 0.0f, 0.0f, 1.0f,
+   1.0f, 0.95f, 0.0f, 1.0f, 1.0f,
+   0.5f, 0.55f, 0.0f, 0.0f, 0.0f,
+   1.0f, 0.55f, 0.0f, 1.0f, 0.0f,
+   0.5f, 0.55f, 0.0f,0.0f, 1.0f,
+   1.0f, 0.55f, 0.0f, 1.0f, 1.0f,
+   0.5f, 0.15f, 0.0f, 0.0f, 0.0f,
+   1.0f, 0.15f, 0.0f, 1.0f, 0.0f,
+   0.5f, 0.15f, 0.0f,0.0f, 1.0f,
+   1.0f, 0.15f, 0.0f, 1.0f, 1.0f,
+   0.5f, -0.25f, 0.0f, 0.0f, 0.0f,
+   1.0f, -0.25f, 0.0f, 1.0f, 0.0f,
+   0.5f, -0.25f, 0.0f,0.0f, 1.0f,
+   1.0f, -0.25f, 0.0f, 1.0f, 1.0f,
+   0.5f, -0.65f, 0.0f, 0.0f, 0.0f,
+   1.0f, -0.65f, 0.0f, 1.0f, 0.0f
 };
 
 std::vector <GLuint> menu_indices = {
@@ -50,32 +50,14 @@ std::vector <GLuint> menu_indices = {
    13, 14, 15
 };
 
-MenuElements::MenuElements() 
+MenuElements::MenuElements() : 
+   shaderProgram("menu_default.vert", "menu_default.frag"),
+   parentDir(""), texPath("resources/"),
+   tekstura1((parentDir + texPath + "start.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
+   tekstura2((parentDir + texPath + "instrukcja.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
+   tekstura3((parentDir + texPath + "wyniki.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
+   tekstura4((parentDir + texPath + "wyjscie.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
 {
-
-
-   vertexShader = glCreateShader(GL_VERTEX_SHADER);
-   std::string vs_source = get_file_contents("menu_default.vert");
-   const char* vertsh = vs_source.c_str();
-
-   glShaderSource(vertexShader, 1, &vertsh, NULL);
-   glCompileShader(vertexShader);
-   
-
-   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-   std::string fs_source = get_file_contents("menu_default.frag");
-   const char* fragsh = fs_source.c_str();
-   glShaderSource(fragmentShader, 1, &fragsh, NULL);
-   glCompileShader(fragmentShader);
-
-
-   shaderProgram = glCreateProgram();
-   glAttachShader(shaderProgram, vertexShader);
-   glAttachShader(shaderProgram, fragmentShader);
-   glLinkProgram(shaderProgram);
-   glDeleteShader(vertexShader);
-   glDeleteShader(fragmentShader);
-
    glGenVertexArrays(1, &VAO);
    glGenBuffers(1, &VBO);
    glGenBuffers(1, &EBO);
@@ -88,31 +70,42 @@ MenuElements::MenuElements()
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
    glBufferData(GL_ELEMENT_ARRAY_BUFFER, menu_indices.size() * sizeof(menu_indices[0]), &menu_indices[0], GL_STATIC_DRAW);
 
-   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
+   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
    glEnableVertexAttribArray(0);
+
+   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+   glEnableVertexAttribArray(1);
+
    glBindBuffer(GL_ARRAY_BUFFER, 0);
    glBindVertexArray(0);
-
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-
 }
-
 void RenderMenu(MenuElements &menu, GLFWwindow* window)
 {
 
    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-         glUseProgram(menu.shaderProgram);
+   menu.shaderProgram.Activate();
 
-         glBindVertexArray(menu.VAO);
+   glBindVertexArray(menu.VAO);
 
-         glDrawElements(GL_TRIANGLES, menu_indices.size(), GL_UNSIGNED_INT, 0);
+   menu.tekstura1.texUnit(menu.shaderProgram, "ourTexture", 0);
+   menu.tekstura1.Bind();
+   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(0));
+   menu.tekstura2.texUnit(menu.shaderProgram, "ourTexture", 0);
+   menu.tekstura2.Bind();
+   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(6 * sizeof(GLuint)));
+   menu.tekstura3.texUnit(menu.shaderProgram, "ourTexture", 0);
+   menu.tekstura3.Bind();
+   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(12 * sizeof(GLuint)));
+   menu.tekstura4.texUnit(menu.shaderProgram, "ourTexture", 0);
+   menu.tekstura4.Bind();
+   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(18 * sizeof(GLuint)));
 
-         glfwSwapBuffers(window);
-         glfwPollEvents();
+   glfwSwapBuffers(window);
+   glfwPollEvents();
 
 }
