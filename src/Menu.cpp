@@ -21,22 +21,22 @@
 #include"Menu.h"
 
 std::vector<GLfloat> menu_vertices = {
-   -0.4f, 0.95f, 0.0f,
-   0.4f, 0.95f, 0.0f,
-   -0.4f, 0.55f, 0.0f,
-   0.4f, 0.55f, 0.0f,
-   -0.4f, 0.45f, 0.0f,
-   0.4f, 0.45f, 0.0f,
-   -0.4f, 0.05f, 0.0f,
-   0.4f, 0.05f, 0.0f,
-   -0.4f, -0.05f, 0.0f,
-   0.4f, -0.05f, 0.0f,
-   -0.4f, -0.45f, 0.0f,
-   0.4f, -0.45f, 0.0f,
-   -0.4f, -0.55f, 0.0f,
-   0.4f, -0.55f, 0.0f,
-   -0.4f, -0.95f, 0.0f,
-   0.4f, -0.95f, 0.0f
+   -0.4f, 0.95f, 0.0f, 0.0f, 1.0f,
+   0.4f, 0.95f, 0.0f, 1.0f, 1.0f,
+   -0.4f, 0.55f, 0.0f, 0.0f, 0.0f,
+   0.4f, 0.55f, 0.0f, 1.0f, 0.0f,
+   -0.4f, 0.45f, 0.0f,0.0f, 1.0f,
+   0.4f, 0.45f, 0.0f, 1.0f, 1.0f,
+   -0.4f, 0.05f, 0.0f, 0.0f, 0.0f,
+   0.4f, 0.05f, 0.0f, 1.0f, 0.0f,
+   -0.4f, -0.05f, 0.0f,0.0f, 1.0f,
+   0.4f, -0.05f, 0.0f, 1.0f, 1.0f,
+   -0.4f, -0.45f, 0.0f, 0.0f, 0.0f,
+   0.4f, -0.45f, 0.0f, 1.0f, 0.0f,
+   -0.4f, -0.55f, 0.0f,0.0f, 1.0f,
+   0.4f, -0.55f, 0.0f, 1.0f, 1.0f,
+   -0.4f, -0.95f, 0.0f, 0.0f, 0.0f,
+   0.4f, -0.95f, 0.0f, 1.0f, 0.0f
 };
 
 std::vector <GLuint> menu_indices = {
@@ -95,6 +95,8 @@ MenuElements::MenuElements()
    glBindVertexArray(0);
 
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
 }
 
 void RenderMenu(MenuElements &menu, GLFWwindow* window)

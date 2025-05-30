@@ -14,6 +14,11 @@ public:
 
    GLuint VAO, VBO, EBO;
 
+   //Texture tekstura1;
+   //Texture tekstura2;
+   //Texture tekstura3;
+   //Texture tekstura4;
+
    MenuElements();
 };
 
