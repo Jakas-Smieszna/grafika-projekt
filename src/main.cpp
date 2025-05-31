@@ -22,6 +22,8 @@
 #include "helper/tsqueue.h"
 #include "State.h"
 #include "Menu.h";
+#include "Autors.h"
+#include "Instruction.h"
 
 
 // Teksturowo:
@@ -3378,6 +3380,8 @@ int main()
 
 
 	MenuElements menu;
+	AutorsElements autors;
+	InstructionElements instruction;
 
 
 
@@ -3779,6 +3783,12 @@ int main()
 
 		case MenuState:
 			RenderMenu(menu, window, state);
+			break;
+		case AutorsState:
+			RenderAutors(autors, window, state);
+			break;
+		case InstructionState:
+			RenderInstruction(instruction, window, state);
 			break;
 		}
 	}

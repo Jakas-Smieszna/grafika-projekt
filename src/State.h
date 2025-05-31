@@ -3,7 +3,9 @@
 
 enum State {
 	PlayState,
-	MenuState
+	MenuState,
+	InstructionState,
+	AutorsState
 };
 
 #endif
