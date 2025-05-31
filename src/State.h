@@ -3,7 +3,8 @@
 
 enum State {
 	PlayState,
-	MenuState
+	MenuState,
+	Wygrana
 };
 
 #endif
