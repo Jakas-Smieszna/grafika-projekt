@@ -23,9 +23,13 @@ public:
 #ifdef _WIN32
 #define SHADER_RELPATH "shaders\\"
 #elif __linux__
-#define SHADER_RELPATH "bin/shaders/"
+#ifdef DEBUG_BUILD
+#define SHADER_RELPATH "out/build/linux-debug-x64/bin/shaders/"
 #else
-#define SHADER_RELPATH
+#define SHADER_RELPATH "out/build/linux-release-x64/bin/shaders/"
+#endif
+#else
+#define SHADER_RELPATH ""
 #endif
 
 #endif

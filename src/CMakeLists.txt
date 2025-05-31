@@ -9,24 +9,41 @@ set(PROJ_FILES
     EBO.cpp
     Kamera.cpp
     Tekstury.cpp
-    stb.cpp
+    mesh.cpp
+    #Game.cpp
+    Menu.cpp
+    #model.cpp
+    terrainGenerator.cpp
 # Biblioteki
+    stb.cpp
+    Zegary.cpp
+    StatusGry.cpp
+# Biblioteki Kici kici kici kici kici kici kici kici kici kici
     glad.c
-)
+ "helper/tsqueue.cpp")
 
 add_executable(GrafikaProjekt ${PROJ_FILES} )
 
 target_link_libraries(GrafikaProjekt PRIVATE
-	${OPENGL_LIBRARY} ${GLFW3_LIBRARY}
+	${OPENGL_LIBRARY} ${GLFW3_LIBRARY} 
 )
 
-set_property(TARGET GrafikaProjekt PROPERTY CXX_STANDARD 20)
+target_compile_definitions(GrafikaProjekt PRIVATE
+    $<$<CONFIG:Debug>:DEBUG_BUILD>
+)
+
+set_target_properties(GrafikaProjekt PROPERTIES
+    CXX_STANDARD 20
+)
+
 if(UNIX)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/bin")
     set_property(TARGET GrafikaProjekt PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 elseif(WIN32)
     set(DIR_TO_COPY_RESOURCES "${CMAKE_BINARY_DIR}/src")
 endif(UNIX)
+
+file(MAKE_DIRECTORY ${DIR_TO_COPY_RESOURCES})
 
 ADD_CUSTOM_TARGET(copy_resource_files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different  "${CMAKE_SOURCE_DIR}/src/resources" "${DIR_TO_COPY_RESOURCES}/resources" 
