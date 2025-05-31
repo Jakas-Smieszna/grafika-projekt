@@ -47,8 +47,8 @@ class Pakiet_Zmiennych {
 
 		//LOSOWY KIERUNEK DO CELU
 		srand(time(NULL));
-		Punkt_docelowy = glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC));
-		//Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000)/36000.0f*2.0f*M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
+		//Punkt_docelowy = glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC));
+		Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000)/36000.0f*2.0f*M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
 		//STARTOWA POZYCJA
 		Biezaca_pozycja = glm::vec3(0.f, 0.f, 0.f);
 		//KIEUNEK
