@@ -9,27 +9,23 @@ layout (location = 2) in vec2 aTex;
 layout (location = 3) in vec3 aNormal;
 
 
+// Outputs the color for the Fragment Shader
 out vec3 color;
+// Outputs the texture coordinates to the fragment shader
 out vec2 texCoord;
+
 out vec3 Normal;
 out vec3 worldPos;
 
+// Imports the camera matrix from the main function
 uniform mat4 camMatrix;
 uniform mat4 model;
-
-// light stuff
-#define NUM_LIGHTS 4
-uniform mat4 lightModel[NUM_LIGHTS];
-out vec3 lightCrntPos[NUM_LIGHTS];
 
 void main()
 {
     gl_Position = camMatrix * model * vec4(aPos, 1.0);
-    worldPos = vec3(model * vec4(aPos, 1.0));
+    worldPos = aPos;
     color = aColor;
     texCoord = aTex;
-    Normal = mat3(transpose(inverse(model))) * aNormal;
-    for(int i = 0; i < NUM_LIGHTS; i++) {
-        lightCrntPos[i] = vec3(lightModel[i] * vec4(aPos, 1.0));
-    }
+    Normal = aNormal;
 }
