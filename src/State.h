@@ -4,7 +4,9 @@
 enum State {
 	PlayState,
 	MenuState,
-	Wygrana
+	Wygrana,
+	InstructionState,
+	AutorsState
 };
 
 #endif

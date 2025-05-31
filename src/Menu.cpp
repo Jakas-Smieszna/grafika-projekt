@@ -22,22 +22,22 @@
 #include"State.h"
 
 std::vector<GLfloat> menu_vertices = {
-   0.5f, 0.95f, 0.0f, 0.0f, 1.0f,
-   1.0f, 0.95f, 0.0f, 1.0f, 1.0f,
-   0.5f, 0.55f, 0.0f, 0.0f, 0.0f,
-   1.0f, 0.55f, 0.0f, 1.0f, 0.0f,
-   0.5f, 0.55f, 0.0f,0.0f, 1.0f,
-   1.0f, 0.55f, 0.0f, 1.0f, 1.0f,
-   0.5f, 0.15f, 0.0f, 0.0f, 0.0f,
-   1.0f, 0.15f, 0.0f, 1.0f, 0.0f,
-   0.5f, 0.15f, 0.0f,0.0f, 1.0f,
-   1.0f, 0.15f, 0.0f, 1.0f, 1.0f,
-   0.5f, -0.25f, 0.0f, 0.0f, 0.0f,
-   1.0f, -0.25f, 0.0f, 1.0f, 0.0f,
-   0.5f, -0.25f, 0.0f,0.0f, 1.0f,
-   1.0f, -0.25f, 0.0f, 1.0f, 1.0f,
-   0.5f, -0.65f, 0.0f, 0.0f, 0.0f,
-   1.0f, -0.65f, 0.0f, 1.0f, 0.0f
+   0.5f, 1.00f, 0.0f, 0.0f, 1.0f,
+   1.0f, 1.00f, 0.0f, 1.0f, 1.0f,
+   0.5f, 0.60f, 0.0f, 0.0f, 0.0f,
+   1.0f, 0.60f, 0.0f, 1.0f, 0.0f,
+   0.5f, 0.60f, 0.0f,0.0f, 1.0f,
+   1.0f, 0.60f, 0.0f, 1.0f, 1.0f,
+   0.5f, 0.20f, 0.0f, 0.0f, 0.0f,
+   1.0f, 0.20f, 0.0f, 1.0f, 0.0f,
+   0.5f, 0.20f, 0.0f,0.0f, 1.0f,
+   1.0f, 0.20f, 0.0f, 1.0f, 1.0f,
+   0.5f, -0.20f, 0.0f, 0.0f, 0.0f,
+   1.0f, -0.20f, 0.0f, 1.0f, 0.0f,
+   0.5f, -0.20f, 0.0f,0.0f, 1.0f,
+   1.0f, -0.20f, 0.0f, 1.0f, 1.0f,
+   0.5f, -1.00f, 0.0f, 0.0f, 0.0f,
+   1.0f, -1.00f, 0.0f, 1.0f, 0.0f
 };
 
 std::vector <GLuint> menu_indices = {
@@ -55,8 +55,8 @@ MenuElements::MenuElements() :
    shaderProgram("menu_default.vert", "menu_default.frag"),
    tekstura1(("start.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
    tekstura2(("instrukcja.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
-   tekstura3(("wyniki.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
-   tekstura4(("wyjscie.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
+   tekstura3(("wyjscie.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE),
+   tekstura4(("Autorzy.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
 {
    glGenVertexArrays(1, &VAO);
    glGenBuffers(1, &VBO);
@@ -105,6 +105,8 @@ void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
    menu.tekstura4.Bind();
    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(18 * sizeof(GLuint)));
 
+   glfwWaitEventsTimeout(0.1);
+
    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
       double xpos, ypos;
       glfwGetCursorPos(window, &xpos, &ypos);
@@ -118,23 +120,25 @@ void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
 
       // Sprawdzenie, który przycisk zosta³ klikniêty
       // Przycisk 1 (Start): obszar od (0.5, 0.95) do (1.0, 0.55)
-      if (x >= 0.5f && x <= 1.0f && y <= 0.95f && y >= 0.55f) {
+      if (x >= 0.5f && x <= 1.0f && y <= 1.00f && y >= 0.60f) {
          state = State::PlayState;
          std::cout << "Start clicked!" << std::endl;
       }
       // Przycisk 2 (Instrukcja): obszar od (0.5, 0.55) do (1.0, 0.15)
-      else if (x >= 0.5f && x <= 1.0f && y <= 0.55f && y >= 0.15f) {
+      else if (x >= 0.5f && x <= 1.0f && y <= 0.59f && y >= 0.20f) {
+         state = State::InstructionState;
          std::cout << "Instructions clicked!" << std::endl;
       }
-      // Przycisk 3 (Wyniki): obszar od (0.5, 0.15) do (1.0, -0.25)
-      else if (x >= 0.5f && x <= 1.0f && y <= 0.15f && y >= -0.25f) {
-         std::cout << "Scores clicked!" << std::endl;
-      }
-      // Przycisk 4 (Wyjœcie): obszar od (0.5, -0.25) do (1.0, -0.65)
-      else if (x >= 0.5f && x <= 1.0f && y <= -0.25f && y >= -0.65f) {
+      // Przycisk 3 (Wyjœcie): obszar od (0.5, 0.15) do (1.0, -0.25)
+      else if (x >= 0.5f && x <= 1.0f && y <= 0.19f && y >= -0.20f) {
          glfwSetWindowShouldClose(window, GLFW_TRUE);
          std::cout << "Exit clicked!" << std::endl;
       }
+      else if (x >= 0.5f && x <= 1.0f && y <= -0.21 && y >= -1.00f) {
+         state = State::AutorsState;
+         std::cout << "Autors clicked!" << std::endl;
+      }
+
    }
 
 

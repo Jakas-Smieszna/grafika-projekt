@@ -12,6 +12,8 @@ set(PROJ_FILES
     mesh.cpp
     #Game.cpp
     Menu.cpp
+    Autors.cpp
+    Instruction.cpp
     #model.cpp
     terrainGenerator.cpp
 # Biblioteki
