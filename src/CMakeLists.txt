@@ -10,6 +10,8 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     mesh.cpp
+    #Game.cpp
+    Menu.cpp
     #model.cpp
     terrainGenerator.cpp
 # Biblioteki

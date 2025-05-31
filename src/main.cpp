@@ -20,6 +20,9 @@
 #include"Kamera.h"
 #include "terrainGenerator.h"
 #include "helper/tsqueue.h"
+#include "State.h"
+#include "Menu.h";
+
 
 // Teksturowo:
 // Wierzcholki2
@@ -3371,321 +3374,313 @@ int main()
 	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
+	State state = State::MenuState;
+
+
+	MenuElements menu;
+
+
+
+
+
 	while (!glfwWindowShouldClose(window))
 	{
-		processTerrainQueue();
-
 		float kat0 = zmienne.Pojazd_kat;
-		AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
-		//ZMIENNE ZMIAN KLATKOWYCH
-		//if (i > 199.5) i = 0.0;
-		//else i = i + 0.5;
+		switch (state) {
+		case PlayState:
+			processTerrainQueue();
 
-		//if (i < 100.5) light2Color = glm::vec4(0.0f, 0.0f, i * 0.02f, 1.0f);
-		//else light2Color = glm::vec4(0.0f, 0.0f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
+			AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
+			//ZMIENNE ZMIAN KLATKOWYCH
+			//if (i > 199.5) i = 0.0;
+			//else i = i + 0.5;
 
-		////AKTUALIZACJA DANYCH
-		//light2Model = glm::translate(light2Model, -light2Pos);
-		////light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-		//light2Model = glm::translate(light2Model, light2Pos);
-		//cube2Model = glm::translate(cube2Model, cube2Pos);
+			//if (i < 100.5) light2Color = glm::vec4(0.0f, 0.0f, i * 0.02f, 1.0f);
+			//else light2Color = glm::vec4(0.0f, 0.0f, 2.0f - (i - 100.0f) * 0.02f, 1.0f);
 
-		//CZYSZCZENIE TLA
-		glClearColor(0.f, 1.00f, 0.f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0),(2.0f * M_PI))));
-		camera.updateMatrix(45.0f, 0.1f, 100.0f);
-		terrainShader.Activate();
-		camera.Matrix(terrainShader, "camMatrix");
-		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-			glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-		}
-		generator.Draw(terrainShader);
-		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+			////AKTUALIZACJA DANYCH
+			//light2Model = glm::translate(light2Model, -light2Pos);
+			////light2Pos = glm::rotate(light2Pos, glm::radians(0.25f), glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+			//light2Model = glm::translate(light2Model, light2Pos);
+			//cube2Model = glm::translate(cube2Model, cube2Pos);
 
+			//CZYSZCZENIE TLA
+			glClearColor(0.f, 1.00f, 0.f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//POJAZD
-		shaderProgram.Activate();
-
-		VAO1.Bind();
-		VBO1 = VBO(vertices, sizeof(vertices));
-		EBO1 = EBO(indices, sizeof(indices));
-		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO1.Unbind();
-		VBO1.Unbind();
-		EBO1.Unbind();
-
-		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-		//Teksturowo:
-		tekstura1.Bind();
-		tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(shaderProgram, "camMatrix");
-
-		VAO1.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//KIEROWCA
-		Mon_Program.Activate();
-
-		VAO_Man.Bind();
-		VBO_Man = VBO(Ty_Vertices, sizeof(Ty_Vertices));
-		EBO_Man = EBO(Ty_Indices, sizeof(Ty_Indices));
-		VAO_Man.LinkAttrib(VBO_Man, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Man.LinkAttrib(VBO_Man, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Man.LinkAttrib(VBO_Man, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Man.LinkAttrib(VBO_Man, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Man.Unbind();
-		VBO_Man.Unbind();
-		EBO_Man.Unbind();
-
-		glUniform4f(glGetUniformLocation(Man_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Man_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Man_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-		tekstura1.Bind();
-		tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(Man_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Man_Program, "camMatrix");
-
-		VAO_Man.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Ty_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0), (2.0f * M_PI))));
+			camera.updateMatrix(45.0f, 0.1f, 100.0f);
+			terrainShader.Activate();
+			camera.Matrix(terrainShader, "camMatrix");
+			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
+			generator.Draw(terrainShader);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
-		//MONITOR-DANE
-		Mon_Program.Activate();
+			//POJAZD
+			shaderProgram.Activate();
 
-		VAO_Mon.Bind();
-		VBO_Mon = VBO(Mon_Vertices, sizeof(Mon_Vertices));
-		EBO_Mon = EBO(Mon_Indices, sizeof(Mon_Indices));
-		VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Mon.Unbind();
-		VBO_Mon.Unbind();
-		EBO_Mon.Unbind();
+			VAO1.Bind();
+			VBO1 = VBO(vertices, sizeof(vertices));
+			EBO1 = EBO(indices, sizeof(indices));
+			VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO1.Unbind();
+			VBO1.Unbind();
+			EBO1.Unbind();
 
-		glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Mon_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+			glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(shaderProgram.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(shaderProgram.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 
-		tekstura1.Bind();
-		tekstura2.Bind();
+			//Teksturowo:
+			tekstura1.Bind();
+			tekstura2.Bind();
 
-		glUniform3f(glGetUniformLocation(Mon_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Mon_Program, "camMatrix");
+			glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(shaderProgram, "camMatrix");
 
-		VAO_Mon.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Mon_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			VAO1.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
-		//MONITOR DANE: WSKAZNIK KIERUNKU
-		Zeg1_Program.Activate();
+			//KIEROWCA
+			Mon_Program.Activate();
 
-		VAO_Zeg1.Bind();
-		VBO_Zeg1 = VBO(Zeg1Vertices, sizeof(Zeg1Vertices));
-		EBO_Zeg1 = EBO(Zeg1Indices, sizeof(Zeg1Indices));
-		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Zeg1.LinkAttrib(VBO_Zeg1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Zeg1.Unbind();
-		VBO_Zeg1.Unbind();
-		EBO_Zeg1.Unbind();
+			VAO_Man.Bind();
+			VBO_Man = VBO(Ty_Vertices, sizeof(Ty_Vertices));
+			EBO_Man = EBO(Ty_Indices, sizeof(Ty_Indices));
+			VAO_Man.LinkAttrib(VBO_Man, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Man.LinkAttrib(VBO_Man, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Man.LinkAttrib(VBO_Man, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Man.LinkAttrib(VBO_Man, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Man.Unbind();
+			VBO_Man.Unbind();
+			EBO_Man.Unbind();
 
-		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+			glUniform4f(glGetUniformLocation(Man_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Man_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Man_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Man_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
 
-		tekstura1.Bind();
-		tekstura2.Bind();
+			tekstura1.Bind();
+			tekstura2.Bind();
 
-		glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Zeg1_Program, "camMatrix");
+			glUniform3f(glGetUniformLocation(Man_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Man_Program, "camMatrix");
 
-		VAO_Zeg1.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Zeg1Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//MONITOR DANE: WSKAZNIK ENERGII
-		Zeg2_Program.Activate();
-
-		VAO_Zeg2.Bind();
-		VBO_Zeg2 = VBO(Zeg2Vertices, sizeof(Zeg2Vertices));
-		EBO_Zeg2 = EBO(Zeg2Indices, sizeof(Zeg2Indices));
-		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Zeg2.LinkAttrib(VBO_Zeg2, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Zeg2.Unbind();
-		VBO_Zeg2.Unbind();
-		EBO_Zeg2.Unbind();
-
-		glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-		tekstura1.Bind();
-		tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Zeg2_Program, "camMatrix");
-
-		VAO_Zeg2.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Zeg2Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//MONITOR DANE: WSKAZNIK ODLEGLOSCI
-		Zeg3_Program.Activate();
-
-		VAO_Zeg3.Bind();
-		VBO_Zeg3 = VBO(Zeg3Vertices, sizeof(Zeg3Vertices));
-		EBO_Zeg3 = EBO(Zeg3Indices, sizeof(Zeg3Indices));
-		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Zeg3.LinkAttrib(VBO_Zeg3, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Zeg3.Unbind();
-		VBO_Zeg3.Unbind();
-		EBO_Zeg3.Unbind();
-
-		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-		tekstura1.Bind();
-		tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Zeg3_Program, "camMatrix");
-
-		VAO_Zeg3.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Zeg3Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//MONITOR DANE: WSKAZNIK PREDKOSCI
-		Zeg4_Program.Activate();
-
-		VAO_Zeg4.Bind();
-		VBO_Zeg4 = VBO(Zeg4Vertices, sizeof(Zeg4Vertices));
-		EBO_Zeg4 = EBO(Zeg4Indices, sizeof(Zeg4Indices));
-		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		VAO_Zeg4.LinkAttrib(VBO_Zeg4, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-		VAO_Zeg4.Unbind();
-		VBO_Zeg4.Unbind();
-		EBO_Zeg4.Unbind();
-
-		glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-		glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
-		glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-		glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
-
-		tekstura1.Bind();
-		tekstura2.Bind();
-
-		glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(Zeg4_Program, "camMatrix");
-
-		VAO_Zeg4.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(Zeg4Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//LAMPA
-		lightShader.Activate();
-
-		lightVAO.Bind();
-		lightVBO = VBO(lightVertices, sizeof(lightVertices));
-		lightEBO = EBO(lightIndices, sizeof(lightIndices));
-		lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-		lightVAO.Unbind();
-		lightVBO.Unbind();
-		lightEBO.Unbind();
-
-		lightPos = glm::rotate(glm::vec3(0.0f, 1.25f, -8.5f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		lightModel = glm::mat4(1.0f);
-		lightModel = glm::translate(lightModel, lightPos);
-		cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cubeModel = glm::mat4(1.0f);
-		cubeModel = glm::translate(cubeModel, cubePos);
-
-		glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
-		glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-
-		camera.Matrix(lightShader, "camMatrix");
-		lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		//OGIEN SILNIKA
-		lightShader2.Activate();
-
-		light2VAO.Bind();
-		light2VBO = VBO(lightVertices2, sizeof(lightVertices2));
-		light2EBO = EBO(lightIndices2, sizeof(lightIndices2));
-		light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 7 * sizeof(float), (void*)0);
-		light2VAO.LinkAttrib(light2VBO, 1, 4, GL_FLOAT, 7 * sizeof(float), (void*)(3 * sizeof(float)));
-		light2VAO.Unbind();
-		light2VBO.Unbind();
-		light2EBO.Unbind();
-
-		light2Color = glm::vec4(0.0f, 0.33f, 0.33f + zmienne.Predkosc / MAX_PREDKOSC * (1.0f), 1.0f);
-		light2Pos = glm::rotate(glm::vec3(0.0f, 0.0f, -23.8f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		light2Model = glm::mat4(1.0f);
-		light2Model = glm::translate(light2Model, light2Pos);
-		cube2Pos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cube2Model = glm::mat4(1.0f);
-		cube2Model = glm::translate(cube2Model, cube2Pos);
-
-		glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
-		glUniform4f(glGetUniformLocation(lightShader2.ID, "lightColor"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
-
-		camera.Matrix(lightShader2, "camMatrix");
-		light2VAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		light2VAO.Unbind();
+			VAO_Man.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Ty_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 
-		//ODPYCHACZE CENTRALNE
-		pushShader.Activate();
+			//MONITOR-DANE
+			Mon_Program.Activate();
+
+			VAO_Mon.Bind();
+			VBO_Mon = VBO(Mon_Vertices, sizeof(Mon_Vertices));
+			EBO_Mon = EBO(Mon_Indices, sizeof(Mon_Indices));
+			VAO_Mon.LinkAttrib(VBO_Mon, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Mon.LinkAttrib(VBO_Mon, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Mon.LinkAttrib(VBO_Mon, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Mon.LinkAttrib(VBO_Mon, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Mon.Unbind();
+			VBO_Mon.Unbind();
+			EBO_Mon.Unbind();
+
+			glUniform4f(glGetUniformLocation(Mon_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Mon_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Mon_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Mon_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+			tekstura1.Bind();
+			tekstura2.Bind();
+
+			glUniform3f(glGetUniformLocation(Mon_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Mon_Program, "camMatrix");
+
+			VAO_Mon.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Mon_Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//MONITOR DANE: WSKAZNIK KIERUNKU
+			Zeg1_Program.Activate();
+
+			VAO_Zeg1.Bind();
+			VBO_Zeg1 = VBO(Zeg1Vertices, sizeof(Zeg1Vertices));
+			EBO_Zeg1 = EBO(Zeg1Indices, sizeof(Zeg1Indices));
+			VAO_Zeg1.LinkAttrib(VBO_Zeg1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Zeg1.LinkAttrib(VBO_Zeg1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Zeg1.LinkAttrib(VBO_Zeg1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Zeg1.LinkAttrib(VBO_Zeg1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Zeg1.Unbind();
+			VBO_Zeg1.Unbind();
+			EBO_Zeg1.Unbind();
+
+			glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Zeg1_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Zeg1_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+			tekstura1.Bind();
+			tekstura2.Bind();
+
+			glUniform3f(glGetUniformLocation(Zeg1_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Zeg1_Program, "camMatrix");
+
+			VAO_Zeg1.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Zeg1Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//MONITOR DANE: WSKAZNIK ENERGII
+			Zeg2_Program.Activate();
+
+			VAO_Zeg2.Bind();
+			VBO_Zeg2 = VBO(Zeg2Vertices, sizeof(Zeg2Vertices));
+			EBO_Zeg2 = EBO(Zeg2Indices, sizeof(Zeg2Indices));
+			VAO_Zeg2.LinkAttrib(VBO_Zeg2, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Zeg2.LinkAttrib(VBO_Zeg2, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Zeg2.LinkAttrib(VBO_Zeg2, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Zeg2.LinkAttrib(VBO_Zeg2, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Zeg2.Unbind();
+			VBO_Zeg2.Unbind();
+			EBO_Zeg2.Unbind();
+
+			glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Zeg2_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Zeg2_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+			tekstura1.Bind();
+			tekstura2.Bind();
+
+			glUniform3f(glGetUniformLocation(Zeg2_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Zeg2_Program, "camMatrix");
+
+			VAO_Zeg2.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Zeg2Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//MONITOR DANE: WSKAZNIK ODLEGLOSCI
+			Zeg3_Program.Activate();
+
+			VAO_Zeg3.Bind();
+			VBO_Zeg3 = VBO(Zeg3Vertices, sizeof(Zeg3Vertices));
+			EBO_Zeg3 = EBO(Zeg3Indices, sizeof(Zeg3Indices));
+			VAO_Zeg3.LinkAttrib(VBO_Zeg3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Zeg3.LinkAttrib(VBO_Zeg3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Zeg3.LinkAttrib(VBO_Zeg3, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Zeg3.LinkAttrib(VBO_Zeg3, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Zeg3.Unbind();
+			VBO_Zeg3.Unbind();
+			EBO_Zeg3.Unbind();
+
+			glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Zeg3_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Zeg3_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+			tekstura1.Bind();
+			tekstura2.Bind();
+
+			glUniform3f(glGetUniformLocation(Zeg3_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Zeg3_Program, "camMatrix");
+
+			VAO_Zeg3.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Zeg3Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//MONITOR DANE: WSKAZNIK PREDKOSCI
+			Zeg4_Program.Activate();
+
+			VAO_Zeg4.Bind();
+			VBO_Zeg4 = VBO(Zeg4Vertices, sizeof(Zeg4Vertices));
+			EBO_Zeg4 = EBO(Zeg4Indices, sizeof(Zeg4Indices));
+			VAO_Zeg4.LinkAttrib(VBO_Zeg4, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+			VAO_Zeg4.LinkAttrib(VBO_Zeg4, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+			VAO_Zeg4.LinkAttrib(VBO_Zeg4, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+			VAO_Zeg4.LinkAttrib(VBO_Zeg4, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+			VAO_Zeg4.Unbind();
+			VBO_Zeg4.Unbind();
+			EBO_Zeg4.Unbind();
+
+			glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniformMatrix4fv(glGetUniformLocation(Zeg4_Program.ID, "model2"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(Zeg4_Program.ID, "light2Color"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "light2Pos"), light2Pos.x, light2Pos.y, light2Pos.z);
+
+			tekstura1.Bind();
+			tekstura2.Bind();
+
+			glUniform3f(glGetUniformLocation(Zeg4_Program.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+			camera.Matrix(Zeg4_Program, "camMatrix");
+
+			VAO_Zeg4.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(Zeg4Indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//LAMPA
+			lightShader.Activate();
+
+			lightVAO.Bind();
+			lightVBO = VBO(lightVertices, sizeof(lightVertices));
+			lightEBO = EBO(lightIndices, sizeof(lightIndices));
+			lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			lightVAO.Unbind();
+			lightVBO.Unbind();
+			lightEBO.Unbind();
+
+			lightPos = glm::rotate(glm::vec3(0.0f, 1.25f, -8.5f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			lightModel = glm::mat4(1.0f);
+			lightModel = glm::translate(lightModel, lightPos);
+			cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
+			cubeModel = glm::mat4(1.0f);
+			cubeModel = glm::translate(cubeModel, cubePos);
+
+			glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
+			glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+
+			camera.Matrix(lightShader, "camMatrix");
+			lightVAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+			//OGIEN SILNIKA
+			lightShader2.Activate();
+
+			light2VAO.Bind();
+			light2VBO = VBO(lightVertices2, sizeof(lightVertices2));
+			light2EBO = EBO(lightIndices2, sizeof(lightIndices2));
+			light2VAO.LinkAttrib(light2VBO, 0, 3, GL_FLOAT, 7 * sizeof(float), (void*)0);
+			light2VAO.LinkAttrib(light2VBO, 1, 4, GL_FLOAT, 7 * sizeof(float), (void*)(3 * sizeof(float)));
+			light2VAO.Unbind();
+			light2VBO.Unbind();
+			light2EBO.Unbind();
+
+			light2Color = glm::vec4(0.0f, 0.33f, 0.33f + zmienne.Predkosc / MAX_PREDKOSC * (1.0f), 1.0f);
+			light2Pos = glm::rotate(glm::vec3(0.0f, 0.0f, -23.8f), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			light2Model = glm::mat4(1.0f);
+			light2Model = glm::translate(light2Model, light2Pos);
+			cube2Pos = glm::vec3(0.0f, 0.0f, 0.0f);
+			cube2Model = glm::mat4(1.0f);
+			cube2Model = glm::translate(cube2Model, cube2Pos);
+
+			glUniformMatrix4fv(glGetUniformLocation(lightShader2.ID, "model"), 1, GL_FALSE, glm::value_ptr(light2Model));
+			glUniform4f(glGetUniformLocation(lightShader2.ID, "lightColor"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+
+			camera.Matrix(lightShader2, "camMatrix");
+			light2VAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			light2VAO.Unbind();
+
+
+			//ODPYCHACZE CENTRALNE
+			pushShader.Activate();
 
 			//CENTRUM
-		pushVAO.Bind();
-		pushVBO = VBO(pushVertices, sizeof(pushVertices));
-		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-		pushVAO.Unbind();
-		pushVBO.Unbind();
-		pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -11.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		pushModel = glm::mat4(1.0f);
-		pushModel = glm::translate(pushModel, pushPos);
-		cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cubePCModel = glm::mat4(1.0f);
-		cubePCModel = glm::translate(cubePCModel, cubePCPos);
-		glUniformMatrix4fv(glGetUniformLocation(pushShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(pushModel));
-
-		camera.Matrix(pushShader, "camMatrix");
-		pushVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-			//FRONT
-		pushVAO.Bind();
-		pushVBO = VBO(pushVertices_front, sizeof(pushVertices_front));
-		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-		pushVAO.Unbind();
-		pushVBO.Unbind();
-		for (int i = 0; i < 6; i++) {
-			pushPos = glm::rotate(glm::vec3(0.0f, -0.5f, 6.5f - 2.5f * float(i)), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			pushVAO.Bind();
+			pushVBO = VBO(pushVertices, sizeof(pushVertices));
+			pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			pushVAO.Unbind();
+			pushVBO.Unbind();
+			pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -11.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 			pushModel = glm::mat4(1.0f);
 			pushModel = glm::translate(pushModel, pushPos);
 			cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3696,63 +3691,96 @@ int main()
 			camera.Matrix(pushShader, "camMatrix");
 			pushVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		}
+
+			//FRONT
+			pushVAO.Bind();
+			pushVBO = VBO(pushVertices_front, sizeof(pushVertices_front));
+			pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			pushVAO.Unbind();
+			pushVBO.Unbind();
+			for (int i = 0; i < 6; i++) {
+				pushPos = glm::rotate(glm::vec3(0.0f, -0.5f, 6.5f - 2.5f * float(i)), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+				pushModel = glm::mat4(1.0f);
+				pushModel = glm::translate(pushModel, pushPos);
+				cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
+				cubePCModel = glm::mat4(1.0f);
+				cubePCModel = glm::translate(cubePCModel, cubePCPos);
+				glUniformMatrix4fv(glGetUniformLocation(pushShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(pushModel));
+
+				camera.Matrix(pushShader, "camMatrix");
+				pushVAO.Bind();
+				glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			}
 			//TYL
-		pushVAO.Bind();
-		pushVBO = VBO(pushVertices_tyl, sizeof(pushVertices_tyl));
-		pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-		pushVAO.Unbind();
-		pushVBO.Unbind();
-		pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -19.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		pushModel = glm::mat4(1.0f);
-		pushModel = glm::translate(pushModel, pushPos);
-		cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cubePCModel = glm::mat4(1.0f);
-		cubePCModel = glm::translate(cubePCModel, cubePCPos);
-		glUniformMatrix4fv(glGetUniformLocation(pushShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(pushModel));
+			pushVAO.Bind();
+			pushVBO = VBO(pushVertices_tyl, sizeof(pushVertices_tyl));
+			pushVAO.LinkAttrib(pushVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			pushVAO.Unbind();
+			pushVBO.Unbind();
+			pushPos = glm::rotate(glm::vec3(0.0f, -1.1f, -19.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			pushModel = glm::mat4(1.0f);
+			pushModel = glm::translate(pushModel, pushPos);
+			cubePCPos = glm::vec3(0.0f, 0.0f, 0.0f);
+			cubePCModel = glm::mat4(1.0f);
+			cubePCModel = glm::translate(cubePCModel, cubePCPos);
+			glUniformMatrix4fv(glGetUniformLocation(pushShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(pushModel));
 
-		camera.Matrix(pushShader, "camMatrix");
-		pushVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		//KONIEC ODPYCHACZY CENTRALNYCH
+			camera.Matrix(pushShader, "camMatrix");
+			pushVAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(pushIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			//KONIEC ODPYCHACZY CENTRALNYCH
 
-		//ODPYCHACZE BOCZNE
-		KulaShader.Activate();
+			//ODPYCHACZE BOCZNE
+			KulaShader.Activate();
 
 			//LEWA
-		KulaVAO.Bind();
-		KulaVBO = VBO(KulaVertices, sizeof(KulaVertices));
-		KulaVAO.LinkAttrib(KulaVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-		KulaVAO.Unbind();
-		KulaVBO.Unbind();
-		KulaPos = glm::rotate(glm::vec3(-4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		KulaModel = glm::mat4(1.0f);
-		KulaModel = glm::translate(KulaModel, KulaPos);
-		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cubePBModel = glm::mat4(1.0f);
-		cubePBModel = glm::translate(cubePBModel, cubePBPos);
-		glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
+			KulaVAO.Bind();
+			KulaVBO = VBO(KulaVertices, sizeof(KulaVertices));
+			KulaVAO.LinkAttrib(KulaVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			KulaVAO.Unbind();
+			KulaVBO.Unbind();
+			KulaPos = glm::rotate(glm::vec3(-4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			KulaModel = glm::mat4(1.0f);
+			KulaModel = glm::translate(KulaModel, KulaPos);
+			cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
+			cubePBModel = glm::mat4(1.0f);
+			cubePBModel = glm::translate(cubePBModel, cubePBPos);
+			glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
 
-		camera.Matrix(KulaShader, "camMatrix");
-		KulaVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			camera.Matrix(KulaShader, "camMatrix");
+			KulaVAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			//PRAWA
-		KulaPos = glm::rotate(glm::vec3(4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
-		KulaModel = glm::mat4(1.0f);
-		KulaModel = glm::translate(KulaModel, KulaPos);
-		cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		cubePBModel = glm::mat4(1.0f);
-		cubePBModel = glm::translate(cubePBModel, cubePBPos);
-		glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
-		
-		camera.Matrix(KulaShader, "camMatrix");
-		KulaVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		//KONIEC ODPYCHACZE BOCZNE
+			KulaPos = glm::rotate(glm::vec3(4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
+			KulaModel = glm::mat4(1.0f);
+			KulaModel = glm::translate(KulaModel, KulaPos);
+			cubePBPos = glm::vec3(0.0f, 0.0f, 0.0f);
+			cubePBModel = glm::mat4(1.0f);
+			cubePBModel = glm::translate(cubePBModel, cubePBPos);
+			glUniformMatrix4fv(glGetUniformLocation(KulaShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(KulaModel));
+
+			camera.Matrix(KulaShader, "camMatrix");
+			KulaVAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			//KONIEC ODPYCHACZE BOCZNE
+
+			//WYJSCIE Z GRY
+			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			{
+				state = State::MenuState;
+			}
 
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+			break;
+
+
+
+		case MenuState:
+			RenderMenu(menu, window, state);
+			break;
+		}
 	}
 
 
