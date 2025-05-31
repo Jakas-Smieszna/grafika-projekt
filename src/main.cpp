@@ -20,13 +20,9 @@
 //
 #include"Game.h"
 #include"Menu.h"
+#include"State.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820
-
-enum State {
-	PlayState,
-	MenuState
-};
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -66,7 +62,6 @@ int main()
 
 	GameElements game;
 	MenuElements menu;
-	//MenuElements menu;
 
 	State state = State::MenuState;
 
@@ -80,12 +75,12 @@ int main()
 	{
 		if (state == State::PlayState)
 		{
-			UpdateGameState(game, window);
+			UpdateGameState(game, window, state);
 			RenderScene(game, window);
 		}
 		if (state == State::MenuState)
 		{
-			RenderMenu(menu, window);
+			RenderMenu(menu, window, state);
 		}
 	}
 

@@ -2,7 +2,7 @@
 #define GAME_CLASS_H
 
 #include<vector>
-
+#include"State.h"
 
 extern std::vector<GLfloat> vertices;
 
@@ -55,7 +55,7 @@ public:
 
 };
 
-void UpdateGameState(GameElements& game, GLFWwindow* window);
+void UpdateGameState(GameElements& game, GLFWwindow* window, State &state);
 void RenderScene(GameElements& game, GLFWwindow* window);
 
 #endif // GAME_CLASS_H

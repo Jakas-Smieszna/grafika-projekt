@@ -210,7 +210,7 @@ camera(1000, 800, glm::vec3(0.0f, 0.0f, 2.0f))
 
 
 
-void UpdateGameState(GameElements& game, GLFWwindow* window)
+void UpdateGameState(GameElements& game, GLFWwindow* window, State &state)
 {
 	static float i = 0.0;
 	if (i > 192.0) i = 0.0;
@@ -224,6 +224,10 @@ void UpdateGameState(GameElements& game, GLFWwindow* window)
 	game.light2Model = glm::translate(game.light2Model, game.light2Pos);
 	game.cube2Model = glm::translate(game.cube2Model, game.cube2Pos);
 
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		state = State::MenuState;
+	}
 	game.camera.Inputs(window);
 	game.camera.updateMatrix(45.0f, 0.1f, 100.0f);
 }

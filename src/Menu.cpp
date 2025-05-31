@@ -19,6 +19,7 @@
 #include"EBO.h"
 #include"Kamera.h"
 #include"Menu.h"
+#include"State.h"
 
 std::vector<GLfloat> menu_vertices = {
    0.5f, 0.95f, 0.0f, 0.0f, 1.0f,
@@ -81,7 +82,7 @@ MenuElements::MenuElements() :
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 }
-void RenderMenu(MenuElements &menu, GLFWwindow* window)
+void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
 {
 
    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -104,6 +105,39 @@ void RenderMenu(MenuElements &menu, GLFWwindow* window)
    menu.tekstura4.texUnit(menu.shaderProgram, "ourTexture", 0);
    menu.tekstura4.Bind();
    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(18 * sizeof(GLuint)));
+
+   if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+      double xpos, ypos;
+      glfwGetCursorPos(window, &xpos, &ypos);
+
+      int width, height;
+      glfwGetWindowSize(window, &width, &height);
+
+      // Konwersja pozycji kursora na wspó³rzêdne znormalizowane (-1 do 1)
+      float x = (2.0f * xpos) / width - 1.0f;
+      float y = 1.0f - (2.0f * ypos) / height;
+
+      // Sprawdzenie, który przycisk zosta³ klikniêty
+      // Przycisk 1 (Start): obszar od (0.5, 0.95) do (1.0, 0.55)
+      if (x >= 0.5f && x <= 1.0f && y <= 0.95f && y >= 0.55f) {
+         state = State::PlayState;
+         std::cout << "Start clicked!" << std::endl;
+      }
+      // Przycisk 2 (Instrukcja): obszar od (0.5, 0.55) do (1.0, 0.15)
+      else if (x >= 0.5f && x <= 1.0f && y <= 0.55f && y >= 0.15f) {
+         std::cout << "Instructions clicked!" << std::endl;
+      }
+      // Przycisk 3 (Wyniki): obszar od (0.5, 0.15) do (1.0, -0.25)
+      else if (x >= 0.5f && x <= 1.0f && y <= 0.15f && y >= -0.25f) {
+         std::cout << "Scores clicked!" << std::endl;
+      }
+      // Przycisk 4 (Wyjœcie): obszar od (0.5, -0.25) do (1.0, -0.65)
+      else if (x >= 0.5f && x <= 1.0f && y <= -0.25f && y >= -0.65f) {
+         glfwSetWindowShouldClose(window, GLFW_TRUE);
+         std::cout << "Exit clicked!" << std::endl;
+      }
+   }
+
 
    glfwSwapBuffers(window);
    glfwPollEvents();

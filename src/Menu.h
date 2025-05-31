@@ -1,5 +1,6 @@
 #ifndef MENU_CLASS_H
 #define MENU_CLASS_H
+#include"State.h"
 
 extern std::vector<GLfloat> menu_vertices;
 
@@ -22,7 +23,7 @@ public:
    MenuElements();
 };
 
-void RenderMenu(MenuElements &menu,GLFWwindow* window);
+void RenderMenu(MenuElements &menu,GLFWwindow* window, State &state);
 
 
 #endif
