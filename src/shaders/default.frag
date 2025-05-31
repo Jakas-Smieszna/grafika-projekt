@@ -30,7 +30,7 @@ uniform vec3 camPos;
 
 void main()
 {
-	float ambient = 0.33f;
+	float ambient = 0.0f;
 	vec3 normal = normalize(Normal);
 	vec3 normal2 = normalize(Normal * -1.0f);
 
@@ -69,9 +69,9 @@ void main()
 	FragColor = vec4(color, 1.0f) 
 	* mix(texture(texture1, texCoord), texture(texture2, texCoord), 0.55) 
 	* (
-		0.3f * lightColor * (diffuse + ambient + specular) 
-		+ 0.3 * light2Color * (diffuse2 + ambient + specular2)
-		+ 0.3 * pushColor * (diffuse3 + ambient + specular3)
+		0.0 * lightColor * (diffuse + ambient + specular) 
+		+ 0.0 * light2Color * (diffuse2 + ambient + specular2)
+		+ 0.0 * pushColor * (diffuse3 + ambient + specular3)
 		+ 1.0 * BIGlightColor * (diffuseBIG + ambient * 2.0f + specularBIG)
 	);
 	

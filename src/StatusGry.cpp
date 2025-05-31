@@ -318,12 +318,6 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 
 	//std::cout << "KAT = " << KAT << "\t Kierunek do celu [" << zmienne->Kierunek_do_celu.x << ", " << zmienne->Kierunek_do_celu.y << ", " << zmienne->Kierunek_do_celu.z <<"]\t" << "Kierunek [" << zmienne->Kierunek.x << ", " << zmienne->Kierunek.y << ", " << zmienne->Kierunek.z << "]\n";
 
-
-	//if (!(abs(glm::dot(glm::normalize(Kierunek_do_celu0), glm::normalize(zmienne->Kierunek_do_celu)) < TOL)) && !(abs(glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu) < 1000.f * TOL))) {
-	//	KAT = acos(glm::dot(glm::normalize(Kierunek_do_celu0), glm::normalize(zmienne->Kierunek_do_celu)) / (glm::length(Kierunek_do_celu0) * glm::length(zmienne->Kierunek_do_celu)));
-	//	//std::cout << KAT << "\n";
-	//}
-
 	//Obrot - wskazanie kierunku:
 	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
 	//Cofniecie do zera
