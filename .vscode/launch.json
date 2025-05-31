@@ -9,7 +9,7 @@
             "program": "${command:cmake.launchTargetPath}",
             "args": [],
             "stopOnEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/out/build/x64-debug/src",
             "env": {
                 "PATH" : "${env:PATH}:${command:cmake.getLaunchTargetDirectory}"
             },

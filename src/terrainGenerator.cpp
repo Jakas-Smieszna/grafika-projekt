@@ -55,6 +55,7 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
             }
         }
     }
+    
     return std::make_pair(vertices, indices);
 }
 #include <chrono>
@@ -72,7 +73,6 @@ void processTerrainQueue()
         }
     }
 }
-
 
 TerrainGenerator::TerrainGenerator(Pakiet_Zmiennych& vars) : assoc_vars(vars), TerrainChunks(), lastCamChunk({21, 37, 0 }) {
     //std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
@@ -99,7 +99,6 @@ chData TerrainGenerator::getChunkPosFromCamPos(glm::vec3 P) {
 void TerrainGenerator::updateTerrain(glm::vec3 P) {
     int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
     int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
-
     for(int i = x - RENDER_DISTANCE; i < x + RENDER_DISTANCE; i++) {
         for(int j = y-RENDER_DISTANCE; j < y + RENDER_DISTANCE; j++) {
             if (chunkExists({i,j,1})) {
@@ -112,7 +111,6 @@ void TerrainGenerator::updateTerrain(glm::vec3 P) {
             auto I = VIPair.second;
             terrainGenQueue.push([this, data, V, I] {
                 std::unique_lock<std::mutex> lock(_mutex);
-                //printf("adding chunk %i, %i\n", data.x, data.y);
                 TerrainChunks.emplace(data, std::make_unique<Chunk>(data, V, I) );
                 });
         }

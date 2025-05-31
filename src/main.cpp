@@ -3183,8 +3183,7 @@ int main()
 	BIGlightEBO.Unbind();
 
 	glm::vec4 BIGlightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	//glm::vec3 BIGlightPos = glm::vec3(0.0f, 1000000000.0f, -26.0f);
-	glm::vec3 BIGlightPos = glm::vec3(0.0f, 1000000000.0f, 0.0f);
+	glm::vec3 BIGlightPos = glm::vec3(0.0f, 0.0f, 200.0f);
 	glm::mat4 BIGlightModel = glm::mat4(1.0f);
 	BIGlightModel = glm::translate(BIGlightModel, BIGlightPos);
 	glm::vec3 BIGcubePos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -3380,9 +3379,9 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		float kat0 = zmienne.Pojazd_kat;
+
 		switch (state) {
 		case PlayState:
-			processTerrainQueue();
 
 			AktualizujZmienne1(window, &zmienne, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 			//ZMIENNE ZMIAN KLATKOWYCH
@@ -3404,14 +3403,6 @@ int main()
 
 			camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0), (2.0f * M_PI))));
 			camera.updateMatrix(45.0f, 0.1f, 100.0f);
-			terrainShader.Activate();
-			camera.Matrix(terrainShader, "camMatrix");
-			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			}
-			generator.Draw(terrainShader);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 
 			//POJAZD
 			shaderProgram.Activate();
@@ -3744,6 +3735,7 @@ int main()
 			camera.Matrix(KulaShader, "camMatrix");
 			KulaVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+        
 			//PRAWA
 			KulaPos = glm::rotate(glm::vec3(4.0f, -1.65f, -21.0), float(zmienne.Pojazd_kat), glm::vec3(0.0f, 1.0f, 0.0f));
 			KulaModel = glm::mat4(1.0f);
@@ -3757,6 +3749,32 @@ int main()
 			KulaVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			//KONIEC ODPYCHACZE BOCZNE
+        
+      //TEREN MG
+      terrainShader.Activate();
+		  glUniformMatrix4fv(glGetUniformLocation(terrainShader.ID, "lightModel[0]"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+		  glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[0]"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+		  glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[0]"), lightPos.x, lightPos.y, lightPos.z);
+		  glUniformMatrix4fv(glGetUniformLocation(terrainShader.ID, "lightModel[1]"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+		  glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[1]"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+		  glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[1]"), light2Pos.x, light2Pos.y, light2Pos.z);
+		  glUniformMatrix4fv(glGetUniformLocation(terrainShader.ID, "lightModel[2]"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+		  glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[2]"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+		  glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[2]"), pushPos.x, pushPos.y, pushPos.z);
+		  glUniformMatrix4fv(glGetUniformLocation(terrainShader.ID, "lightModel[3]"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+		  glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[3]"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+		  glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[3]"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+		  camera.Matrix(terrainShader, "camMatrix");
+		
+		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+			glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		}
+		generator.Draw(terrainShader);
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+        
 
 			//WYJSCIE Z GRY
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
