@@ -21,9 +21,10 @@
 #include "terrainGenerator.h"
 #include "helper/tsqueue.h"
 #include "State.h"
-#include "Menu.h";
+#include "Menu.h"
 #include "Autors.h"
 #include "Instruction.h"
+#include "model.h"
 
 
 // Teksturowo:
@@ -3780,7 +3781,7 @@ int main()
 			BIGlightVAO.LinkAttrib(BIGlightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 			BIGlightVAO.Unbind();
 			BIGlightVBO.Unbind();BIGlightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);;
-			BIGlightPos = glm::vec3(0.0f, 80.0f, 0.0f);
+			BIGlightPos = glm::vec3(0.0f, 00.0f, 100.0f);
 			BIGlightModel = glm::mat4(1.0f);
 			BIGlightModel = glm::translate(BIGlightModel, BIGlightPos);
 			BIGcubePos = glm::vec3(0.0f, 0.0f, 0.0f);

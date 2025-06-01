@@ -4,7 +4,7 @@
 #include <string>
 
 
-#include <tiny_obj_loader>
+#include <tol/tiny_obj_loader.h>
 
 #include "Tekstury.h"
 #include "mesh.h"
