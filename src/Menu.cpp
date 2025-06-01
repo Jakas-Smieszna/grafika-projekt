@@ -37,9 +37,13 @@ std::vector<GLfloat> menu_vertices = {
    0.5f, -0.20f, 0.0f,0.0f, 1.0f,
    1.0f, -0.20f, 0.0f, 1.0f, 1.0f,
    0.5f, -1.00f, 0.0f, 0.0f, 0.0f,
-   1.0f, -1.00f, 0.0f, 1.0f, 0.0f
+   1.0f, -1.00f, 0.0f, 1.0f, 0.0f,
+   -1.0f, 1.00f, 0.0f, 0.0f, 1.0f,
+   0.5f, 1.00f, 0.0f, 1.0f, 1.0f,
+   -1.0f, -1.00f, 0.0f, 0.0f, 0.0f,
+   0.5f, -1.00f, 0.0f, 1.0f, 0.0f
 };
-
+//xD
 std::vector <GLuint> menu_indices = {
    0, 1, 2,
    1, 2, 3,
@@ -48,7 +52,9 @@ std::vector <GLuint> menu_indices = {
    8, 9, 10,
    9, 10, 11,
    12, 13, 14,
-   13, 14, 15
+   13, 14, 15,
+   16, 17, 18,
+   17, 18, 19
 };
 
 MenuElements::MenuElements() : 
@@ -80,6 +86,13 @@ MenuElements::MenuElements() :
    glBindVertexArray(0);
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+   tekstury_obrazu.emplace_back(("Kotel1.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("metal.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("start.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("instrukcja.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("start.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("instrukcja.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+
 }
 void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
 {
@@ -104,6 +117,11 @@ void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
    menu.tekstura4.texUnit(menu.shaderProgram, "ourTexture", 0);
    menu.tekstura4.Bind();
    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(18 * sizeof(GLuint)));
+   std::time_t czas = std::time(nullptr);
+   czas = czas % (3 * menu.tekstury_obrazu.size());
+   menu.tekstury_obrazu[czas/3].texUnit(menu.shaderProgram, "ourTexture", 0);
+   menu.tekstury_obrazu[czas/3].Bind();
+   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(24 * sizeof(GLuint)));
 
    glfwWaitEventsTimeout(0.1);
 
