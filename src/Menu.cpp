@@ -140,21 +140,21 @@ void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
       // Przycisk 1 (Start): obszar od (0.5, 0.95) do (1.0, 0.55)
       if (x >= 0.5f && x <= 1.0f && y <= 1.00f && y >= 0.60f) {
          state = State::PlayState;
-         std::cout << "Start clicked!" << std::endl;
+         //std::cout << "Start clicked!" << std::endl;
       }
       // Przycisk 2 (Instrukcja): obszar od (0.5, 0.55) do (1.0, 0.15)
       else if (x >= 0.5f && x <= 1.0f && y <= 0.59f && y >= 0.20f) {
          state = State::InstructionState;
-         std::cout << "Instructions clicked!" << std::endl;
+         //std::cout << "Instructions clicked!" << std::endl;
       }
       // Przycisk 3 (Wyjœcie): obszar od (0.5, 0.15) do (1.0, -0.25)
       else if (x >= 0.5f && x <= 1.0f && y <= 0.19f && y >= -0.20f) {
          glfwSetWindowShouldClose(window, GLFW_TRUE);
-         std::cout << "Exit clicked!" << std::endl;
+         //std::cout << "Exit clicked!" << std::endl;
       }
       else if (x >= 0.5f && x <= 1.0f && y <= -0.21 && y >= -1.00f) {
          state = State::AutorsState;
-         std::cout << "Autors clicked!" << std::endl;
+         //std::cout << "Autors clicked!" << std::endl;
       }
 
    }

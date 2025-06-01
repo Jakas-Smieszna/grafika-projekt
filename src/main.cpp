@@ -3684,9 +3684,9 @@ int main()
 	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
-	std::cout << "WSKKIER=[" << Mon_Vertices[4 * 11] << ", " << Mon_Vertices[4 * 11 + 1] << ", " << Mon_Vertices[4 * 11 + 2] << "]\n";
+	/*std::cout << "WSKKIER=[" << Mon_Vertices[4 * 11] << ", " << Mon_Vertices[4 * 11 + 1] << ", " << Mon_Vertices[4 * 11 + 2] << "]\n";
 	std::cout << "WSKKIER=[" << Mon_Vertices[5 * 11] << ", " << Mon_Vertices[5 * 11 + 1] << ", " << Mon_Vertices[5 * 11 + 2] << "]\n";
-	std::cout << "WSKKIER=[" << Mon_Vertices[6 * 11] << ", " << Mon_Vertices[6 * 11 + 1] << ", " << Mon_Vertices[6 * 11 + 2] << "]\n";
+	std::cout << "WSKKIER=[" << Mon_Vertices[6 * 11] << ", " << Mon_Vertices[6 * 11 + 1] << ", " << Mon_Vertices[6 * 11 + 2] << "]\n";*/
 
 
 	State state = State::MenuState;

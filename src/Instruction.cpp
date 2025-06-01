@@ -91,7 +91,7 @@ void RenderInstruction(InstructionElements& instruction, GLFWwindow* window, Sta
       // Przycisk 1 (instruction): obszar od (0.5, 0.95) do (1.0, 0.55)
       if (x >= -1.0f && x <= 1.0f && y <= 1.00f && y >= -1.00f) {
          state = State::MenuState;
-         std::cout << "instruction clicked!" << std::endl;
+         //std::cout << "instruction clicked!" << std::endl;
       }
    }
 
