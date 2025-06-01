@@ -414,3 +414,4 @@ _deps
 CMakeUserPresets.json
 # Visual Studio cmake output folder
 out/
+.vscode/settings.json

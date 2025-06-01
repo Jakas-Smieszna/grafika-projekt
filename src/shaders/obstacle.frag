@@ -12,8 +12,8 @@ in vec3 Normal;
 in vec3 worldPos;
 
 // Gets the Texture Unit from the main function
+uniform sampler2D texture3;
 uniform sampler2D texture1;
-uniform sampler2D texture2;
 uniform vec3 camPos;
 #define NUM_LIGHTS 4
 uniform vec3 lightPos[NUM_LIGHTS];
@@ -24,7 +24,6 @@ uniform mat4 model;
 void main()
 {
     //FragColor = color;
-    vec4 heightColor = vec4(0.2, 0.5 - (worldPos.y + 5)/2, 0, 1);
     vec3 normal = normalize(Normal);
     float ambient = 0.2;
     float specular[NUM_LIGHTS];
@@ -37,7 +36,7 @@ void main()
         float specAmount = pow(max(dot(viewDir, reflDir), 0), 8);
         specular[i] = specAmount * 0.5;
     }
-    FragColor = heightColor * (
+    FragColor = texture(texture3, texCoord) * (
         0.2 * lightColor[0] * (diffuse[0] + ambient + specular[0]) +
         0.2 * lightColor[1] * (diffuse[1] + ambient + specular[1]) +
         0.2 * lightColor[2] * (diffuse[2] + ambient + specular[2]) +

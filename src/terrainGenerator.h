@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "Kamera.h"
 #include "StatusGry.h"
+#include "model.h"
 #include <memory>
 #include <vector>
 #include <utility>
@@ -24,6 +25,15 @@
 #define RENDER_DISTANCE 7
 #endif
 
+#ifndef OBSTRUCTION_SPAWN_CHANCE
+#define OBSTRUCTION_SPAWN_CHANCE 0.1
+#endif
+
+#ifndef OBSTRUCTION_COLLISION_DISTANCE
+#define OBSTRUCTION_COLLISION_DISTANCE 7
+#endif
+
+
 struct chData {
     int x;
     int y;
@@ -38,16 +48,13 @@ struct chData {
         return (x == rhs.x && y == rhs.y);
     }
 };
-
-
-
-class Chunk {
+struct Chunk {
 public:
     chData data;
     Mesh terrainMesh;
-    // Chunk musi wygenerować własny mesh z verteksów i indeksów.
-    // Zapobiega to problemów z pamięcią itp.
-    Chunk(chData chnkData, std::vector<Vertex> V, std::vector<GLuint> I) : data(chnkData), terrainMesh(Mesh(V, I)) {};
+    Chunk(chData chnkData, std::vector<Vertex> V, std::vector<GLuint> I) : 
+        data(chnkData), terrainMesh(Mesh(V, I)), obstacleModels({}) {};
+    std::vector<std::pair<glm::vec4, glm::vec3>> obstacleModels;
 };
 
 
@@ -64,8 +71,11 @@ public:
     chData getChunkPosFromCamPos(glm::vec3 P);
 
 
-    void Draw(Shader& shader);
+    void Draw(Shader& shader, Shader& obstacleShader);
     void updateTerrain(glm::vec3 P);
+
+    bool checkObstacleCollisions();
+
 private:
     bool chunkExists(chData who);
     void dropChunk(chData who);
@@ -77,6 +87,8 @@ private:
     // ich dekonstruktor, który niszczy ebo, vbo, vao
     //std::vector<std::unique_ptr<Chunk>> TerrainChunks;
     std::map<chData, std::unique_ptr<Chunk>> TerrainChunks;
+
+    std::vector<Model> obstacleModels;
 
     // Mutex raczej nie powinien być potrzebny, bo
     // wszystko (rysowanie + dodawanie do TerrainChunks)
