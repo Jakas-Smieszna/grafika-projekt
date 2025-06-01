@@ -14,7 +14,7 @@ public:
 
    Texture tekstura1;
 
-   AutorsElements();
+   AutorsElements(const char[9]);
 };
 
 void RenderAutors(AutorsElements& autors, GLFWwindow* window, State& state);

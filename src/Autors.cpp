@@ -33,9 +33,9 @@ std::vector <GLuint> autors_indices = {
    1, 2, 3,
 };
 
-AutorsElements::AutorsElements() :
+AutorsElements::AutorsElements(const char nazwa[9]) :
    shaderProgram("menu_default.vert", "menu_default.frag"),
-   tekstura1(("chat.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
+   tekstura1((nazwa), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
 {
    glGenVertexArrays(1, &VAO);
    glGenBuffers(1, &VBO);

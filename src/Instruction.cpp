@@ -35,7 +35,7 @@ std::vector <GLuint> instruction_indices = {
 
 InstructionElements::InstructionElements() :
    shaderProgram("menu_default.vert", "menu_default.frag"),
-   tekstura1(("Kotel1.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
+   tekstura1(("insj.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE)
 {
    glGenVertexArrays(1, &VAO);
    glGenBuffers(1, &VBO);

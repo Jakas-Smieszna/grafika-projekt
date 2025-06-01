@@ -5,6 +5,8 @@ enum State {
 	PlayState,
 	MenuState,
 	Wygrana,
+	Przegrana,
+	BrakPaliwa,
 	InstructionState,
 	AutorsState
 };

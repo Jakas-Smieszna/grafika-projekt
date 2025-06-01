@@ -62,11 +62,11 @@ void Camera::Inputs(GLFWwindow* window, float rotacja)
 	}
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
-		speed = 1.00f;
+		speed = 0.50f;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_RELEASE)
 	{
-		speed = 0.03f;
+		speed = 0.50f;
 	}
 	// Obsluga myszki
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)

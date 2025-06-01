@@ -210,7 +210,7 @@ int AktualizujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wsk
 	
 	//ZMIANY ENERGII
 	w0 = 11;
-	double D_energia = zmienne->Predkosc;
+	double D_energia = 2.0 * zmienne->Predkosc + PASYWNE_ZUZYCIE_ENERGII;
 	zmienne->Energia = zmienne->Energia - D_energia;
 	//Obrot - wskazanie energii:
 	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
@@ -471,6 +471,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	//KAT
 	for (int i = 0; i < zmienne->Rozmiar_vertices[0]; i = i + DL1) {
+		//Pozycja
 		vpom = glm::vec3(
 			korpus[i],
 			korpus[i + 1],
@@ -480,9 +481,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		korpus[i] = vpom.x;
 		korpus[i + 1] = vpom.y;
 		korpus[i + 2] = vpom.z;
+		//Wektory normalne
+		vpom = glm::vec3(
+			korpus[i + 8],
+			korpus[i + 9],
+			korpus[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		korpus[i + 8] = vpom.x;
+		korpus[i + 9] = vpom.y;
+		korpus[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[1]; i = i + DL1) {
+		//pozycja
 		vpom = glm::vec3(
 			monitor[i],
 			monitor[i + 1],
@@ -492,9 +504,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		monitor[i] = vpom.x;
 		monitor[i + 1] = vpom.y;
 		monitor[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			monitor[i + 8],
+			monitor[i + 9],
+			monitor[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		monitor[i + 8] = vpom.x;
+		monitor[i + 9] = vpom.y;
+		monitor[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[2]; i = i + DL2) {
+		//pozycja
 		vpom = glm::vec3(
 			lampa[i],
 			lampa[i + 1],
@@ -507,6 +530,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[3]; i = i + DL3) {
+		//pozycja
 		vpom = glm::vec3(
 			zaplon[i],
 			zaplon[i + 1],
@@ -519,6 +543,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[4]; i = i + DL2) {
+		//pozycja
 		vpom = glm::vec3(
 			pusch[i],
 			pusch[i + 1],
@@ -531,6 +556,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[5]; i = i + DL2) {
+		//pozycja
 		vpom = glm::vec3(
 			kule[i],
 			kule[i + 1],
@@ -543,6 +569,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[6]; i = i + DL1) {
+		//pozycja
 		vpom = glm::vec3(
 			zeg1[i],
 			zeg1[i + 1],
@@ -552,9 +579,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		zeg1[i] = vpom.x;
 		zeg1[i + 1] = vpom.y;
 		zeg1[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			zeg1[i + 8],
+			zeg1[i + 9],
+			zeg1[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		zeg1[i + 8] = vpom.x;
+		zeg1[i + 9] = vpom.y;
+		zeg1[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[7]; i = i + DL1) {
+		//pozycje
 		vpom = glm::vec3(
 			zeg2[i],
 			zeg2[i + 1],
@@ -564,9 +602,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		zeg2[i] = vpom.x;
 		zeg2[i + 1] = vpom.y;
 		zeg2[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			zeg2[i + 8],
+			zeg2[i + 9],
+			zeg2[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		zeg2[i + 8] = vpom.x;
+		zeg2[i + 9] = vpom.y;
+		zeg2[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[8]; i = i + DL1) {
+		//pozycja
 		vpom = glm::vec3(
 			zeg3[i],
 			zeg3[i + 1],
@@ -576,9 +625,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		zeg3[i] = vpom.x;
 		zeg3[i + 1] = vpom.y;
 		zeg3[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			zeg3[i + 8],
+			zeg3[i + 9],
+			zeg3[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		zeg3[i + 8] = vpom.x;
+		zeg3[i + 9] = vpom.y;
+		zeg3[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[9]; i = i + DL1) {
+		//pozycja
 		vpom = glm::vec3(
 			zeg4[i],
 			zeg4[i + 1],
@@ -588,9 +648,20 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		zeg4[i] = vpom.x;
 		zeg4[i + 1] = vpom.y;
 		zeg4[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			zeg4[i + 8],
+			zeg4[i + 9],
+			zeg4[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		zeg4[i + 8] = vpom.x;
+		zeg4[i + 9] = vpom.y;
+		zeg4[i + 10] = vpom.z;
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[10]; i = i + DL2) {
+		//pozycja
 		vpom = glm::vec3(
 			pusch_F[i],
 			pusch_F[i + 1],
@@ -603,6 +674,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[11]; i = i + DL2) {
+		//pozycja
 		vpom = glm::vec3(
 			pusch_T[i],
 			pusch_T[i + 1],
@@ -615,6 +687,7 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 
 	}
 	for (int i = 0; i < zmienne->Rozmiar_vertices[12]; i = i + DL1) {
+		//pozycja
 		vpom = glm::vec3(
 			man[i],
 			man[i + 1],
@@ -624,10 +697,184 @@ int Zrotuj_0_1_pojazd(Pakiet_Zmiennych* zmienne, int zmiana, GLfloat* monitor, G
 		man[i] = vpom.x;
 		man[i + 1] = vpom.y;
 		man[i + 2] = vpom.z;
+		//wektory.n
+		vpom = glm::vec3(
+			man[i + 8],
+			man[i + 9],
+			man[i + 10]
+		);
+		vpom = glm::rotate(vpom, float(zmiana * zmienne->Pojazd_kat), glm::normalize(glm::vec3(0.f, 1.f, 0.f)));
+		man[i + 8] = vpom.x;
+		man[i + 9] = vpom.y;
+		man[i + 10] = vpom.z;
 
 	}
 	//KONIEC KAT
 
 	return 1;
 
+}
+
+
+
+
+
+
+
+//USTAW WSKAZOWKI NA POZYCJACH POCZATKOWYCH
+int ResetujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazowki) {
+
+	glm::vec3 vpom = glm::vec3(0.f, 0.f, 0.f);
+	glm::vec3 vpom2 = glm::vec3(0.f, 0.f, 0.f);
+	int w0 = 65;//pierwszy wierzcholek wskazowki
+
+	//PREDKOSC
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot na min
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, 0.975f * float(2.0 * M_PI * zmienne->Predkosc / MAX_PREDKOSC), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+	//ENERGIA
+	w0 = 11;
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot na maks
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, -0.975f * float(2.0 * M_PI * (1.0 - zmienne->Energia / MAX_ENERGIA)), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+	//ODLEGLOSC DO CELU
+	w0 = 46;
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot na maks
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, -0.975f * float(2.0 * M_PI * (1.0 - zmienne->Odleglosc / MAX_ODLEGLOSC)), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+
+
+	//AKTUALIZACJA WSKAZOWKI KIERUNKU
+	w0 = 4;
+	//Liczenie zmiany kierunku do celu jako kata w radianach
+	double KAT = 0.0f * M_PI;
+	glm::vec3 Kierunek_do_celu0 = zmienne->Punkt_docelowy;
+	glm::vec2 KDC1(Kierunek_do_celu0.x, Kierunek_do_celu0.z);
+	glm::vec2 KDC0(zmienne->Kierunek_do_celu.x, zmienne->Kierunek_do_celu.z);
+
+	if (abs(KDC0.y) < TOL) {
+		if (KDC0.x > -TOL) KAT = KAT + M_PI * 0.5;
+		else KAT = KAT + M_PI * 1.5;
+	}
+	else {
+		if (KDC0.y > -TOL) KAT = KAT + acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y)));
+		else KAT = KAT - acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y))) + 2.0 * M_PI;
+	}
+
+	if (abs(KDC1.y) < TOL) {
+		if (KDC1.x > -TOL) KAT = KAT - M_PI * 0.5;
+		else KAT = KAT - M_PI * 1.5;
+	}
+	else {
+		if (KDC1.y > -TOL) KAT = KAT - acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y)));
+		else KAT = KAT + acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y))) - 2.0 * M_PI;
+	}
+
+	glm::vec3 Kierunek0(0.0f, 0.0f, 1.0f);
+	glm::vec2 K1(Kierunek0.x, Kierunek0.z);
+	glm::vec2 K0(zmienne->Kierunek.x, zmienne->Kierunek.z);
+
+	if (abs(K0.y) < TOL) {
+		if (K0.x > -TOL) KAT = KAT - M_PI * 0.5;
+		else KAT = KAT - M_PI * 1.5;
+	}
+	else {
+		if (K0.y > -TOL) KAT = KAT - acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y)));
+		else KAT = KAT + acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y))) - 2.0 * M_PI;
+	}
+
+	if (abs(K1.y) < TOL) {
+		if (K1.x > -TOL) KAT = KAT + M_PI * 0.5;
+		else KAT = KAT + M_PI * 1.5;
+	}
+	else {
+		if (K1.y > -TOL) KAT = KAT + acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y)));
+		else KAT = KAT - acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y))) + 2.0 * M_PI;
+	}
+
+	//std::cout << "KAT = " << KAT << "\t Kierunek do celu [" << zmienne->Kierunek_do_celu.x << ", " << zmienne->Kierunek_do_celu.y << ", " << zmienne->Kierunek_do_celu.z <<"]\t" << "Kierunek [" << zmienne->Kierunek.x << ", " << zmienne->Kierunek.y << ", " << zmienne->Kierunek.z << "]\n";
+
+	//Obrot - wskazanie kierunku:
+	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
+	//Cofniecie do zera
+	for (int i = 0; i < 3; i++) {
+		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
+	}
+	//Obrot
+	for (int i = 0; i < 3; i++) {
+		vpom2 = glm::vec3(
+			wskazowki[(w0 + i) * 11],
+			wskazowki[(w0 + i) * 11 + 1],
+			wskazowki[(w0 + i) * 11 + 2]
+		);
+		vpom2 = glm::rotate(vpom2, float(KAT), glm::normalize(zmienne->Os_zegarow));
+		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
+		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
+		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
+
+	}
+
+
+
+
+	return 0;
 }
