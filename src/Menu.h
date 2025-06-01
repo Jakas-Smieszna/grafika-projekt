@@ -17,6 +17,7 @@ public:
    Texture tekstura3;
    Texture tekstura4;
 
+   std::vector<Texture> tekstury_obrazu;
    MenuElements();
 };
 
