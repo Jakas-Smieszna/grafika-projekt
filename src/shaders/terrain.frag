@@ -38,9 +38,9 @@ void main()
         specular[i] = specAmount * 0.5;
     }
     FragColor = heightColor * (
-        0.2 * lightColor[0] * (diffuse[0] + ambient + specular[0]) +
-        0.2 * lightColor[1] * (diffuse[1] + ambient + specular[1]) +
-        0.2 * lightColor[2] * (diffuse[2] + ambient + specular[2]) +
+        1 * lightColor[0] * (diffuse[0] + 0*ambient + specular[0]) +
+        1 * lightColor[1] * (diffuse[1] + 0*ambient + specular[1]) +
+        1 * lightColor[2] * (diffuse[2] + 0*ambient + specular[2]) +
         0.8 * lightColor[3] * (diffuse[3] + ambient + specular[3])
     );
 

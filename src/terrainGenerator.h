@@ -19,7 +19,7 @@
 #endif
 
 // ilość vertexów w boku; fajnie jak jest potęgą dwójki
-#define TERRAINGENERATOR_CHUNK_DETAIL 16
+#define TERRAINGENERATOR_CHUNK_DETAIL 32
 
 #ifndef RENDER_DISTANCE
 #define RENDER_DISTANCE 7
