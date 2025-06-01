@@ -81,7 +81,6 @@ int InicjujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 	//KIERUNEK NA START 90, czyli na prost (domyslnie)
 
 
-
 	return 0;
 }
 
@@ -801,77 +800,19 @@ int ResetujZmienne1(GLFWwindow* okno, Pakiet_Zmiennych* zmienne, GLfloat* wskazo
 
 
 
-	//AKTUALIZACJA WSKAZOWKI KIERUNKU
-	w0 = 4;
-	//Liczenie zmiany kierunku do celu jako kata w radianach
-	double KAT = 0.0f * M_PI;
-	glm::vec3 Kierunek_do_celu0 = zmienne->Punkt_docelowy;
-	glm::vec2 KDC1(Kierunek_do_celu0.x, Kierunek_do_celu0.z);
-	glm::vec2 KDC0(zmienne->Kierunek_do_celu.x, zmienne->Kierunek_do_celu.z);
+	////AKTUALIZACJA WSKAZOWKI KIERUNKU
+	//COFANIE WSKAZOWKI KIERUNKU
+	wskazowki[4 * 11] = 0.57;
+	wskazowki[4 * 11 + 1] = 1.83475;
+	wskazowki[4 * 11 + 2] = -0.424923;
 
-	if (abs(KDC0.y) < TOL) {
-		if (KDC0.x > -TOL) KAT = KAT + M_PI * 0.5;
-		else KAT = KAT + M_PI * 1.5;
-	}
-	else {
-		if (KDC0.y > -TOL) KAT = KAT + acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y)));
-		else KAT = KAT - acos(KDC0.x / (sqrt(KDC0.x * KDC0.x + KDC0.y * KDC0.y))) + 2.0 * M_PI;
-	}
+	wskazowki[5 * 11] = 0.6;
+	wskazowki[5 * 11 + 1] = 2.02889;
+	wskazowki[5 * 11 + 2] = -0.133705;
 
-	if (abs(KDC1.y) < TOL) {
-		if (KDC1.x > -TOL) KAT = KAT - M_PI * 0.5;
-		else KAT = KAT - M_PI * 1.5;
-	}
-	else {
-		if (KDC1.y > -TOL) KAT = KAT - acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y)));
-		else KAT = KAT + acos(KDC1.x / (sqrt(KDC1.x * KDC1.x + KDC1.y * KDC1.y))) - 2.0 * M_PI;
-	}
-
-	glm::vec3 Kierunek0(0.0f, 0.0f, 1.0f);
-	glm::vec2 K1(Kierunek0.x, Kierunek0.z);
-	glm::vec2 K0(zmienne->Kierunek.x, zmienne->Kierunek.z);
-
-	if (abs(K0.y) < TOL) {
-		if (K0.x > -TOL) KAT = KAT - M_PI * 0.5;
-		else KAT = KAT - M_PI * 1.5;
-	}
-	else {
-		if (K0.y > -TOL) KAT = KAT - acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y)));
-		else KAT = KAT + acos(K0.x / (sqrt(K0.x * K0.x + K0.y * K0.y))) - 2.0 * M_PI;
-	}
-
-	if (abs(K1.y) < TOL) {
-		if (K1.x > -TOL) KAT = KAT + M_PI * 0.5;
-		else KAT = KAT + M_PI * 1.5;
-	}
-	else {
-		if (K1.y > -TOL) KAT = KAT + acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y)));
-		else KAT = KAT - acos(K1.x / (sqrt(K1.x * K1.x + K1.y * K1.y))) + 2.0 * M_PI;
-	}
-
-	//std::cout << "KAT = " << KAT << "\t Kierunek do celu [" << zmienne->Kierunek_do_celu.x << ", " << zmienne->Kierunek_do_celu.y << ", " << zmienne->Kierunek_do_celu.z <<"]\t" << "Kierunek [" << zmienne->Kierunek.x << ", " << zmienne->Kierunek.y << ", " << zmienne->Kierunek.z << "]\n";
-
-	//Obrot - wskazanie kierunku:
-	vpom = glm::vec3((wskazowki[w0 * 11] + wskazowki[(w0 + 2) * 11]) / 2.0, (wskazowki[w0 * 11 + 1] + wskazowki[(w0 + 2) * 11 + 1]) / 2.0, (wskazowki[w0 * 11 + 2] + wskazowki[(w0 + 2) * 11 + 2]) / 2.0);
-	//Cofniecie do zera
-	for (int i = 0; i < 3; i++) {
-		wskazowki[(w0 + i) * 11] = wskazowki[(w0 + i) * 11] - vpom.x;
-		wskazowki[(w0 + i) * 11 + 1] = wskazowki[(w0 + i) * 11 + 1] - vpom.y;
-		wskazowki[(w0 + i) * 11 + 2] = wskazowki[(w0 + i) * 11 + 2] - vpom.z;
-	}
-	//Obrot
-	for (int i = 0; i < 3; i++) {
-		vpom2 = glm::vec3(
-			wskazowki[(w0 + i) * 11],
-			wskazowki[(w0 + i) * 11 + 1],
-			wskazowki[(w0 + i) * 11 + 2]
-		);
-		vpom2 = glm::rotate(vpom2, float(KAT), glm::normalize(zmienne->Os_zegarow));
-		wskazowki[(w0 + i) * 11] = vpom2.x + vpom.x;
-		wskazowki[(w0 + i) * 11 + 1] = vpom2.y + vpom.y;
-		wskazowki[(w0 + i) * 11 + 2] = vpom2.z + vpom.z;
-
-	}
+	wskazowki[6 * 11] = 0.63;
+	wskazowki[6 * 11 + 1] = 1.83475;
+	wskazowki[6 * 11 + 2] = -0.424923;
 
 
 

@@ -3384,6 +3384,11 @@ int main()
 	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
+	std::cout << "WSKKIER=[" << Mon_Vertices[4 * 11] << ", " << Mon_Vertices[4 * 11 + 1] << ", " << Mon_Vertices[4 * 11 + 2] << "]\n";
+	std::cout << "WSKKIER=[" << Mon_Vertices[5 * 11] << ", " << Mon_Vertices[5 * 11 + 1] << ", " << Mon_Vertices[5 * 11 + 2] << "]\n";
+	std::cout << "WSKKIER=[" << Mon_Vertices[6 * 11] << ", " << Mon_Vertices[6 * 11 + 1] << ", " << Mon_Vertices[6 * 11 + 2] << "]\n";
+
+
 	State state = State::MenuState;
 
 
@@ -3872,8 +3877,7 @@ int main()
 				zmienne.Energia = MAX_ENERGIA;
 				zmienne.Predkosc = 0.0;
 				zmienne.Kierunek = glm::vec3(0.f, 0.f, 1.f);
-				//zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
-				zmienne.Punkt_docelowy = glm::vec3(0.0f, 0.0f, MAX_ODLEGLOSC);
+				zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
 				zmienne.Kierunek_do_celu = zmienne.Kierunek;
 				zmienne.Odleglosc = glm::length(zmienne.Punkt_docelowy - zmienne.Biezaca_pozycja);
 				zmienne.Czas_klatki = 0;
