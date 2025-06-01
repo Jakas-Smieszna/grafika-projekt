@@ -19,7 +19,11 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Kamera.h"
+
+#define OBSTRUCTION_SPAWN_CHANCE 0.1
+#define OBSTRUCTION_COLLISION_DISTANCE 7
 #include "terrainGenerator.h"
+
 #include "helper/tsqueue.h"
 #include "State.h"
 #include "Menu.h"

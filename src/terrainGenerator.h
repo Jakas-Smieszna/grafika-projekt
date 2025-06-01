@@ -25,6 +25,15 @@
 #define RENDER_DISTANCE 7
 #endif
 
+#ifndef OBSTRUCTION_SPAWN_CHANCE
+#define OBSTRUCTION_SPAWN_CHANCE 0.1
+#endif
+
+#ifndef OBSTRUCTION_COLLISION_DISTANCE
+#define OBSTRUCTION_COLLISION_DISTANCE 7
+#endif
+
+
 struct chData {
     int x;
     int y;

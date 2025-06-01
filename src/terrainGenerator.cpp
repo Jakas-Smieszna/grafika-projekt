@@ -116,7 +116,7 @@ void TerrainGenerator::updateTerrain(glm::vec3 P) {
                 std::unique_lock<std::mutex> lock(_mutex);
                 TerrainChunks.emplace(data, std::make_unique<Chunk>(data, V, I) );
             });
-            if(std::abs(i) > 1 && std::abs(j) > 1 && (RANDLFLOAT < 0.15)) {
+            if(std::abs(i) > 1 && std::abs(j) > 1 && (RANDLFLOAT < OBSTRUCTION_SPAWN_CHANCE)) {
                 terrainGenQueue.push([this, data] {
                     float cX = (RANDLFLOAT) * TERRAINGENERATOR_CHUNK_SIZE;
                     float cY = (RANDLFLOAT) * TERRAINGENERATOR_CHUNK_SIZE;
@@ -126,12 +126,14 @@ void TerrainGenerator::updateTerrain(glm::vec3 P) {
                     std::unique_lock<std::mutex> lock(_mutex);
                     TerrainChunks.at(data)->obstacleModels.emplace_back(
                         std::make_pair(
+                            // place in the world
                             glm::vec4(
                                 static_cast<float>(cX),
-                                perlinChunkHeight(cX + genOffsetX, cY + genOffsetY),
+                                perlinChunkHeight(cX + genOffsetX, cY + genOffsetY) + 2.f,
                                 static_cast<float>(cY),
-                                type
+                                type // determines if tree or rock
                             ), 
+                            // unused rotation vector
                             glm::vec3(
                                 glm::radians(RANDLFLOAT * 360),
                                 glm::radians(RANDLFLOAT * 360),
@@ -166,11 +168,8 @@ bool TerrainGenerator::checkObstacleCollisions() {
                     0, j * TERRAINGENERATOR_CHUNK_SIZE
                 );
                 auto obstPos = (chnkPosVec + glm::vec3(obstacle.first));
-                printf("obst pos: %f %f %f\n", obstPos.x, obstPos.y, obstPos.z);
-                printf("car  pos: %f %f %f\n", assoc_vars.Biezaca_pozycja.x, assoc_vars.Biezaca_pozycja.y, assoc_vars.Biezaca_pozycja.z);
                 float dist = std::abs(glm::length(obstPos - assoc_vars.Biezaca_pozycja));
-                printf("dist: %f\n", dist);
-                if(dist < 7) {
+                if(dist < OBSTRUCTION_COLLISION_DISTANCE) {
                     return true;
                 }
             }
