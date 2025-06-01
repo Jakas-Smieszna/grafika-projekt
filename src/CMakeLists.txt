@@ -14,7 +14,7 @@ set(PROJ_FILES
     Menu.cpp
     Autors.cpp
     Instruction.cpp
-    #model.cpp
+    model.cpp
     terrainGenerator.cpp
 # Biblioteki
     stb.cpp
