@@ -3401,7 +3401,7 @@ int main()
 
 
 
-	Model rock("rock.obj");
+	
 
 	glm::mat4 bin_model = glm::mat4(1);
 	bin_model = glm::translate(bin_model, glm::vec3(15, 15, 15));
@@ -3815,14 +3815,8 @@ int main()
 			glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[3]"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
 			glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[3]"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
 			camera.Matrix(terrainShader, "camMatrix");
-			
-			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-			generator.Draw(terrainShader);
-			glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-
-			
 			obstacleShader.Activate();
+			// Inaczej się nie da, nasz kod jest zbyt chujowy na to
 			glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "lightModel[0]"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[0]"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[0]"), lightPos.x, lightPos.y, lightPos.z);
@@ -3836,11 +3830,11 @@ int main()
 			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[3]"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
 			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[3]"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
 			camera.Matrix(obstacleShader, "camMatrix");
-			glad_glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(bin_model));
 			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
 				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-			rock.Draw(obstacleShader);
+			generator.Draw(terrainShader, obstacleShader);
 			glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
         
 			//WYJSCIE Z GRY
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -3863,6 +3857,28 @@ int main()
 				zmienne.Czas_przyspieszanie = 0;
 
 				state = State::MenuState;
+			}
+
+			// przegrana
+			if(generator.checkObstacleCollisions() ) {
+				Zrotuj_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);//ODROTOWANIE
+				ResetujZmienne1(window, &zmienne, Mon_Vertices);
+				camera.Position = glm::vec3(0.0f, 4.5f, -6.0f);
+				camera.Orientation = glm::vec3(0.0f, 0.0f, 1.0f);
+				zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
+				zmienne.Odleglosc = MAX_ODLEGLOSC;
+				zmienne.Energia = MAX_ENERGIA;
+				zmienne.Predkosc = 0.0;
+				zmienne.Kierunek = glm::vec3(0.f, 0.f, 1.f);
+				zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
+				zmienne.Kierunek_do_celu = zmienne.Kierunek;
+				zmienne.Odleglosc = glm::length(zmienne.Punkt_docelowy - zmienne.Biezaca_pozycja);
+				zmienne.Czas_klatki = 0;
+				zmienne.Pojazd_kat = 0.0;
+				zmienne.Przechylenie_kat = 0.0;
+				zmienne.Czas_przyspieszanie = 0;
+
+				state = State::Przegrana;
 			}
 
 			//ZWYCIESTWO

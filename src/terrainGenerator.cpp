@@ -7,6 +7,7 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <cmath>
 
 #define STB_PERLIN_IMPLEMENTATION
 #include <stb/stb_perlin.h>
@@ -27,10 +28,8 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
             Vertex v;
             float cX = (i / static_cast<float>(vert_per_chunk - 1) ) * TERRAINGENERATOR_CHUNK_SIZE;
             float cY = (j / static_cast<float>(vert_per_chunk - 1) ) * TERRAINGENERATOR_CHUNK_SIZE;
-
             float genOffsetX = chunkX * TERRAINGENERATOR_CHUNK_SIZE;
             float genOffsetY = chunkY * TERRAINGENERATOR_CHUNK_SIZE;
-            
             glm::vec3 vector{
                 static_cast<float>(cX),
                 perlinChunkHeight(cX + genOffsetX, cY + genOffsetY),
@@ -77,6 +76,8 @@ void processTerrainQueue()
 
 TerrainGenerator::TerrainGenerator(Pakiet_Zmiennych& vars) : assoc_vars(vars), TerrainChunks(), lastCamChunk({21, 37, 0}) {
     //std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
+    obstacleModels.emplace_back(Model("rock.obj"));
+    obstacleModels.emplace_back(Model("tree.obj"));
     std::thread generatorThread([this] {
         while (true) {
             //std::unique_lock<std::mutex> lock(associated_cam._mutex);
@@ -97,6 +98,7 @@ chData TerrainGenerator::getChunkPosFromCamPos(glm::vec3 P) {
     return { x, y, 0 };
 }
 
+#define RANDLFLOAT (static_cast<double>(rand()) / RAND_MAX)
 void TerrainGenerator::updateTerrain(glm::vec3 P) {
     int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
     int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
@@ -113,22 +115,83 @@ void TerrainGenerator::updateTerrain(glm::vec3 P) {
             terrainGenQueue.push([this, data, V, I] {
                 std::unique_lock<std::mutex> lock(_mutex);
                 TerrainChunks.emplace(data, std::make_unique<Chunk>(data, V, I) );
+            });
+            if(std::abs(i) > 1 && std::abs(j) > 1 && (RANDLFLOAT < 0.15)) {
+                terrainGenQueue.push([this, data] {
+                    float cX = (RANDLFLOAT) * TERRAINGENERATOR_CHUNK_SIZE;
+                    float cY = (RANDLFLOAT) * TERRAINGENERATOR_CHUNK_SIZE;
+                    float genOffsetX = data.x * TERRAINGENERATOR_CHUNK_SIZE;
+                    float genOffsetY = data.y * TERRAINGENERATOR_CHUNK_SIZE;
+                    float type = (RANDLFLOAT < 0.5 ? 0 : 1);
+                    std::unique_lock<std::mutex> lock(_mutex);
+                    TerrainChunks.at(data)->obstacleModels.emplace_back(
+                        std::make_pair(
+                            glm::vec4(
+                                static_cast<float>(cX),
+                                perlinChunkHeight(cX + genOffsetX, cY + genOffsetY),
+                                static_cast<float>(cY),
+                                type
+                            ), 
+                            glm::vec3(
+                                glm::radians(RANDLFLOAT * 360),
+                                glm::radians(RANDLFLOAT * 360),
+                                glm::radians(RANDLFLOAT * 360)
+                            )
+                        )
+                    );
                 });
+            }
         }
     }
 }
+#define COLLISION_CHECK_CHUNK_RADIUS 2
+bool TerrainGenerator::checkObstacleCollisions() {
+    glm::vec3 P;
+    P = assoc_vars.Biezaca_pozycja;
+    int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
+    int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
+    for (int i = x - COLLISION_CHECK_CHUNK_RADIUS; i < x + COLLISION_CHECK_CHUNK_RADIUS; i++) {
+        for (int j = y - COLLISION_CHECK_CHUNK_RADIUS; j < y + COLLISION_CHECK_CHUNK_RADIUS; j++) {
+            if (!chunkExists({ i,j,1 })) {
+                continue;
+            }
+            auto& chunk = TerrainChunks.at({i,j,1});
+            if(chunk->obstacleModels.size() == 0) {
+                continue;
+            }
 
+            for(auto obstacle : chunk->obstacleModels) {
+                glm::vec3 chnkPosVec = glm::vec3(
+                    i*TERRAINGENERATOR_CHUNK_SIZE,
+                    0, j * TERRAINGENERATOR_CHUNK_SIZE
+                );
+                auto obstPos = (chnkPosVec + glm::vec3(obstacle.first));
+                printf("obst pos: %f %f %f\n", obstPos.x, obstPos.y, obstPos.z);
+                printf("car  pos: %f %f %f\n", assoc_vars.Biezaca_pozycja.x, assoc_vars.Biezaca_pozycja.y, assoc_vars.Biezaca_pozycja.z);
+                float dist = std::abs(glm::length(obstPos - assoc_vars.Biezaca_pozycja));
+                printf("dist: %f\n", dist);
+                if(dist < 7) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+    
+}
+#undef RANDLFLOAT
 bool TerrainGenerator::chunkExists(chData who)
 {
     std::unique_lock<std::mutex> lock(_mutex);
     return TerrainChunks.contains(who);
 }
 
-void TerrainGenerator::Draw(Shader& shader) {
+void TerrainGenerator::Draw(Shader& shader, Shader& obstacleShader) {
     glm::vec3 P;
     //std::unique_lock<std::mutex> camLock(associated_cam._mutex);
     P = assoc_vars.Biezaca_pozycja;
     //camLock.unlock();
+
     int x = P.x / TERRAINGENERATOR_CHUNK_SIZE;
     int y = P.z / TERRAINGENERATOR_CHUNK_SIZE;
     for (int i = x - RENDER_DISTANCE; i < x + RENDER_DISTANCE; i++) {
@@ -137,16 +200,26 @@ void TerrainGenerator::Draw(Shader& shader) {
                 continue;
             }
             glm::mat4 chunkModel = glm::mat4(1.0f);
-            chunkModel = glm::translate(chunkModel,
-                 glm::vec3(
+            glm::vec3 chnkPosVec = glm::vec3(
                     -P.x + i*TERRAINGENERATOR_CHUNK_SIZE,
-                    0,
-                    -P.z + j * TERRAINGENERATOR_CHUNK_SIZE
-                 ));
-                 
+                    0, -P.z + j * TERRAINGENERATOR_CHUNK_SIZE
+                );
+            chunkModel = glm::translate(chunkModel, chnkPosVec);
+            shader.Activate();
             glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(chunkModel));
             std::unique_lock<std::mutex> ourLock(_mutex);
-            TerrainChunks.at({ i, j, 1 })->terrainMesh.Draw(shader);
+            auto &ourChnk = TerrainChunks.at({ i, j, 1 });
+            ourChnk->terrainMesh.Draw(shader); // draw chunk proper
+            for(auto pair : ourChnk->obstacleModels) {
+                glm::vec4 pos = pair.first;
+                glm::vec3 rot = pair.second;
+                glm::mat4 obstModel = glm::translate(glm::mat4(1.0f), chnkPosVec);
+                obstModel = glm::translate(chunkModel, glm::vec3(pos));
+                // use W coord to determine the model -- todo
+                obstacleShader.Activate();
+			    glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(obstModel));
+                obstacleModels[static_cast<int>(pos.w)].Draw(obstacleShader);
+            }
             ourLock.unlock();
         }
     }
