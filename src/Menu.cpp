@@ -43,7 +43,7 @@ std::vector<GLfloat> menu_vertices = {
    -1.0f, -1.00f, 0.0f, 0.0f, 0.0f,
    0.5f, -1.00f, 0.0f, 1.0f, 0.0f
 };
-
+//xD
 std::vector <GLuint> menu_indices = {
    0, 1, 2,
    1, 2, 3,
