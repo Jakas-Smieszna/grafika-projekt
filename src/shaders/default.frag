@@ -69,9 +69,9 @@ void main()
 	FragColor = vec4(color, 1.0f) 
 	* mix(texture(texture1, texCoord), texture(texture2, texCoord), 0.55) 
 	* (
-		0.2f * lightColor * (diffuse + ambient + specular) 
-		+ 0.2f * light2Color * (diffuse2 + ambient + specular2)
-		+ 0.2f * pushColor * (diffuse3 + ambient + specular3)
+		0.3f * lightColor * (diffuse + ambient + specular) 
+		+ 0.3f * light2Color * (diffuse2 + ambient + specular2)
+		+ 0.3f * pushColor * (diffuse3 + ambient + specular3)
 		+ 1.0f * BIGlightColor * (diffuseBIG + ambient * 2.0f + specularBIG)
 	);
 	

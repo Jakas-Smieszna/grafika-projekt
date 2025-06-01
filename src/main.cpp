@@ -1631,11 +1631,30 @@ GLfloat Ty_Vertices[] =
 
 	//LEWY BUT
 		//SPOD:
+	//przod
 	-2.75f, -1.13f, -10.0f,		0.2f, 0.2f, 1.0f,			1.0f, 0.7f,							0.0f, 0.0f, 1.0f,
+	-2.0f, -1.48f, -13.0f,		0.2f, 0.2f, 1.0f,			0.33f, 0.8f,						0.0f, 0.0f, 1.0f,
+	-3.5f, -1.38f, -13.0f,		0.2f, 0.2f, 1.0f,			0.33f, 0.6f,						0.0f, 0.0f, 1.0f,
+	//tyl
 	-2.0f, -1.48f, -13.0f,		0.2f, 0.2f, 1.0f,			0.33f, 0.8f,						0.0f, 0.0f, 1.0f,
 	-3.5f, -1.38f, -13.0f,		0.2f, 0.2f, 1.0f,			0.33f, 0.6f,						0.0f, 0.0f, 1.0f,
 	-3.0f, -1.505f, -14.0f,		0.2f, 0.2f, 1.0f,			0.0f, 0.65f,						0.0f, 0.0f, 1.0f,
 	-2.5f, -1.555f, -14.0f,		0.2f, 0.2f, 1.0f,			0.0f, 0.75f,						0.0f, 0.0f, 1.0f,
+	
+		//PIETA
+	-3.0f, -1.505f, -14.0f,		0.3f, 0.0f, 0.7f,			0.00f, 0.8f,						0.0f, 0.0f, 1.0f,
+	-2.5f, -1.555f, -14.0f,		0.3f, 0.0f, 0.7f,			0.0f, 0.8f,							0.0f, 0.0f, 1.0f,
+	-3.0f, -0.605f, -13.75f,	0.3f, 0.0f, 0.7f,			0.0f, 1.0f,							0.0f, 0.0f, 1.0f,
+	-2.5f, -0.655f, -13.75f,	0.3f, 0.0f, 0.7f,			0.0f, 1.0f,							0.0f, 0.0f, 1.0f,
+		
+		//LEWY TYL
+	-3.5f, -1.38f, -13.0f,		0.3f, 0.0f, 0.7f,			1.0f, 0.8f,							0.0f, 0.0f, 1.0f,
+	-3.0f, -1.505f, -14.0f,		0.3f, 0.0f, 0.7f,			0.00f, 0.8f,						0.0f, 0.0f, 1.0f,
+	-3.0f, -0.605f, -13.75f,	0.3f, 0.0f, 0.7f,			0.0f, 1.0f,							0.0f, 0.0f, 1.0f,
+	-3.25f, -0.5925f, -13.0f,	0.3f, 0.0f, 0.7f,			0.5f, 1.0f,							0.0f, 0.0f, 1.0f,
+		
+		//PRAWY TYL
+
 	//Dol - boki:
 	-2.75f, -1.13f, -10.0f,		0.3f, 0.0f, 0.7f,			3.0f, 0.8f,							0.0f, 0.0f, 1.0f,
 	-2.0f, -1.48f, -13.0f,		0.3f, 0.0f, 0.7f,			1.0f, 0.8f,							0.0f, 0.0f, 1.0f,
@@ -3369,9 +3388,12 @@ int main()
 
 
 	MenuElements menu;
-	AutorsElements autors;
+	AutorsElements autors("chat.png");
 	InstructionElements instruction;
 
+	AutorsElements wygrana("wygj.png");
+	AutorsElements przegrana("przj.png");
+	AutorsElements brakpaliwa("enej.png");
 
 
 
@@ -3399,7 +3421,7 @@ int main()
 			//cube2Model = glm::translate(cube2Model, cube2Pos);
 
 			//CZYSZCZENIE TLA
-			glClearColor(0.f, 1.00f, 0.f, 1.0f);
+			glClearColor(0.6, 1.2f, 2.55f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0), (2.0f * M_PI))));
@@ -3750,6 +3772,25 @@ int main()
 			KulaVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			//KONIEC ODPYCHACZE BOCZNE
+
+			//SLONCE
+			BIGlightShader.Activate();
+			BIGlightVAO.Bind();
+			BIGlightVBO = VBO(KulaVertices, sizeof(KulaVertices));
+			BIGlightVAO.LinkAttrib(BIGlightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+			BIGlightVAO.Unbind();
+			BIGlightVBO.Unbind();BIGlightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);;
+			BIGlightPos = glm::vec3(0.0f, 80.0f, 0.0f);
+			BIGlightModel = glm::mat4(1.0f);
+			BIGlightModel = glm::translate(BIGlightModel, BIGlightPos);
+			BIGcubePos = glm::vec3(0.0f, 0.0f, 0.0f);
+			BIGcubeModel = glm::mat4(1.0f);
+			BIGcubeModel = glm::translate(BIGcubeModel, BIGcubePos);
+			glUniformMatrix4fv(glGetUniformLocation(BIGlightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(BIGlightModel));
+
+			camera.Matrix(BIGlightShader, "camMatrix");
+			KulaVAO.Bind();
+			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
         
       //TEREN MG
 			terrainShader.Activate();
@@ -3776,13 +3817,71 @@ int main()
 			//WYJSCIE Z GRY
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			{
+				Zrotuj_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);//ODROTOWANIE
+				ResetujZmienne1(window, &zmienne, Mon_Vertices);
+				camera.Position = glm::vec3(0.0f, 4.5f, -6.0f);
+				camera.Orientation = glm::vec3(0.0f, 0.0f, 1.0f);
+				zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
+				zmienne.Odleglosc = MAX_ODLEGLOSC;
+				zmienne.Energia = MAX_ENERGIA;
+				zmienne.Predkosc = 0.0;
+				zmienne.Kierunek = glm::vec3(0.f, 0.f, 1.f);
+				zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
+				zmienne.Kierunek_do_celu = zmienne.Kierunek;
+				zmienne.Odleglosc = glm::length(zmienne.Punkt_docelowy - zmienne.Biezaca_pozycja);
+				zmienne.Czas_klatki = 0;
+				zmienne.Pojazd_kat = 0.0;
+				zmienne.Przechylenie_kat = 0.0;
+				zmienne.Czas_przyspieszanie = 0;
+
 				state = State::MenuState;
 			}
 
 			//ZWYCIESTWO
 			if (abs(glm::length(zmienne.Biezaca_pozycja - zmienne.Punkt_docelowy)) < 2.5 * MAX_PREDKOSC)
 			{
+				Zrotuj_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);//ODROTOWANIE
+				ResetujZmienne1(window, &zmienne, Mon_Vertices);
+				camera.Position = glm::vec3(0.0f, 4.5f, -6.0f);
+				camera.Orientation = glm::vec3(0.0f, 0.0f, 1.0f);
+				zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
+				zmienne.Odleglosc = MAX_ODLEGLOSC;
+				zmienne.Energia = MAX_ENERGIA;
+				zmienne.Predkosc = 0.0;
+				zmienne.Kierunek = glm::vec3(0.f, 0.f, 1.f);
+				zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
+				zmienne.Kierunek_do_celu = zmienne.Kierunek;
+				zmienne.Odleglosc = glm::length(zmienne.Punkt_docelowy - zmienne.Biezaca_pozycja);
+				zmienne.Czas_klatki = 0;
+				zmienne.Pojazd_kat = 0.0;
+				zmienne.Przechylenie_kat = 0.0;
+				zmienne.Czas_przyspieszanie = 0;
+
 				state = State::Wygrana;
+			}
+
+			//BRAK PALIWA
+			if (zmienne.Energia < TOL) 
+			{
+				Zrotuj_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);//ODROTOWANIE
+				ResetujZmienne1(window, &zmienne, Mon_Vertices);
+				camera.Position = glm::vec3(0.0f, 4.5f, -6.0f);
+				camera.Orientation = glm::vec3(0.0f, 0.0f, 1.0f);
+				zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
+				zmienne.Odleglosc = MAX_ODLEGLOSC;
+				zmienne.Energia = MAX_ENERGIA;
+				zmienne.Predkosc = 0.0;
+				zmienne.Kierunek = glm::vec3(0.f, 0.f, 1.f);
+				//zmienne.Punkt_docelowy = glm::vec3(glm::rotate(glm::vec3(0.0f, 0.0f, float(MAX_ODLEGLOSC)), float(float(rand() % 36000) / 36000.0f * 2.0f * M_PI), glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))));
+				zmienne.Punkt_docelowy = glm::vec3(0.0f, 0.0f, MAX_ODLEGLOSC);
+				zmienne.Kierunek_do_celu = zmienne.Kierunek;
+				zmienne.Odleglosc = glm::length(zmienne.Punkt_docelowy - zmienne.Biezaca_pozycja);
+				zmienne.Czas_klatki = 0;
+				zmienne.Pojazd_kat = 0.0;
+				zmienne.Przechylenie_kat = 0.0;
+				zmienne.Czas_przyspieszanie = 0;
+
+				state = State::BrakPaliwa;
 			}
 
 
@@ -3797,7 +3896,13 @@ int main()
 			RenderMenu(menu, window, state);
 			break;
 		case Wygrana:
-			RenderMenu(menu, window, state);
+			RenderAutors(wygrana, window, state);
+			break;
+		case Przegrana:
+			RenderAutors(przegrana, window, state);
+			break;
+		case BrakPaliwa:
+			RenderAutors(brakpaliwa, window, state);
 			break;
 		case AutorsState:
 			RenderAutors(autors, window, state);
@@ -3858,6 +3963,7 @@ int main()
 	Zeg2_Program.Delete();
 	Zeg3_Program.Delete();
 	Zeg4_Program.Delete();
+	BIGlightShader.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
