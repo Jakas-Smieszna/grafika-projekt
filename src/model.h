@@ -15,16 +15,25 @@ std::string getModelPath(std::string);
 
 class Model {
 public:
-    Model(std::string path) {
-        loadModel(getModelPath(path));
+    Model(std::string obj) : modelTextures() {
+        loadModel(getModelPath(obj));
     }
-    void Draw(Shader &shader);
+    void Draw(Shader &shader) {
+        int i = 0;
+        shader.Activate();
+        for(const auto &T : modelTextures) {
+            T->texUnit(shader, ("texture" + std::to_string(i)).c_str(), i++);
+            T->Bind();
+        }
+        modelMesh->Draw(shader);
+    }
 private:
     std::unique_ptr<Mesh> modelMesh;
-    std::string directory;
 
-    void loadModel(std::string path);
-    //std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+    std::vector<std::unique_ptr<Texture>> modelTextures;
+
+    void loadModel(std::string objPath);
+    void processMaterials(const std::vector<tinyobj::material_t> &materials);
 };
 
 #ifdef _WIN32

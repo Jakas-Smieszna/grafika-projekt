@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "Kamera.h"
 #include "StatusGry.h"
+#include "model.h"
 #include <memory>
 #include <vector>
 #include <utility>
@@ -38,8 +39,6 @@ struct chData {
         return (x == rhs.x && y == rhs.y);
     }
 };
-
-
 
 class Chunk {
 public:

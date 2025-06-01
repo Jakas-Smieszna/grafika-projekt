@@ -10,21 +10,20 @@ std::string getModelPath(std::string who) {
     return std::string{MODEL_RELPATH} + who;
 }
 
-void Model::Draw(Shader &shader) {
-    modelMesh->Draw(shader);
-}
-
-void Model::loadModel(std::string path) {
+void Model::loadModel(std::string objPath) {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
 
-    if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path.c_str())) {
-        eprintf("FAILED TO LOAD OBJ %s\n", path.c_str());
+    if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err,
+         objPath.c_str(), MODEL_RELPATH
+        )) {
+        eprintf("FAILED TO LOAD OBJ %s\n", objPath.c_str());
         return;
     }
 
+    dbgprintf("material size: %u", (unsigned int)materials.size());
 
     std::vector<Vertex> V;
     std::vector<GLuint> I;
@@ -54,7 +53,21 @@ void Model::loadModel(std::string path) {
             I.push_back(I.size());
         }
     }
+    processMaterials(materials);
     modelMesh = std::make_unique<Mesh>(V, I);
+}
+
+void Model::processMaterials(const std::vector<tinyobj::material_t> &materials) {
+    int i = 0;
+    for(auto mat = materials.begin(); mat < materials.end(); mat++) {
+        if(!(*mat).diffuse_texname.empty()) {
+            modelTextures.emplace_back(std::make_unique<Texture>(
+                (*mat).diffuse_texname.c_str(),
+                GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE
+            ));
+            dbgprintf("loaded texture %s", (*mat).diffuse_texname.c_str());
+        }
+    }
 }
 
 /*

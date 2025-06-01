@@ -2939,6 +2939,7 @@ int main()
 	}
 	//KONIEC MODYFIKACJI TABLIC V/I
 	Shader shaderProgram("default.vert", "default.frag");
+	Shader obstacleShader("obstacle.vert", "obstacle.frag");
 
 	
 	VAO VAO1;
@@ -3400,10 +3401,10 @@ int main()
 
 
 
-	Model k("Untitled.obj");
+	Model rock("rock.obj");
 
 	glm::mat4 bin_model = glm::mat4(1);
-	bin_model = glm::translate(bin_model, glm::vec3(5, 5, 5));
+	bin_model = glm::translate(bin_model, glm::vec3(15, 15, 15));
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -3436,8 +3437,6 @@ int main()
 
 			//POJAZD
 			shaderProgram.Activate();
-			glad_glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(bin_model));
-			//k.Draw(shaderProgram);
 
 			VAO1.Bind();
 			VBO1 = VBO(vertices, sizeof(vertices));
@@ -3796,12 +3795,12 @@ int main()
 			BIGcubeModel = glm::mat4(1.0f);
 			BIGcubeModel = glm::translate(BIGcubeModel, BIGcubePos);
 			glUniformMatrix4fv(glGetUniformLocation(BIGlightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(BIGlightModel));
-
+			
 			camera.Matrix(BIGlightShader, "camMatrix");
 			KulaVAO.Bind();
 			glDrawElements(GL_TRIANGLES, sizeof(KulaIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
-        
-      //TEREN MG
+			
+			//TEREN MG
 			terrainShader.Activate();
 			glUniformMatrix4fv(glGetUniformLocation(terrainShader.ID, "lightModel[0]"), 1, GL_FALSE, glm::value_ptr(cubeModel));
 			glUniform4f(glGetUniformLocation(terrainShader.ID, "lightColor[0]"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
@@ -3817,10 +3816,30 @@ int main()
 			glUniform3f(glGetUniformLocation(terrainShader.ID, "lightPos[3]"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
 			camera.Matrix(terrainShader, "camMatrix");
 			
-			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
 				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-			}
 			generator.Draw(terrainShader);
+			glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+			
+			obstacleShader.Activate();
+			glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "lightModel[0]"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[0]"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[0]"), lightPos.x, lightPos.y, lightPos.z);
+			glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "lightModel[1]"), 1, GL_FALSE, glm::value_ptr(cube2Model));
+			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[1]"), light2Color.x, light2Color.y, light2Color.z, light2Color.w);
+			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[1]"), light2Pos.x, light2Pos.y, light2Pos.z);
+			glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "lightModel[2]"), 1, GL_FALSE, glm::value_ptr(cubePCModel));
+			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[2]"), pushColor.x, pushColor.y, pushColor.z, pushColor.w);
+			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[2]"), pushPos.x, pushPos.y, pushPos.z);
+			glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "lightModel[3]"), 1, GL_FALSE, glm::value_ptr(BIGcubeModel));
+			glUniform4f(glGetUniformLocation(obstacleShader.ID, "lightColor[3]"), BIGlightColor.x, BIGlightColor.y, BIGlightColor.z, BIGlightColor.w);
+			glUniform3f(glGetUniformLocation(obstacleShader.ID, "lightPos[3]"), BIGlightPos.x, BIGlightPos.y, BIGlightPos.z);
+			camera.Matrix(obstacleShader, "camMatrix");
+			glad_glUniformMatrix4fv(glGetUniformLocation(obstacleShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(bin_model));
+			if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+			rock.Draw(obstacleShader);
 			glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
         
 			//WYJSCIE Z GRY

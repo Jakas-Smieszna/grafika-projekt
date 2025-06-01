@@ -3,8 +3,10 @@
 #include "vertex.h"
 #include "Kamera.h"
 #include "helper/tsqueue.h"
+#include "helper/debugutils.h"
 #include <memory>
 #include <thread>
+#include <chrono>
 
 #define STB_PERLIN_IMPLEMENTATION
 #include <stb/stb_perlin.h>
@@ -58,7 +60,6 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
     
     return std::make_pair(vertices, indices);
 }
-#include <chrono>
 void processTerrainQueue()
 {
     auto t_start = std::chrono::steady_clock::now();
@@ -68,7 +69,7 @@ void processTerrainQueue()
         auto t_end = std::chrono::steady_clock::now();
         double elapsed = std::chrono::duration<double, std::milli>(t_end - t_start).count();
         if (elapsed > 1000) {
-            printf("stopped processing due to surpassed time limit!\n");
+            dbgprintf("stopped processing due to surpassed time limit!\n");
             break;
         }
     }
