@@ -74,7 +74,7 @@ void processTerrainQueue()
     }
 }
 
-TerrainGenerator::TerrainGenerator(Pakiet_Zmiennych& vars) : assoc_vars(vars), TerrainChunks(), lastCamChunk({21, 37, 0 }) {
+TerrainGenerator::TerrainGenerator(Pakiet_Zmiennych& vars) : assoc_vars(vars), TerrainChunks(), lastCamChunk({21, 37, 0}) {
     //std::thread generatorThread(&TerrainGenerator::updateTerrain, this);
     std::thread generatorThread([this] {
         while (true) {
