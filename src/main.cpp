@@ -10,6 +10,7 @@
 
 //Teksturowo:
 #include"Tekstury.h"
+#include "glm/ext/matrix_transform.hpp"
 #include "mesh.h"
 #include"stb/stb_image.h"
 //
@@ -19,7 +20,7 @@
 #include"EBO.h"
 #include"Kamera.h"
 #include "terrainGenerator.h"
-#include "helper/tsqueue.h"
+#include "model.h"
 
 // Teksturowo:
 // Wierzcholki2
@@ -2848,6 +2849,11 @@ int main()
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, -11.0f);
 	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	Model k("Untitled.obj");
+
+	glm::mat4 bin_model = glm::mat4(1);
+	bin_model = glm::translate(bin_model, glm::vec3(5, 5, 5));
   
 	while (!glfwWindowShouldClose(window))
 	{
@@ -2881,10 +2887,12 @@ int main()
 		}
 		generator.Draw(terrainShader);
 		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-
-
+		glad_glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(bin_model));
+		
+		
 		//POJAZD
 		shaderProgram.Activate();
+		k.Draw(shaderProgram);
 
 		VAO1.Bind();
 		VBO1 = VBO(vertices, sizeof(vertices));

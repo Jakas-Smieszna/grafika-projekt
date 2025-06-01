@@ -10,7 +10,7 @@ set(PROJ_FILES
     Kamera.cpp
     Tekstury.cpp
     mesh.cpp
-    #model.cpp
+    model.cpp
     terrainGenerator.cpp
 # Biblioteki
     stb.cpp

@@ -26,6 +26,7 @@ include_directories(
 	${GLFW_INCLUDE_PATH}
 	${GLAD_INCLUDE_PATH}
   ${GLM_INCLUDE_DIR}
+  "${PROJECT_SOURCE_DIR}/include"
 )
 
 # Enable Hot Reload for MSVC compilers if supported.
