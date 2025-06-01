@@ -86,12 +86,12 @@ MenuElements::MenuElements() :
    glBindVertexArray(0);
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-   tekstury_obrazu.emplace_back(("Kotel1.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-   tekstury_obrazu.emplace_back(("metal.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-   tekstury_obrazu.emplace_back(("start.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-   tekstury_obrazu.emplace_back(("instrukcja.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-   tekstury_obrazu.emplace_back(("start.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-   tekstury_obrazu.emplace_back(("instrukcja.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo1.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo2.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo3.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo4.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo5.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+   tekstury_obrazu.emplace_back(("tlo6.png"), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
 }
 void RenderMenu(MenuElements &menu, GLFWwindow* window, State &state)
