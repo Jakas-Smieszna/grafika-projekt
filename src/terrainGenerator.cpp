@@ -37,7 +37,7 @@ std::pair< std::vector<Vertex>, std::vector<GLuint>> generateChunkMesh(int chunk
             v.Position = vector;
             v.Color = {0.7, vector.y, 0.1};
             // no troche nie ale n5iech bedzie
-            v.Normal = glm::vec3{0.f, 0.f, 1.f};
+            v.Normal = glm::vec3{0.f, 1.f, 0.f};
             v.TexCoords = {0.f, 0.f};
             vertices.push_back(v);
         }

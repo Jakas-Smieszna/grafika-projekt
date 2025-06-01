@@ -3386,6 +3386,25 @@ int main()
 	Przestaw_0_1_pojazd(&zmienne, -1, Mon_Vertices, vertices, lightVertices, lightVertices2, pushVertices, pushVertices_front, pushVertices_tyl, KulaVertices, Zeg1Vertices, Zeg2Vertices, Zeg3Vertices, Zeg4Vertices, Ty_Vertices);
 	zmienne.Biezaca_pozycja = glm::vec3(0.0f, 0.0f, 0.0f);
   
+	State state = State::MenuState;
+
+
+	MenuElements menu;
+	AutorsElements autors("chat.png");
+	InstructionElements instruction;
+
+	AutorsElements wygrana("wygj.png");
+	AutorsElements przegrana("przj.png");
+	AutorsElements brakpaliwa("enej.png");
+
+
+
+
+	Model k("Untitled.obj");
+
+	glm::mat4 bin_model = glm::mat4(1);
+	bin_model = glm::translate(bin_model, glm::vec3(5, 5, 5));
+
 	while (!glfwWindowShouldClose(window))
 	{
 		float kat0 = zmienne.Pojazd_kat;
@@ -3408,23 +3427,17 @@ int main()
 			//light2Model = glm::translate(light2Model, light2Pos);
 			//cube2Model = glm::translate(cube2Model, cube2Pos);
 
-		//CZYSZCZENIE TLA
-		glClearColor(0.f, 1.00f, 0.f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0),(2.0f * M_PI))));
-		camera.updateMatrix(45.0f, 0.1f, 100.0f);
-		terrainShader.Activate();
-		camera.Matrix(terrainShader, "camMatrix");
-		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-			glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-		}
-		generator.Draw(terrainShader);
-		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+			//CZYSZCZENIE TLA
+			glClearColor(0.6, 1.2f, 2.55f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			camera.Inputs(window, float(fmod((zmienne.Pojazd_kat - kat0), (2.0f * M_PI))));
+			camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		//POJAZD
-		shaderProgram.Activate();
+			//POJAZD
+			shaderProgram.Activate();
+			glad_glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(bin_model));
+			//k.Draw(shaderProgram);
 
 			VAO1.Bind();
 			VBO1 = VBO(vertices, sizeof(vertices));
@@ -3776,7 +3789,7 @@ int main()
 			BIGlightVAO.LinkAttrib(BIGlightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 			BIGlightVAO.Unbind();
 			BIGlightVBO.Unbind();BIGlightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);;
-			BIGlightPos = glm::vec3(0.0f, 00.0f, 100.0f);
+			BIGlightPos = glm::vec3(0.0f, 100.0f, 0.0f);
 			BIGlightModel = glm::mat4(1.0f);
 			BIGlightModel = glm::translate(BIGlightModel, BIGlightPos);
 			BIGcubePos = glm::vec3(0.0f, 0.0f, 0.0f);

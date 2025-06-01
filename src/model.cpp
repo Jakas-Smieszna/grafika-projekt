@@ -1,9 +1,10 @@
 #include "model.h"
 #include "vertex.h"
 #include "mesh.h"
+#include "helper/debugutils.h"
 #include <memory>
 #define TINYOBJLOADER_IMPLEMENTATION
-#include "tinyobj/tiny_obj_loader.h"
+#include <tol/tiny_obj_loader.h>
 
 std::string getModelPath(std::string who) {
     return std::string{MODEL_RELPATH} + who;
@@ -20,7 +21,8 @@ void Model::loadModel(std::string path) {
     std::string err;
 
     if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path.c_str())) {
-        throw std::runtime_error(err);
+        eprintf("FAILED TO LOAD OBJ %s\n", path.c_str());
+        return;
     }
 
 
